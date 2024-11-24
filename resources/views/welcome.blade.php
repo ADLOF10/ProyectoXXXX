@@ -113,9 +113,19 @@
             const horarioClaseFinal = document.getElementById("horarioClaseFinal").value;
             const horarioRegistro = document.getElementById("horarioRegistro").value;
 
+             // Validar que la fecha no sea en el pasado
+        const fechaHoy = new Date();
+        const fechaClaseDate = new Date(fechaClase);
+
+        if (fechaClaseDate < fechaHoy.setHours(0, 0, 0, 0)) {
+            alert("La fecha de la clase no puede ser un día pasado.");
+            return;
+        }
+
+
             // Validar que el horario de registro esté dentro del rango de clase
             if (horarioRegistro < horarioClase || horarioRegistro > horarioClaseFinal) {
-                alert("El horario de registro debe estar entre el horario de inicio y finalización de la clase.");
+                alert("El horario Fin de registro debe estar entre el horario de inicio y finalización de la clase.");
                 return;
             }
 

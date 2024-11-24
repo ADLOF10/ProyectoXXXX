@@ -2,6 +2,16 @@
 
 return [
 
+
+        'driver' => env('MAIL_MAILER', 'smtp'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+    'port' => env('MAIL_PORT', 2525),
+    'username' => env('MAIL_USERNAME'),
+    'password' => env('MAIL_PASSWORD'),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'from' => ['address' => 'noreply@tuapp.com', 'name' => 'Tu Aplicación'],
+
+
     /*
     |--------------------------------------------------------------------------
     | Default Mailer
