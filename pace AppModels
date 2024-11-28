@@ -1,0 +1,19 @@
+[33mcommit ceb6a47dd32174c87e1205a285c6d91459d18f4e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32malan[m[33m)[m
+Author: Alan de la O Flores <77209278+ADLOF10@users.noreply.github.com>
+Date:   Sun Nov 17 21:07:11 2024 -0600
+
+    Ya quedo todo al 100
+    
+    Carga el qr, descarga y copia. reguistra en la base de datos y notifica de satisfaccion al usuario.
+
+[33mcommit e7c2f2d119683d9ae5cb8d31caac3ca5c910cc34[m
+Author: Alan de la O Flores <77209278+ADLOF10@users.noreply.github.com>
+Date:   Tue Nov 12 01:56:51 2024 -0600
+
+    xd
+
+[33mcommit 2acba012d584cb8a43790cc956a6d5bd655db61f[m
+Author: Alan de la O Flores <77209278+ADLOF10@users.noreply.github.com>
+Date:   Tue Nov 12 01:53:02 2024 -0600
+
+    Initial commit

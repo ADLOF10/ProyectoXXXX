@@ -1,0 +1,152 @@
+/* Estilos globales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Fondo claro */
+    color: #333; /* Texto oscuro */
+}
+
+/* Header con barra de navegación centrado */
+header {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header .logo img {
+    width: 100px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center; /* Centra los enlaces en el navbar */
+    align-items: center;
+    width: 100%; /* Mantiene un ancho máximo para centrar el contenido */
+}
+
+.logo img {
+    width: 100px; /* Tamaño proporcional del logo */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links li a {
+    color: #000; /* Texto negro */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem; /* Ajuste del tamaño del texto */
+}
+
+.nav-links li a:hover {
+    color: #3498db; /* Color azul al pasar el mouse */
+}
+
+/* Estilos para el div grupo (centrar contenido) */
+.grupo {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra los elementos hijos verticalmente */
+    margin: 0 auto;
+    padding: 20px; /* Espaciado alrededor */
+    width: 100%; /* Ajuste del ancho del grupo */
+    max-width: 1500px; /* Opcional: ancho máximo para un diseño más controlado */
+}
+
+
+/* Título de la sección */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+/* Eliminar espacio entre los párrafos */
+h2, p {
+    margin: 0;  /* Elimina el margen por defecto */
+    padding: 0; /* Elimina el padding por defecto */
+}
+
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilos de la tabla */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th, .table-container td {
+    padding: 12px 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.table-container th {
+    background-color: #004d40; /* Fondo verde oscuro */
+    color: white;
+    font-size: 1.1rem;
+}
+
+.table-container td {
+    background-color: #f9f9f9; /* Fondo claro */
+}
+
+.table-container tr:nth-child(even) td {
+    background-color: #f1f1f1; /* Alterna color en filas pares */
+}
+
+/* Estilo para el encabezado de la tabla */
+.table-container .header {
+    font-weight: bold;
+    background-color: #004d40;
+    color: #fff;
+}
+
+/* Estilo para las filas de la tabla */
+.table-container tr:hover {
+    background-color: #e6f7f1; /* Efecto hover para filas */
+}
+
+/* Estilos para el porcentaje de asistencia */
+.porcentaje {
+    font-weight: bold;
+    color: #27ae60; /* Color verde para porcentaje */
+}
+
+/* Estilo del input de fecha */
+input[type="date"] {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+footer {
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}

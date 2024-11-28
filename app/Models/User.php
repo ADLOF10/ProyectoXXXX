@@ -2,30 +2,35 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar de forma masiva.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre',
+        'apellidos',
+        'fecha_nacimiento',
+        'genero',
+        'correo_personal',
+        'licenciatura',
+        'centro_universitario',
+        'cedula_profesional',
+        'es_academico',
+        'role', // Campo para manejar roles
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atributos ocultos para arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -33,15 +38,53 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Casts para tipos de datos.
      *
-     * @return array<string, string>
+     * @var array
      */
-    protected function casts(): array
+    protected $casts = [
+        'es_academico' => 'boolean',
+        'fecha_nacimiento' => 'date',
+    ];
+
+    /**
+     * Verifica si el usuario tiene un rol específico.
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->role === $role;
+    }
+
+    /**
+     * Verifica si el usuario es un superusuario.
+     *
+     * @return bool
+     */
+    public function isSuperUsuario(): bool
+    {
+        return $this->role === 'superusuario';
+    }
+
+    /**
+     * Verifica si el usuario es académico.
+     *
+     * @return bool
+     */
+    public function isAcademico(): bool
+    {
+        return $this->role === 'academico';
+    }
+
+    /**
+     * Verifica si el usuario es alumno.
+     *
+     * @return bool
+     */
+    public function isAlumno(): bool
+    {
+        return $this->role === 'alumno';
     }
 }

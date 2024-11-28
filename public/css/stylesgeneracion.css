@@ -55,7 +55,7 @@ header {
     padding: 10px;
     text-align: center;
     color: #fff;
-    background-image: url('/fondo uaemex.jpg'); /* Ruta relativa a la carpeta public */
+    background-image: #212121; /* Ruta relativa a la carpeta public */
     
     background-size: cover; /* La imagen cubre toda la sección */
     background-position: center;
@@ -93,7 +93,7 @@ header {
     display: flex;
     flex-direction: column;
     width: 100%; /* Asegura que el grupo de formularios ocupe el ancho completo */
-    background-color: #228B22; /* Verde más translúcido */
+    background-color: #004d40; /* Verde más translúcido */
     padding: 0px;
     border-radius: 5px; /* Bordes redondeados opcionales */
 }
@@ -110,13 +110,13 @@ button {
 }
 
 button {
-    background-color: #228B22; /* Verde más translúcido */
+    background-color:#004d40; /* Verde más translúcido */
     color: white;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #1e8449;
+    background-color: #004d40;
 }
 
 /* Estilos para el QR y resumen */
@@ -134,7 +134,7 @@ button:hover {
 .qr-container {
     margin: 20px 0;
     padding: 10px; /* Espacio alrededor del QR */
-    background-color: #228B22; /* Verde más translúcido */
+    background-color: #004d40; /* Verde más translúcido */
     border-radius: 10px;
     width: 256px;
     height: 256px;
@@ -197,7 +197,7 @@ footer {
 .qr-buttons button {
     padding: 10px 15px;
     font-size: 1rem;
-    background-color: #228B22; /* Mismo color verde translúcido */
+    background-color: #004d40; /* Mismo color verde translúcido */
     color: #fff; /* Texto en blanco */
     border: none;
     border-radius: 5px; /* Bordes redondeados como el formulario */
@@ -206,6 +206,6 @@ footer {
 }
 
 .qr-buttons button:hover {
-    background-color: #228B22; /* Color más oscuro al hacer hover */
+    background-color: #004d40; /* Color más oscuro al hacer hover */
 }
 

@@ -4,9 +4,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Consulta de Asistencias</title>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylesconsultas.css') }}">
     <style>
         .calendar, .table-container, .alumno-info { margin: 20px; }
         .table-container table { width: 100%; border-collapse: collapse; }
@@ -16,10 +16,21 @@
 </head>
 <body>
     <header>
-        <h1>Consulta de Asistencias por Grupo</h1>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ asset('image.png') }}" alt="Logo Universidad">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+        </nav>
     </header>
-
+    
     <main>
+        <h1>Asistencias</h1>
         <div class="calendar">
             <!-- Implementación de un calendario simple -->
             <input type="date" id="fecha" name="fecha" value="{{ \Carbon\Carbon::now()->toDateString() }}">
@@ -35,8 +46,11 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>No.</th>
+                                <th>No. Cuenta</th>
                                 <th>Alumno</th>
                                 <th>Fecha</th>
+                                <th>Hora</th>
                                 <th>Estado</th>
                                 <th>Porcentaje de Asistencia</th>
                             </tr>
@@ -44,8 +58,11 @@
                         <tbody>
                             @foreach($grupo->asistencias as $asistencia)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $asistencia->numero_cuenta }}</td>
                                     <td>{{ $asistencia->alumno->nombre }}</td>
                                     <td>{{ $asistencia->fecha }}</td>
+                                    <td>{{ $asistencia->hora_registro }}</td>
                                     <td>{{ $asistencia->estado }}</td>
                                     <td class="attendance-percentage">
                                         {{ number_format($asistencia->porcentaje_asistencia, 2) }}%

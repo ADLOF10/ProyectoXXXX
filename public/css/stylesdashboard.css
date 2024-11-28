@@ -1,0 +1,19 @@
+.dashboard-container {
+    padding: 20px;
+    text-align: center;
+    color: #004d40;
+}
+
+.dashboard-links a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #004d40;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.dashboard-links a:hover {
+    background-color: #003d33;
+}

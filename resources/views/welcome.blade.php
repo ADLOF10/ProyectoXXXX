@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Generar Código QR</title>
     <link rel="stylesheet" href="{{ asset('css/stylesgeneracion.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     
     <!-- Incluir la librería qrcode.js localmente o desde un CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -83,7 +84,7 @@
                     <!-- Botón de descarga para el código QR -->
                 <div class="qr-buttons">
                     <button id="downloadButton" style="display: none;">Descargar QR</button>
-                    <button id="copyButton" style="display: none;">Copiar Código QR</button>
+                    <button id="copyButton" style="display: none;">Copiar QR</button>
                 </div>
                 </div>
             </div>
@@ -98,106 +99,115 @@
     
     <!-- Script para generar el código QR -->
     <script>
-            document.addEventListener("DOMContentLoaded", function() {
-        const form = document.getElementById("qrForm");
-
-        form.addEventListener("submit", async function(event) {
-            event.preventDefault(); // Evita que se recargue la página
-
-            // Obtener los valores del formulario
-            const nombreGrupo = document.getElementById("nombreGrupo").value;
-            const materia = document.getElementById("materia").value;
-            const fechaClase = document.getElementById("fechaClase").value;
-            const profesor = document.getElementById("profesor").value;
-            const horarioClase = document.getElementById("horarioClase").value;
-            const horarioClaseFinal = document.getElementById("horarioClaseFinal").value;
-            const horarioRegistro = document.getElementById("horarioRegistro").value;
-
-            // Validar que el horario de registro esté dentro del rango de clase
-            if (horarioRegistro < horarioClase || horarioRegistro > horarioClaseFinal) {
-                alert("El horario de registro debe estar entre el horario de inicio y finalización de la clase.");
-                return;
-            }
-
-            // Crear el texto para el código QR
-            const qrData = `Grupo: ${nombreGrupo}\nMateria: ${materia}\nFecha: ${fechaClase}\nProfesor: ${profesor}\nHorario Clase: ${horarioClase}\nClase Finalizada: ${horarioClaseFinal}\nHorario Registro: ${horarioRegistro}`;
-
-            // Mostrar la información generada en el texto
-            document.getElementById("qrCodeText").innerText = `Datos del QR:\n${qrData}`;
-
-            // Generar el código QR en el contenedor
-            const qrContainer = document.getElementById("qrContainer");
-            qrContainer.innerHTML = ""; // Limpiar cualquier QR anterior
-            new QRCode(qrContainer, {
-                text: qrData,
-                width: 256,
-                height: 256
-            });
-
-            // Mostrar los botones de descarga y copiar
-            const downloadButton = document.getElementById("downloadButton");
-            const copyButton = document.getElementById("copyButton");
-            downloadButton.style.display = "inline-block";
-            copyButton.style.display = "inline-block";
-
-            // Función para convertir el QR a imagen PNG y descargar
-            downloadButton.onclick = function() {
-                const qrCanvas = qrContainer.querySelector("canvas");
-                const qrImage = qrCanvas.toDataURL("image/png");
-
-                const link = document.createElement("a");
-                link.href = qrImage;
-                link.download = "codigo_qr.png";
-                link.click();
-            };
-
-            // Función para copiar el QR al portapapeles
-            copyButton.onclick = async function() {
-                try {
-                    const qrCanvas = qrContainer.querySelector("canvas");
-                    const blob = await new Promise(resolve => qrCanvas.toBlob(resolve, "image/png"));
-
-                    // Usar Clipboard API para copiar la imagen
-                    await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-                    alert("¡Código QR copiado al portapapeles!");
-                } catch (error) {
-                    console.error("Error al copiar el QR:", error);
-                    alert("Error al copiar el código QR.");
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("qrForm");
+    
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault(); // Evita que se recargue la página
+    
+                // Obtener los valores del formulario
+                const nombreGrupo = document.getElementById("nombreGrupo").value;
+                const materia = document.getElementById("materia").value;
+                const fechaClase = document.getElementById("fechaClase").value;
+                const profesor = document.getElementById("profesor").value;
+                const horarioClase = document.getElementById("horarioClase").value;
+                const horarioClaseFinal = document.getElementById("horarioClaseFinal").value;
+                const horarioRegistro = document.getElementById("horarioRegistro").value;
+    
+                // Validar que la fecha no sea en el pasado
+                const fechaHoy = new Date();
+                const fechaClaseDate = new Date(fechaClase);
+    
+                if (fechaClaseDate < fechaHoy.setHours(0, 0, 0, 0)) {
+                    alert("La fecha de la clase no puede ser un día pasado.");
+                    return;
                 }
-            };
-
-            // Enviar los datos al servidor mediante AJAX
-            try {
-                const response = await fetch("{{ route('guardarGrupo') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                    },
-                    body: JSON.stringify({
-                        nombreGrupo,
-                        materia,
-                        fechaClase,
-                        profesor,
-                        horarioClase,
-                        horarioClaseFinal,
-                        horarioRegistro
-                    })
+    
+                // Validar que el horario de registro esté dentro del rango de clase
+                if (horarioRegistro < horarioClase || horarioRegistro > horarioClaseFinal) {
+                    alert("El horario Fin de registro debe estar entre el horario de inicio y finalización de la clase.");
+                    return;
+                }
+    
+                // Crear el texto para el código QR
+                const qrData = `Grupo: ${nombreGrupo}\nMateria: ${materia}\nFecha: ${fechaClase}\nProfesor: ${profesor}\nHorario Clase: ${horarioClase}\nClase Finalizada: ${horarioClaseFinal}\nHorario Registro: ${horarioRegistro}`;
+    
+                // Mostrar la información generada en el texto
+                document.getElementById("qrCodeText").innerText = `Datos del QR:\n${qrData}`;
+    
+                // Generar el código QR en el contenedor
+                const qrContainer = document.getElementById("qrContainer");
+                qrContainer.innerHTML = ""; // Limpiar cualquier QR anterior
+                new QRCode(qrContainer, {
+                    text: qrData,
+                    width: 256,
+                    height: 256
                 });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error("Error del servidor:", errorData);
-                    alert("Error al guardar los datos. Intenta nuevamente.");
-                } else {
-                    alert("¡Grupo registrado con éxito!");
+    
+                // Mostrar los botones de descarga y copiar
+                const downloadButton = document.getElementById("downloadButton");
+                const copyButton = document.getElementById("copyButton");
+                downloadButton.style.display = "inline-block";
+                copyButton.style.display = "inline-block";
+    
+                // Función para convertir el QR a imagen PNG y descargar
+                downloadButton.onclick = function() {
+                    const qrCanvas = qrContainer.querySelector("canvas");
+                    const qrImage = qrCanvas.toDataURL("image/png");
+    
+                    const link = document.createElement("a");
+                    link.href = qrImage;
+                    link.download = "codigo_qr.png";
+                    link.click();
+                };
+    
+                // Función para copiar el QR al portapapeles
+                copyButton.onclick = async function() {
+                    try {
+                        const qrCanvas = qrContainer.querySelector("canvas");
+                        const blob = await new Promise(resolve => qrCanvas.toBlob(resolve, "image/png"));
+    
+                        // Usar Clipboard API para copiar la imagen
+                        await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+                        alert("¡Código QR copiado al portapapeles!");
+                    } catch (error) {
+                        console.error("Error al copiar el QR:", error);
+                        alert("Error al copiar el código QR.");
+                    }
+                };
+    
+                // Enviar los datos al servidor mediante AJAX
+                try {
+                    const response = await fetch("{{ route('guardarGrupo') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                        },
+                        body: JSON.stringify({
+                            nombreGrupo,
+                            materia,
+                            fechaClase,
+                            profesor,
+                            horarioClase,
+                            horarioClaseFinal,
+                            horarioRegistro
+                        })
+                    });
+    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("Error del servidor:", errorData);
+                        alert("Error al guardar los datos. Intenta nuevamente.");
+                    } else {
+                        alert("¡Grupo registrado con éxito!");
+                    }
+                } catch (error) {
+                    console.error("Error al realizar la solicitud:", error);
+                    alert("Error al guardar los datos. Verifica tu conexión o revisa el servidor.");
                 }
-            } catch (error) {
-                console.error("Error al realizar la solicitud:", error);
-                alert("Error al guardar los datos. Verifica tu conexión o revisa el servidor.");
-            }
+            });
         });
-    });
     </script>
     
 
