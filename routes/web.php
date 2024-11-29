@@ -6,6 +6,7 @@ use App\Http\Controllers\grupos\RegistroController as GruposRegistroController;
 use App\Http\Controllers\SuperUsuarioController;
 use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\AuthController;
 
 
 // Ruta principal para todos los usuarios
@@ -28,12 +29,6 @@ Route::middleware(['auth', 'superusuario'])->group(function () {
 Route::get('/registro-usuario', [NuevoRegistroController::class, 'showForm'])->name('registro.usuario');
 Route::post('/registro-usuario', [NuevoRegistroController::class, 'handleForm'])->name('registro.usuario.handle');
 
-
-// use App\Http\Controllers\AuthController;
-
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [AuthController::class, 'login']);
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route::middleware(['role:superusuario'])->group(function () {
 //     Route::get('/dashboard/superusuario', function () {
@@ -68,27 +63,27 @@ Route::post('/registro-usuario', [NuevoRegistroController::class, 'handleForm'])
 
 
 
-// // Superusuario
-// Route::middleware(['auth', 'role:superusuario'])->group(function () {
-//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index']);
-//     Route::post('/aprobar', [SuperUsuarioController::class, 'aprobarUsuario']);
-// });
+// Superusuario
+Route::middleware(['auth', 'role:superusuario'])->group(function () {
+    Route::get('/aprobaciones', [SuperUsuarioController::class, 'index']);
+    Route::post('/aprobar', [SuperUsuarioController::class, 'aprobarUsuario']);
+});
 
-// // Académicos
-// Route::middleware(['auth', 'role:academico'])->group(function () {
-//     Route::get('/crear-qr', [AcademicoController::class, 'crearQR']);
-//     Route::get('/consulta-alumnos', [AcademicoController::class, 'consultaAlumnos']);
-// });
+// Académicos
+Route::middleware(['auth', 'role:academico'])->group(function () {
+    Route::get('/crear-qr', [AcademicoController::class, 'crearQR']);
+    Route::get('/consulta-alumnos', [AcademicoController::class, 'consultaAlumnos']);
+});
 
-// // Alumnos
-// Route::middleware(['auth', 'role:alumno'])->group(function () {
-//     Route::get('/asistencias', [AlumnoController::class, 'verAsistencias']);
-//     Route::get('/historial', [AlumnoController::class, 'historial']);
-// });
+// Alumnos
+Route::middleware(['auth', 'role:alumno'])->group(function () {
+    Route::get('/asistencias', [AlumnoController::class, 'verAsistencias']);
+    Route::get('/historial', [AlumnoController::class, 'historial']);
+});
 
 
 // Ruta para mostrar el formulario de registro de grupo
-Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
+Route::get('/registro-grupo', [GruposC  ontroller::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
 // Ruta para la vista de asistencias
 Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
