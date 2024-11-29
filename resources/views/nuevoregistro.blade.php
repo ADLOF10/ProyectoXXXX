@@ -13,6 +13,20 @@
         }
     </script>
 </head>
+    <!-- Header con barra de navegación -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ asset('image.png') }}" alt="Logo Universidad">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
 <body>
     <div class="form-container">
         <h1>Registro de Usuario</h1>
@@ -52,12 +66,21 @@
 
             <div class="form-group">
                 <label for="licenciatura">Licenciatura:</label>
-                <input type="text" id="licenciatura" name="licenciatura" required>
+                <select id="licenciatura" name="licenciatura" required>
+                    <option value="Software">Ingenieria en Software</option>
+                    <option value="Plasticos">Ingenieria en Plasticos</option>
+                    <option value="Computacion">Ingenieria en Computacion</option>
+                    <option value="Arquitectura">Arquitectura</option>
+                    <option value="Derecho">Derecho</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="centro_universitario">Centro Universitario:</label>
-                <input type="text" id="centro_universitario" name="centro_universitario" required>
+                <select id="centro_universitario" name="centro_universitario" required>
+                    <option value="UAPT">Unidad Academica Profesional Tianguistenco</option>
+                    <option value="CU">Ciudad Universitaria</option>
+                </select>
             </div>
 
             <div class="form-group checkbox-group">
@@ -71,7 +94,6 @@
                     <input type="text" id="cedula_profesional" name="cedula_profesional">
                 </div>
             </div>
-
             <button type="submit">Registrar</button>
         </form>
     </div>
