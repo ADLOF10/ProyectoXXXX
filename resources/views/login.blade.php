@@ -6,6 +6,19 @@
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="{{ asset('css/styleslogin.css') }}">
 </head>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ asset('image.png') }}" alt="Logo Universidad">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
 <body>
     <div class="login-container">
         <h1>Inicia Sesión</h1>

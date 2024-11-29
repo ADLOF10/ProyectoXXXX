@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory;
 
     /**
-     * Los atributos que se pueden asignar de forma masiva.
-     *
-     * @var array
+     * Campos asignables masivamente.
      */
     protected $fillable = [
         'nombre',
@@ -21,27 +18,25 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'genero',
         'correo_personal',
+        'correo_institucional', // Campo para login
+        'numero_cuenta',        // Contraseña inicial
         'licenciatura',
         'centro_universitario',
         'cedula_profesional',
         'es_academico',
-        'role', // Campo para manejar roles
+        'role',                 // Rol del usuario
     ];
 
     /**
-     * Atributos ocultos para arrays.
-     *
-     * @var array
+     * Campos ocultos para arrays.
      */
     protected $hidden = [
-        'password',
+        'numero_cuenta',        // Contraseña
         'remember_token',
     ];
 
     /**
-     * Casts para tipos de datos.
-     *
-     * @var array
+     * Casts para los datos.
      */
     protected $casts = [
         'es_academico' => 'boolean',
@@ -49,27 +44,31 @@ class User extends Authenticatable
     ];
 
     /**
+     * Cambia el identificador para autenticación a `correo_institucional`.
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'correo_institucional';
+    }
+
+    /**
      * Verifica si el usuario tiene un rol específico.
-     *
-     * @param string $role
-     * @return bool
      */
     public function hasRole(string $role): bool
     {
         return $this->role === $role;
     }
 
-
+    /**
+     * Relación con la solicitud.
+     */
     public function solicitud()
     {
         return $this->hasOne(Solicitud::class);
     }
 
-
     /**
      * Verifica si el usuario es un superusuario.
-     *
-     * @return bool
      */
     public function isSuperUsuario(): bool
     {
@@ -78,8 +77,6 @@ class User extends Authenticatable
 
     /**
      * Verifica si el usuario es académico.
-     *
-     * @return bool
      */
     public function isAcademico(): bool
     {
@@ -88,8 +85,6 @@ class User extends Authenticatable
 
     /**
      * Verifica si el usuario es alumno.
-     *
-     * @return bool
      */
     public function isAlumno(): bool
     {

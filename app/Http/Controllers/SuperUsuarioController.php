@@ -2,28 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Solicitud;
+use App\Mail\AprobacionMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class SuperUsuarioController extends Controller
 {
-    public function index()
+    /**
+     * Mostrar el dashboard del superusuario.
+     */
+    public function mostrarDashboard()
     {
-        $solicitudes = Solicitud::with('user')->where('es_aprobado', false)->get();
+        return view('dashsuper');
+    }
+    
+    /**
+     * Mostrar la lista de aprobaciones pendientes.
+     */
+    public function mostrarAprobaciones()
+    {
+        $solicitudes = Solicitud::where('es_aprobado', false)->get();
         return view('aprobaciones', compact('solicitudes'));
     }
 
+    public function listarSolicitudes()
+    {
+        $solicitudes = User::whereNull('correo_institucional')->get();
+        return view('aprobaciones', compact('solicitudes'));
+    }
+
+    /**
+     * Aprobar una solicitud.
+     */
     public function aprobar($id)
     {
         $solicitud = Solicitud::findOrFail($id);
         $usuario = $solicitud->user;
 
-        // Generar correo institucional
-        $correoInstitucional = $this->generarCorreoInstitucional($usuario);
-
-            // Generar correo institucional y número de cuenta
+        // Generar correo institucional y número de cuenta
         $correoInstitucional = $this->generarCorreoInstitucional($usuario);
         $numeroCuenta = $this->generarNumeroCuenta($usuario);
 
@@ -33,7 +51,6 @@ class SuperUsuarioController extends Controller
             'numero_cuenta' => $numeroCuenta,
         ]);
 
-        // Marcar solicitud como aprobada
         $solicitud->update(['es_aprobado' => true]);
 
         // Enviar el correo
@@ -42,33 +59,44 @@ class SuperUsuarioController extends Controller
         return redirect()->route('aprobaciones')->with('success', 'Usuario aprobado y correo enviado.');
     }
 
+    /**
+     * Rechazar una solicitud.
+     */
     public function rechazar($id)
     {
         $solicitud = Solicitud::findOrFail($id);
+
+        // Eliminar la solicitud
         $solicitud->delete();
 
-        return redirect()->route('aprobaciones')->with('success', 'Solicitud rechazada.');
+        return redirect()->route('aprobaciones')->with('success', 'Solicitud rechazada correctamente.');
     }
 
+    /**
+     * Generar el correo institucional.
+     */
     private function generarCorreoInstitucional($usuario)
     {
-        $nombreInicial = substr($usuario->nombre, 0, 1);
-        $apellido = $usuario->apellidos;
-        $apellidoInicial = substr(explode(' ', $usuario->apellidos)[1] ?? '', 0, 1);
-        $registroId = str_pad($usuario->id, 4, '0', STR_PAD_LEFT);
+        $nombreInicial = strtoupper(substr($usuario->nombre, 0, 1));
+        $apellidoCompleto = strtoupper($usuario->apellidos);
+        $segundaInicial = strtoupper(substr($usuario->apellidos, strpos($usuario->apellidos, ' ') + 1, 1));
+        $idFragment = substr($usuario->id, -4);
         $terminacion = $usuario->es_academico ? 'academico.universidad.mx' : 'alumno.universidad.mx';
 
-        return strtolower("$nombreInicial$apellido$apellidoInicial$registroId@$terminacion");
+        return "{$nombreInicial}{$apellidoCompleto}{$segundaInicial}{$idFragment}@{$terminacion}";
     }
 
+    /**
+     * Generar el número de cuenta.
+     */
     private function generarNumeroCuenta($usuario)
     {
-        $centroMap = [
+        // Mapeo del centro universitario y carrera
+        $centros = [
             'UAPT' => '21',
             'CU' => '22',
         ];
-
-        $licenciaturaMap = [
+        $carreras = [
             'Software' => '11',
             'Plasticos' => '12',
             'Computacion' => '13',
@@ -76,10 +104,10 @@ class SuperUsuarioController extends Controller
             'Derecho' => '15',
         ];
 
-        $centro = $centroMap[$usuario->centro_universitario] ?? '00';
-        $licenciatura = $licenciaturaMap[$usuario->licenciatura] ?? '00';
-        $identificador = str_pad($usuario->id, 3, '0', STR_PAD_LEFT);
+        $centroCode = $centros[$usuario->centro_universitario] ?? '00';
+        $carreraCode = $carreras[$usuario->licenciatura] ?? '00';
+        $registroCode = str_pad($usuario->id, 3, '0', STR_PAD_LEFT);
 
-        return "$centro$licenciatura$identificador";
+        return "{$centroCode}{$carreraCode}{$registroCode}";
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\LoginController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -47,6 +48,16 @@ Route::get('/dashboard/superusuario', function () {
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 })->name('forgot-password');
+
+
+Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('aprobaciones');
+
+Route::middleware(['auth', 'role:superusuario'])->group(function () {
+    Route::get('/dashsuper', [SuperUsuarioController::class, 'mostrarDashboard'])->name('dashboard');
+    Route::get('/aprobaciones', [SuperUsuarioController::class, 'mostrarAprobaciones'])->name('aprobaciones');
+});
+
+
 
 
 // use App\Http\Controllers\AuthController;

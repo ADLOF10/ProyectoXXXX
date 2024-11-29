@@ -37,17 +37,48 @@
             @csrf
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value="{{ old('nombre') }}"
+                    required
+                    class="@error('nombre') is-invalid @enderror"
+                >
+                @if ($errors->has('nombre'))
+                    <span class="text-danger">{{ $errors->first('nombre') }}</span>
+                @endif
             </div>
+
 
             <div class="form-group">
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required>
+                <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    value="{{ old('apellidos') }}"
+                    required
+                    class="@error('apellidos') is-invalid @enderror"
+                >
+                @if ($errors->has('apellidos'))
+                    <span class="text-danger">{{ $errors->first('apellidos') }}</span>
+                @endif
             </div>
 
             <div class="form-group">
                 <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                <input
+                        type="date"
+                        id="fecha_nacimiento"
+                        name="fecha_nacimiento"
+                        class="form-control @error('fecha_nacimiento') is-invalid @enderror"
+                        value="{{ old('fecha_nacimiento') }}"
+                        required
+                        >
+                        @if ($errors->has('fecha_nacimiento'))
+                        <span class="text-danger">{{ $errors->first('fecha_nacimiento') }}</span>
+                    @endif
             </div>
 
             <div class="form-group">
@@ -61,7 +92,17 @@
 
             <div class="form-group">
                 <label for="correo_personal">Correo Personal:</label>
-                <input type="email" id="correo_personal" name="correo_personal" required>
+                <input
+                    type="email"
+                    id="correo_personal"
+                    name="correo_personal"
+                    value="{{ old('correo_personal') }}"
+                    required
+                    class="@error('correo_personal') is-invalid @enderror"
+                >
+                @if ($errors->has('correo_personal'))
+                    <span class="text-danger">{{ $errors->first('correo_personal') }}</span>
+                @endif
             </div>
 
             <div class="form-group">
@@ -91,9 +132,14 @@
             <div id="academico-fields" style="display: none;">
                 <div class="form-group">
                     <label for="cedula_profesional">Cédula Profesional:</label>
-                    <input type="text" id="cedula_profesional" name="cedula_profesional">
+                    <input type="text" id="cedula_profesional" name="cedula_profesional" value="{{ old('cedula_profesional') }}"
+                    class="@error('cedula_profesional') is-invalid @enderror">
+                    @if ($errors->has('cedula_profesional'))
+                    <span class="text-danger">{{ $errors->first('cedula_profesional') }}</span>
+                    @endif
                 </div>
             </div>
+
             <button type="submit">Registrar</button>
         </form>
     </div>

@@ -113,3 +113,8 @@ button:hover {
     font-weight: bold;
     text-align: center;
 }
+
+.is-invalid {
+    border-color: #e3342f;
+    background-color: #f8d7da;
+}

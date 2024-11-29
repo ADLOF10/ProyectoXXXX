@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F3F3;
+    color: #004d40;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #004d40;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px;
+    margin-left: 20px;
+}
+
+.navbar {
+    margin-right: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+.nav-links li a:hover {
+    background-color: #00695c;
+    border-radius: 4px;
+}
+
+.main-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #004d40;
+}
+
+.description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #004d40;
+}
+
+.btn-primary:hover {
+    background-color: #00695c;
+}
+
+.btn-secondary {
+    background-color: #FFA726;
+}
+
+.btn-secondary:hover {
+    background-color: #FB8C00;
+}
+
+.btn-danger {
+    background-color: #E53935;
+}
+
+.btn-danger:hover {
+    background-color: #D32F2F;
+}
+
+footer {
+    text-align: center;
+    background-color: #004d40;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
