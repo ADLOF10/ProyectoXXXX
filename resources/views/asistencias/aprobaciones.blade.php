@@ -4,61 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprobaciones</title>
-    <link rel="stylesheet" href="{{ asset('css/stylesaprobaciones.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aprobaciones.css') }}">
 </head>
 <body>
-    <header class="header">
-        <h1>Gestión de Aprobaciones</h1>
-    </header>
-
-    <main class="main-container">
-        <h2>Usuarios Pendientes de Aprobación</h2>
-        @if (session('success'))
-            <div class="success-message">
-                {{ session('success') }}
+    <div class="container">
+        <h1>Solicitudes de Aprobación</h1>
+        @foreach ($solicitudes as $solicitud)
+            <div class="solicitud">
+                <h2>{{ $solicitud->user->nombre }} {{ $solicitud->user->apellidos }}</h2>
+                <p>Correo: {{ $solicitud->user->correo_personal }}</p>
+                <p>Licenciatura: {{ $solicitud->user->licenciatura }}</p>
+                <p>Centro Universitario: {{ $solicitud->user->centro_universitario }}</p>
+                <form action="{{ route('aprobaciones.aprobar', $solicitud->id) }}" method="POST">
+                    @csrf
+                    <button type="submit">Aprobar</button>
+                </form>
+                <form action="{{ route('aprobaciones.rechazar', $solicitud->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Rechazar</button>
+                </form>
             </div>
-        @endif
-        <table class="approval-table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Fecha de Registro</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->nombre }} {{ $user->apellidos }}</td>
-                        <td>{{ $user->correo_personal }}</td>
-                        <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                        <td>
-                            <form action="{{ route('aprobar', $user->id) }}" method="POST">
-                                @csrf
-                                <select name="role" required>
-                                    <option value="alumno">Alumno</option>
-                                    <option value="academico">Académico</option>
-                                </select>
-                        </td>
-                        <td>
-                            <button type="submit" class="approve-button">Aprobar</button>
-                            </form>
-                            <form action="{{ route('rechazar', $user->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="reject-button">Rechazar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2024 Universidad - Todos los derechos reservados</p>
-    </footer>
+        @endforeach
+    </div>
 </body>
 </html>

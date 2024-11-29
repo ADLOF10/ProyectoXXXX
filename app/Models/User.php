@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -57,6 +58,13 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+
+
+    public function solicitud()
+    {
+        return $this->hasOne(Solicitud::class);
+    }
+
 
     /**
      * Verifica si el usuario es un superusuario.

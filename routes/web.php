@@ -7,6 +7,7 @@ use App\Http\Controllers\grupos\RegistroController as GruposRegistroController;
 use App\Http\Controllers\SuperUsuarioController;
 use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\LoginController;
 
 
 Route::get('/', function () {
@@ -14,8 +15,38 @@ Route::get('/', function () {
 });
 
 
+Route::middleware('role:superusuario')->group(function () {
+    Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
+    Route::post('/aprobaciones/{id}/aprobar', [SuperUsuarioController::class, 'aprobar'])->name('aprobaciones.aprobar');
+    Route::post('/aprobaciones/{id}/rechazar', [SuperUsuarioController::class, 'rechazar'])->name('aprobaciones.rechazar');
+});
+
+
 Route::get('/registro-usuario', [NuevoRegistroController::class, 'showForm'])->name('registro.usuario');
 Route::post('/registro-usuario', [NuevoRegistroController::class, 'handleForm'])->name('registro.usuario.handle');
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.handle');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rutas para dashboards según roles
+Route::get('/dashboard/alumno', function () {
+    return view('dashboard-alumno');
+})->name('dashboard.alumno')->middleware('auth');
+
+Route::get('/dashboard/academico', function () {
+    return view('dashboard-academico');
+})->name('dashboard.academico')->middleware('auth');
+
+Route::get('/dashboard/superusuario', function () {
+    return view('dashboard-superusuario');
+})->name('dashboard.superusuario')->middleware('auth');
+
+
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+})->name('forgot-password');
 
 
 // use App\Http\Controllers\AuthController;

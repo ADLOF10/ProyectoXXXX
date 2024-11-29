@@ -17,11 +17,12 @@ class CreateUsersTable extends Migration
             $table->string('correo_personal')->unique();
             $table->string('licenciatura');
             $table->string('centro_universitario');
-            $table->string('cedula_profesional')->nullable(); // Solo para académicos
+            $table->string('cedula_profesional')->nullable();
             $table->boolean('es_academico')->default(false);
-            $table->string('role')->default('alumno'); // Valores posibles: superusuario, academico, alumno
+            $table->string('password')->default(bcrypt('default_password')); // Asignar una contraseña predeterminada
             $table->timestamps();
         });
+        
     }
 
 
