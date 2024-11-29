@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\grupos\GruposController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NuevoRegistroController;
 use App\Http\Controllers\grupos\RegistroController as GruposRegistroController;
@@ -9,8 +8,20 @@ use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
 
 
+// Ruta principal para todos los usuarios
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+
+// Registro de usuarios
+Route::get('/registro', [RegistroController::class, 'show'])->name('registro');
+Route::post('/registro', [RegistroController::class, 'solicitarRegistro'])->name('solicitarRegistro');
+
+// Superusuario: manejo de aprobaciones
+Route::middleware(['auth', 'superusuario'])->group(function () {
+    Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('listarSolicitudes');
+    Route::post('/aprobar/{id}', [SuperUsuarioController::class, 'aprobarRegistro'])->name('aprobarRegistro');
+    Route::delete('/rechazar/{id}', [SuperUsuarioController::class, 'rechazarRegistro'])->name('rechazarRegistro');
 });
 
 
@@ -82,12 +93,6 @@ Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegist
 // Ruta para la vista de asistencias
 Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
 
-
-// Ruta para mostrar el formulario de registro de grupo
-Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
-
-// Ruta para guardar el grupo (envío de formulario)
-Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando 
 
 // Ruta para la consulta de asistencias
 Route::get('/consulta-asistencias', [GruposController::class, 'consultaAsistencias'])->name('consultaAsistencias');

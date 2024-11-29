@@ -28,7 +28,7 @@ class GruposController extends Controller
             'horarioRegistro' => 'required|date_format:H:i', // se validará con lógica adicional
         ]);
 
-        // Validación de rango de horario para `horarioRegistro`
+        // Validación de rango de horario para horarioRegistro
         $horarioClase = $request->input('horarioClase');
         $horarioClaseFinal = $request->input('horarioClaseFinal');
         $horarioRegistro = $request->input('horarioRegistro');
@@ -46,7 +46,7 @@ class GruposController extends Controller
             'horario_clase' => $horarioClase,
             'horario_clase_final' => $horarioClaseFinal,
             'horario_registro' => $horarioRegistro,
-            'qr_code' => 'PRUEBA', // Aquí podrías generar el QR
+            'qr_code' => 'GENERADO', // Aquí podrías generar el QR
         ]);
 
         //echo $horarioClase .  $request->input('nombreGrupo');
