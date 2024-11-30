@@ -30,6 +30,10 @@ class SuperUsuarioController extends Controller
         $user->role = $request->role;
         $user->save();
 
+
+
+        
+
         return redirect()->route('listarSolicitudes')->with('success', 'Usuario aprobado con el rol de ' . ucfirst($request->role) . '.');
     }
 
