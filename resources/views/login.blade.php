@@ -22,7 +22,8 @@
 <body>
     <div class="login-container">
         <h1>Inicia Sesión</h1>
-        <form action="{{ route('login.handle') }}" method="POST">
+        
+        <form action="{{ url('/login2') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="correo_institucional">Correo Institucional</label>

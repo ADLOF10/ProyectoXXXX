@@ -11,7 +11,7 @@ use App\Http\Controllers\LoginController;
 
 
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
 });
 
@@ -28,7 +28,7 @@ Route::post('/registro-usuario', [NuevoRegistroController::class, 'handleForm'])
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.handle');
+Route::post('/login2', [LoginController::class, 'handleLogin'])->name('login.handle');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rutas para dashboards según roles
@@ -41,7 +41,7 @@ Route::get('/dashboard/academico', function () {
 })->name('dashboard.academico')->middleware('auth');
 
 Route::get('/dashboard/superusuario', function () {
-    return view('dashboard-superusuario');
+    return view('dashsuper');
 })->name('dashboard.superusuario')->middleware('auth');
 
 

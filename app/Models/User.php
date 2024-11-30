@@ -21,6 +21,8 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'genero',
         'correo_personal',
+        'correo_institucional',
+        'numero_cuenta',
         'licenciatura',
         'centro_universitario',
         'cedula_profesional',

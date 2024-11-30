@@ -27,10 +27,10 @@
         </nav>
         <nav>
             <ul>
-                <li><a href="{{ route('listarSolicitudes') }}">Aprobaciones</a></li>
-                <li><a href="{{ route('registroGrupo') }}">Registrar Grupo</a></li>
-                <li><a href="{{ route('historialAsistencias') }}">Historial de Asistencias</a></li>
-                <li><a href="{{ route('escanearQr') }}">Escanear QR</a></li>
+                <li><a href="{{ url('/dashboard/superusuario') }}" >Aprobaciones</a></li>
+                <li><a href="#">Registrar Grupo</a></li>
+                <li><a href="#">Historial de Asistencias</a></li>
+                <li><a href="#">Escanear QR</a></li>
             </ul>
         </nav>
         
