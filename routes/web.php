@@ -11,7 +11,7 @@ use App\Http\Controllers\LoginController;
 
 
 
-Route::get('/home', function () {
+Route::get('/generador-qr', function () {
     return view('welcome');
 });
 
