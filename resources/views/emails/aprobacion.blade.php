@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprobación de Registro</title>
 </head>
+
+
 <body>
     <h1>¡Hola, {{ $nombre }}!</h1>
     <p>Tu registro ha sido aprobado. Aquí están tus credenciales:</p>
