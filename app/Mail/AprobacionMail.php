@@ -10,17 +10,12 @@ class AprobacionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Datos del usuario que será aprobado.
-     *
-     * @var mixed
-     */
     public $usuario;
 
     /**
-     * Crear una nueva instancia de mensaje.
+     * Crea una nueva instancia del mensaje.
      *
-     * @param mixed $usuario
+     * @param \App\Models\User $usuario
      */
     public function __construct($usuario)
     {
@@ -28,20 +23,18 @@ class AprobacionMail extends Mailable
     }
 
     /**
-     * Construir el mensaje.
+     * Construye el mensaje.
      *
      * @return $this
      */
     public function build()
     {
-        // Ajusta el asunto y la vista para el correo.
-        return $this
-            ->subject('Credenciales Institucionales')
-            ->view('emails.aprobacion') // Asegúrate de tener esta vista creada.
-            ->with([
-                'correoInstitucional' => $this->usuario->correo_institucional,
-                'numeroCuenta' => $this->usuario->numero_cuenta,
-                'nombreCompleto' => $this->usuario->nombre . ' ' . $this->usuario->apellidos,
-            ]);
+        return $this->subject('Credenciales de Acceso Institucionales')
+                    ->view('emails.aprobacion')
+                    ->with([
+                        'nombre' => $this->usuario->nombre,
+                        'correoInstitucional' => $this->usuario->correo_institucional,
+                        'numeroCuenta' => $this->usuario->numero_cuenta,
+                    ]);
     }
 }

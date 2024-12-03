@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nacimiento');
             $table->string('genero');
             $table->string('correo_personal')->unique();
-            $table->string('correo_institucional')->unique();
+            $table->string('correo_institucional')->nullable()->unique();
             $table->string('licenciatura');
             $table->string('centro_universitario');
             $table->string('grupo')->nullable();

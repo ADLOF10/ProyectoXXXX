@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credenciales Institucionales</title>
 </head>
-<body style="font-family: Arial, sans-serif; color: #333;">
-    <h1>Hola {{ $nombreCompleto }}</h1>
-    <p>
-        ¡Felicidades! Tu cuenta institucional ha sido aprobada. A continuación, te proporcionamos tus credenciales:
-    </p>
+<body>
+    <h1>¡Felicidades, {{ $nombre }}!</h1>
+
+    <p>Tu solicitud de registro ha sido aprobada. A continuación, encontrarás tus credenciales de acceso:</p>
+
     <ul>
         <li><strong>Correo Institucional:</strong> {{ $correoInstitucional }}</li>
         <li><strong>Número de Cuenta:</strong> {{ $numeroCuenta }}</li>
     </ul>
-    <p>
-        Por favor, utiliza esta información para iniciar sesión en nuestra plataforma.
-    </p>
-    <p>Gracias,</p>
-    <p><strong>Equipo Administrativo</strong></p>
+
+    <p>Puedes utilizar estas credenciales para iniciar sesión en el sistema institucional.</p>
+
+    <p>Si tienes alguna duda, no dudes en contactar al área administrativa.</p>
+
+    <p>Saludos cordiales,</p>
+    <p><strong>Equipo Institucional</strong></p>
 </body>
 </html>

@@ -35,6 +35,18 @@ Route::middleware(['auth', 'role:superusuario'])->group(function () {
 
 
 
+// Ruta para la vista de aprobaciones
+Route::get('/dashboard/superusuario/aprobaciones', [SuperUsuarioController::class, 'mostrarAprobaciones'])->name('aprobaciones')->middleware('auth');
+
+// Rutas para manejar aprobaciones
+Route::post('/aprobaciones/aprobar/{id}', [SuperUsuarioController::class, 'aprobarRegistro'])->name('aprobar.solicitud')->middleware('auth');
+Route::delete('/aprobaciones/rechazar/{id}', [SuperUsuarioController::class, 'rechazarRegistro'])->name('rechazar.solicitud')->middleware('auth');
+
+
+
+
+
+
 Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
 Route::post('/aprobaciones/aprobar/{id}', [SuperUsuarioController::class, 'aprobarUsuario'])->name('aprobaciones.aprobar');
 Route::post('/aprobaciones/rechazar/{id}', [SuperUsuarioController::class, 'rechazarUsuario'])->name('aprobaciones.rechazar');
@@ -60,9 +72,7 @@ Route::get('/dashboard/academico', function () {
 
 // Route::get('/dashboard/superusuario', function () {
 //     return view('dashsuper');
-// })->name('dashboard.superusuario');
-
-//->middleware('auth');
+// })->name('dashboard.superusuario')->middleware('auth');
 
 
 Route::get('/dashboard/superusuario', [SuperUsuarioController::class, 'mostrarDashboard'])

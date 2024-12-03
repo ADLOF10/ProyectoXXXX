@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Mail;
 
 class SuperUsuarioController extends Controller
 {
-    /**
-     * Muestra la vista de aprobaciones con las listas de alumnos y académicos.
-     */
     public function mostrarDashboard()
     {
         // $alumnos = User::where('es_academico', 0)->get(); // 0 para alumnos
@@ -24,11 +21,111 @@ class SuperUsuarioController extends Controller
     }
     
 
+
+
+
+
+
+
+    public function mostrarAprobaciones()
+    {
+        $alumnos = User::where('es_academico', false)->whereNull('correo_institucional')->get();
+        $academicos = User::where('es_academico', true)->whereNull('correo_institucional')->get();
+
+        return view('aprobaciones', compact('alumnos', 'academicos'));
+    }
+
+        public function aprobarSolicitud($id)
+    {
+        $usuario = User::findOrFail($id);
+
+        if ($usuario->es_academico) {
+            $terminacionCorreo = '@academico.universidad.mx';
+            $centroCodigo = substr($usuario->centro_universitario, -2);
+            $carreraCodigo = '11'; // Ajustar según la lógica.
+        } else {
+            $terminacionCorreo = '@alumno.universidad.mx';
+            $centroCodigo = substr($usuario->centro_universitario, -2);
+            $carreraCodigo = '11'; // Ajustar según la lógica.
+        }
+
+        // Generar correo institucional
+        $usuario->correo_institucional = strtolower(substr($usuario->nombre, 0, 1) . $usuario->apellidos . $usuario->id . $terminacionCorreo);
+
+        // Generar número de cuenta
+        $usuario->numero_cuenta = $centroCodigo . $carreraCodigo . str_pad($usuario->id, 3, '0', STR_PAD_LEFT);
+
+        $usuario->save();
+
+        // Enviar correo con las credenciales
+        Mail::to($usuario->correo_personal)->send(new AprobacionMail($usuario));
+
+        return redirect()->route('dashboard.superusuario')->with('success', 'Solicitud aprobada y credenciales enviadas.');
+    }
+
+//     public function aprobarSolicitud($id)
+// {
+//     $usuario = User::findOrFail($id);
+
+//     // Generar credenciales institucionales
+//     $usuario->correo_institucional = $this->generarCorreoInstitucional($usuario);
+//     $usuario->numero_cuenta = $this->generarNumeroCuenta($usuario);
+//     $usuario->save();
+
+//     // Enviar el correo de aprobación
+//     Mail::to($usuario->correo_personal)->send(new AprobacionMail($usuario));
+
+//     return redirect()->route('dashboard.superusuario')->with('success', 'Solicitud aprobada y correo enviado.');
+// }
+
+
+    public function aprobarRegistro($id)
+    {
+        $usuario = User::findOrFail($id);
+
+        // Generar correo institucional
+        $correoDominio = $usuario->es_academico ? '@academico.universidad.mx' : '@alumno.universidad.mx';
+        $usuario->correo_institucional = strtolower(substr($usuario->nombre, 0, 1) . $usuario->apellidos . substr($usuario->id, -4)) . $correoDominio;
+
+        // Generar número de cuenta
+        $centroCodigos = [
+            'UAPT' => '21',
+            'Ciudad Universitaria' => '22',
+        ];
+        $licenciaturaCodigos = [
+            'Software' => '11',
+            'Plásticos' => '12',
+            'Computación' => '13',
+            'Arquitectura' => '14',
+            'Derecho' => '15',
+        ];
+        $usuario->numero_cuenta = $centroCodigos[$usuario->centro_universitario] . $licenciaturaCodigos[$usuario->licenciatura] . str_pad($usuario->id, 3, '0', STR_PAD_LEFT);
+
+        // Guardar usuario
+        $usuario->save();
+
+        // Enviar correo
+        Mail::to($usuario->correo_personal)->send(new AprobacionMail($usuario));
+
+        return redirect()->route('aprobaciones')->with('success', 'Registro aprobado y credenciales enviadas.');
+    }
+
+    public function rechazarRegistro($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+
+        return redirect()->route('aprobaciones')->with('success', 'Registro rechazado y eliminado.');
+    }
+
+
+
+
+
     
 
-    /**
-     * Aprueba un usuario y genera sus credenciales institucionales.
-     */
+
+
     public function aprobarUsuario($id)
     {
         $usuario = User::findOrFail($id);
