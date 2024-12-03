@@ -15,12 +15,30 @@ Route::get('/generador-qr', function () {
     return view('welcome');
 });
 
+// Route::middleware(['role:superusuario'])->group(function () {
+//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
+// });
 
-Route::middleware('role:superusuario')->group(function () {
-    Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
-    Route::post('/aprobaciones/{id}/aprobar', [SuperUsuarioController::class, 'aprobar'])->name('aprobaciones.aprobar');
-    Route::post('/aprobaciones/{id}/rechazar', [SuperUsuarioController::class, 'rechazar'])->name('aprobaciones.rechazar');
+
+// Route::middleware('role:superusuario')->group(function () {
+//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
+//     Route::post('/aprobaciones/{id}/aprobar', [SuperUsuarioController::class, 'aprobar'])->name('aprobaciones.aprobar');
+//     Route::post('/aprobaciones/{id}/rechazar', [SuperUsuarioController::class, 'rechazar'])->name('aprobaciones.rechazar');
+// });
+
+Route::middleware(['auth', 'role:superusuario'])->group(function () {
+    //Route::get('/dashsuper', [SuperUsuarioController::class, 'mostrarDashboard'])->name('dashsuper');
+    Route::post('/aprobar/academico/{id}', [SuperUsuarioController::class, 'aprobarAcademico'])->name('aprobar.academico');
 });
+
+
+
+
+
+Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
+Route::post('/aprobaciones/aprobar/{id}', [SuperUsuarioController::class, 'aprobarUsuario'])->name('aprobaciones.aprobar');
+Route::post('/aprobaciones/rechazar/{id}', [SuperUsuarioController::class, 'rechazarUsuario'])->name('aprobaciones.rechazar');
+
 
 
 Route::get('/registro-usuario', [NuevoRegistroController::class, 'showForm'])->name('registro.usuario');
@@ -42,7 +60,9 @@ Route::get('/dashboard/academico', function () {
 
 Route::get('/dashboard/superusuario', function () {
     return view('dashsuper');
-})->name('dashboard.superusuario')->middleware('auth');
+})->name('dashboard.superusuario');
+
+//->middleware('auth');
 
 
 Route::get('/forgot-password', function () {

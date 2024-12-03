@@ -10,11 +10,17 @@ class CreateSolicitudesTable extends Migration
     {
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Relación con el usuario
-            $table->boolean('es_aprobado')->default(false); // Estado de aprobación
+            $table->string('nombre');
+            $table->string('apellidos');
+            $table->date('fecha_nacimiento');
+            $table->string('genero');
+            $table->string('correo_personal')->unique();
+            $table->string('licenciatura');
+            $table->string('centro_universitario');
+            $table->string('cedula_profesional')->nullable(); // Solo para académicos
+            $table->boolean('es_academico')->default(false);
+            $table->string('estatus')->default('pendiente'); // pendiente, aprobado, rechazado
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
