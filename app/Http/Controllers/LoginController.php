@@ -24,19 +24,20 @@ class LoginController extends Controller
         ]);
 
         $credentials = [
-            'correo_personal' => $request->input('correo_institucional'),
+            'correo_institucional' => $request->input('correo_institucional'),
             'password' => $request->input('password'),
         ];
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            if (str_contains($user->correo_institucional, '@alumno.universidad.mx')) {
+              // Redirige según el tipo de usuario
+            if (str_contains($user->correo_institucional, '@alumno.universidad.mx') && !$user->es_academico) {
                 return redirect()->route('dashboard.alumno');
-            } elseif (str_contains($user->correo_institucional, '@academico.universidad.mx')) {
+            } elseif (str_contains($user->correo_institucional, '@academico.universidad.mx') && $user->es_academico) {
                 return redirect()->route('dashboard.academico');
             } elseif ($user->correo_personal === 'dios@gmail.com') {
-                return redirect('/dashboard/superusuario');
+                return redirect()->route('dashsuper'); // Ruta del superusuario
             }
         }
 

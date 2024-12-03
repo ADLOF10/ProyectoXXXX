@@ -58,11 +58,16 @@ Route::get('/dashboard/academico', function () {
     return view('dashboard-academico');
 })->name('dashboard.academico')->middleware('auth');
 
-Route::get('/dashboard/superusuario', function () {
-    return view('dashsuper');
-})->name('dashboard.superusuario');
+// Route::get('/dashboard/superusuario', function () {
+//     return view('dashsuper');
+// })->name('dashboard.superusuario');
 
 //->middleware('auth');
+
+
+Route::get('/dashboard/superusuario', [SuperUsuarioController::class, 'mostrarDashboard'])
+    ->name('dashsuper')
+    ->middleware('auth');
 
 
 Route::get('/forgot-password', function () {

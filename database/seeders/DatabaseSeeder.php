@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'fecha_nacimiento' => '1980-01-01',
             'genero' => 'Otro',
             'correo_personal' => 'dios@gmail.com',
+            'correo_institucional' => 'dios@gmail.com',
             'licenciatura' => 'Derecho',
             'centro_universitario' => 'Ciudad Universitaria',
             'grupo' => null, // Dejar grupo como null para el superusuario

@@ -15,10 +15,12 @@ class SuperUsuarioController extends Controller
      */
     public function mostrarDashboard()
     {
-        $alumnos = User::where('es_academico', 0)->get(); // 0 para alumnos
-        $academicos = User::where('es_academico', 1)->get(); // 1 para académicos
+        // $alumnos = User::where('es_academico', 0)->get(); // 0 para alumnos
+        // $academicos = User::where('es_academico', 1)->get(); // 1 para académicos
     
-        return view('dashsuper', compact('alumnos', 'academicos'));
+        // return view('dashsuper', compact('alumnos', 'academicos'));
+
+        return view('dashsuper');
     }
     
 
