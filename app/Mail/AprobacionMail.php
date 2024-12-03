@@ -13,9 +13,9 @@ class AprobacionMail extends Mailable
     public $usuario;
 
     /**
-     * Create a new message instance.
+     * Crea una nueva instancia del mensaje.
      *
-     * @param $usuario
+     * @param \App\Models\User $usuario
      */
     public function __construct($usuario)
     {
@@ -23,18 +23,18 @@ class AprobacionMail extends Mailable
     }
 
     /**
-     * Build the message.
+     * Construye el mensaje.
      *
      * @return $this
      */
     public function build()
     {
-        return $this->view('emails.aprobacion')
-            ->subject('Tu registro ha sido aprobado')
-            ->with([
-                'nombre' => $this->usuario->nombre,
-                'correoInstitucional' => $this->usuario->correo_institucional,
-                'numeroCuenta' => $this->usuario->numero_cuenta,
-            ]);
+        return $this->subject('Credenciales de Acceso Institucionales')
+                    ->view('emails.aprobacion')
+                    ->with([
+                        'nombre' => $this->usuario->nombre,
+                        'correoInstitucional' => $this->usuario->correo_institucional,
+                        'numeroCuenta' => $this->usuario->numero_cuenta,
+                    ]);
     }
 }
