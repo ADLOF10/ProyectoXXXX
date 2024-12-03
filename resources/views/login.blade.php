@@ -13,16 +13,14 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="/nosotros">Nosotros</a></li>
             </ul>
         </nav>
     </header>
 <body>
     <div class="login-container">
         <h1>Inicia Sesión</h1>
-        
+
         <form action="{{ url('/login2') }}" method="POST">
             @csrf
             <div class="form-group">

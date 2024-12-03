@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F3F3;
+    color: #004d40;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+header {
+    background-color: #fff; /* Fondo blanco */
+    padding: 10px 0; /* Reducir el padding inferior del header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0; /* Asegurar que no haya margen adicional */
+
+}
+footer {
+    background-color: #004d40; /* Fondo blanco */
+    padding: 10px 0; /* Reducir el padding inferior del header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0; /* Asegurar que no haya margen adicional */
+    color: #fff;
+    position: fixed; bottom: 0; width: 100%;
+
+}
+
+.navbar {
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    width: 80%; /* Mantiene un ancho máximo para centrar el contenido */
+}
+
+.logo img {
+    width: 100px; /* Tamaño proporcional del logo */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links li a {
+    color: #000; /* Texto negro */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem; /* Ajuste del tamaño del texto */
+}
+
+.nav-links li a:hover {
+    color:  #DAA520; /* Color azul al pasar el mouse */
+}

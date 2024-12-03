@@ -23,10 +23,8 @@
                 <img src="{{ asset('image.png') }}" alt="Logo Universidad">
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="http://127.0.0.1:8000/login">Iniciar sesion</a></li>
+                <li><a href="/nosotros">Nosotros</a></li>
             </ul>
         </nav>
     </header>

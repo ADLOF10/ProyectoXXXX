@@ -9,12 +9,17 @@ use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\LoginController;
 
-
+Route::get('/nosotros', function () {
+    return view('nosotros');
+});
 
 Route::get('/generador-qr', function () {
     return view('welcome');
 });
 
+Route::get('', function () {
+    return view('home');
+});
 
 Route::middleware('role:superusuario')->group(function () {
     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
@@ -129,7 +134,7 @@ Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
 Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
 // Ruta para guardar el grupo (envío de formulario)
-Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando 
+Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando
 
 // Ruta para la consulta de asistencias
 Route::get('/consulta-asistencias', [GruposController::class, 'consultaAsistencias'])->name('consultaAsistencias');
