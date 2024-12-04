@@ -9,7 +9,9 @@ use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\LoginController;
 
-
+Route::get('/nosotros', function () {
+    return view('nosotros');
+});
 
 Route::get('/generador-qr', function () {
     return view('welcome');
@@ -37,12 +39,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rutas para dashboards según roles
 Route::get('/dashboard/alumno', function () {
-    return view('dashboard-alumno');
+    return view('dashalumno');
 })->name('dashboard.alumno')->middleware('auth');
 
-Route::get('/dashboard/academico', function () {
-    return view('dashboard-academico');
-})->name('dashboard.academico')->middleware('auth');
+Route::get('/dashboard/profesor', function () {
+    return view('dashmaestro');
+})->name('dashboard.profesor')->middleware('auth');
 
 Route::get('/dashboard/superusuario', function () {
     return view('dashsuper');
@@ -133,7 +135,7 @@ Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
 Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
 // Ruta para guardar el grupo (envío de formulario)
-Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando 
+Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando
 
 // Ruta para la consulta de asistencias
 Route::get('/consulta-asistencias', [GruposController::class, 'consultaAsistencias'])->name('consultaAsistencias');
@@ -164,7 +166,3 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
-// Rutas para registrar asistencias
-Route::post('/attendance/register', 'AttendanceController@registerAttendance')->name('attendance.register');
-Route::get('/attendance/success', 'AttendanceController@attendanceSuccess')->name('attendance.success');
