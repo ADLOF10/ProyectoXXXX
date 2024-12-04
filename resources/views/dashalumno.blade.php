@@ -12,6 +12,7 @@
             <img src="{{ asset('image.png') }}" alt="Logo Universidad">
         </div>
         <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
             <li><a href="/asistencias">Ver mis Asistencias</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
         </ul>

@@ -68,6 +68,7 @@ class NuevoRegistroController extends Controller
             'regex:/[A-Z]/', // Al menos una letra mayúscula
             'regex:/[a-z]/', // Al menos una letra minúscula
             'regex:/[0-9]/', // Al menos un número
+
         ],
         'cedula_profesional' => [
             'nullable', // Puede ser nula si no es académico
@@ -82,6 +83,8 @@ class NuevoRegistroController extends Controller
             'nombre.regex' => 'El nombre solo puede contener caracteres',
             'apellidos.required_if' => 'Campo Obligatorio.',
             'apellidos.regex' => 'El apellido solo puede contener caracteres',
+            'password.required_if' =>'Campo Obligatorio',
+            'password.regex'=> 'La contraseña debe de tener al menos 8 caracteres una mayuscula una minuscula y un numero',
 
         ]);
 

@@ -134,7 +134,11 @@
                     value="{{ old('password') }}"
                     required
                     class="@error('password') is-invalid @enderror"
+
                 >
+                @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                @endif
             </div>
 
             <div class="form-group checkbox-group">
