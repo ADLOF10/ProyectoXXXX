@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Generar Código QR</title>
     <link rel="stylesheet" href="{{ asset('css/stylesgeneracion.css') }}">
-    
+
     <!-- Incluir la librería qrcode.js localmente o desde un CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
@@ -16,13 +16,11 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{{ asset('image.png') }}" alt="Logo Universidad">}
+                <img src="{{ asset('image.png') }}" alt="Logo Universidad">
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="http://127.0.0.1:8000/">Inicio</a></li>
+                <li><a href="http://127.0.0.1:8000/nosotros">Nosotros</a></li>
             </ul>
         </nav>
         <nav>
@@ -33,7 +31,7 @@
                 <li><a href="#">Escanear QR</a></li>
             </ul>
         </nav>
-        
+
     </header>
 
     <!-- Sección principal con formulario y botón de generación de QR -->
@@ -58,7 +56,7 @@
                         <input type="text" id="materia" name="materia" required maxlength="60" value="{{ old('materia') }}"
                             pattern="^[A-Za-zÀ-ÿ\s]+$" title="Solo se permiten letras y espacios">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="fechaClase">Fecha de la Clase:</label>
                         <input type="date" id="fechaClase" name="fechaClase" required value="{{ old('fechaClase') }}">
@@ -105,7 +103,7 @@
     </footer>
 
 
-    
+
     <!-- Script para generar el código QR -->
     <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -220,36 +218,6 @@
     });
     </script>
 
-<!--Validacion del tiempo de registro -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const horarioClaseInput = document.getElementById("horarioClase");
-        const horarioRegistroInput = document.getElementById("horarioRegistro");
-
-        // Escucha cambios en el horario de inicio
-        horarioClaseInput.addEventListener("input", function() {
-            const horarioClase = horarioClaseInput.value;
-
-            if (horarioClase) {
-                // Calcular el horario de fin de registro sumando 5 minutos
-                const [horas, minutos] = horarioClase.split(":").map(Number);
-                let nuevaHora = horas;
-                let nuevosMinutos = minutos + 5;
-
-                // Ajustar la hora si los minutos superan 59
-                if (nuevosMinutos >= 60) {
-                    nuevosMinutos -= 60;
-                    nuevaHora += 1;
-                }
-
-                // Formatear el tiempo con ceros iniciales
-                const horarioFormateado = `${String(nuevaHora).padStart(2, '0')}:${String(nuevosMinutos).padStart(2, '0')}`;
-                horarioRegistroInput.value = horarioFormateado; // Establecer el valor calculado
-            }
-        });
-    });
-</script>
-    
 
 
 

@@ -4,8 +4,8 @@ body {
     color: #004d40;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
-
 header {
     background-color: #fff; /* Fondo blanco */
     padding: 10px 0; /* Reducir el padding inferior del header */
@@ -13,6 +13,7 @@ header {
     justify-content: center;
     align-items: center;
     margin-bottom: 0; /* Asegurar que no haya margen adicional */
+
 }
 footer {
     background-color: #004d40; /* Fondo blanco */
@@ -52,67 +53,4 @@ footer {
 
 .nav-links li a:hover {
     color:  #DAA520; /* Color azul al pasar el mouse */
-}
-
-.login-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h1 {
-    color: #004d40;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #004d40;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #00695c;
-}
-
-.extra-links {
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-.extra-links a {
-    color: #004d40;
-    text-decoration: none;
-}
-
-.extra-links a:hover {
-    text-decoration: underline;
 }

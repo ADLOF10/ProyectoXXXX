@@ -22,4 +22,7 @@
     <p>Saludos cordiales,</p>
     <p><strong>Equipo Institucional</strong></p>
 </body>
+<footer>
+    <p>© 2024 Universidad - Todos los derechos reservados</p>
+</footer>
 </html>

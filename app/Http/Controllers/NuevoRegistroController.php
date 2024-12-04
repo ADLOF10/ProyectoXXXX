@@ -60,18 +60,32 @@ class NuevoRegistroController extends Controller
             ],
             'licenciatura' => 'required|string|max:30',
             'centro_universitario' => 'required|string|max:30',
-            'cedula_profesional' => [
-                'nullable', // Puede ser nula si no es académico
-                'required_if:es_academico,on', // Obligatoria si es académico
-                'regex:/^\d{7,8}$/', // Solo números de 7 u 8 dígitos
-            ],
-        ], [
+
+            'password' => [
+            'required',
+            'string',
+            'min:8', // Longitud mínima
+            'regex:/[A-Z]/', // Al menos una letra mayúscula
+            'regex:/[a-z]/', // Al menos una letra minúscula
+            'regex:/[0-9]/', // Al menos un número
+
+        ],
+        'cedula_profesional' => [
+            'nullable', // Puede ser nula si no es académico
+            'required_if:es_academico,on', // Obligatoria si es académico
+            'regex:/^\d{7,8}$/', // Solo números de 7 u 8 dígitos
+        ],
+        ],
+        [
             'cedula_profesional.required_if' => 'La cédula profesional es obligatoria para académicos.',
             'cedula_profesional.regex' => 'La cédula profesional debe ser un número de 7 u 8 dígitos.',
             'nombre.required_if' => 'Campo Obligatorio.',
             'nombre.regex' => 'El nombre solo puede contener caracteres',
             'apellidos.required_if' => 'Campo Obligatorio.',
             'apellidos.regex' => 'El apellido solo puede contener caracteres',
+            'password.required_if' =>'Campo Obligatorio',
+            'password.regex'=> 'La contraseña debe de tener al menos 8 caracteres una mayuscula una minuscula y un numero',
+
         ]);
 
 
@@ -81,11 +95,12 @@ class NuevoRegistroController extends Controller
             'apellidos' => $request->input('apellidos'),
             'fecha_nacimiento' => $request->input('fecha_nacimiento'),
             'genero' => $request->input('genero'),
-            'correo_personal' => $request->input('correo_personal'),
+            'correo_personal' => (string) $request->input('correo_personal'),
             'licenciatura' => $request->input('licenciatura'),
             'centro_universitario' => $request->input('centro_universitario'),
             'cedula_profesional' => $request->input('cedula_profesional'), // Será null si no aplica
             'es_academico' => $request->has('es_academico'), // Retorna true si el checkbox fue marcado
+            'password' => bcrypt($request->input('password')),
         ]);
 
 
