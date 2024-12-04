@@ -21,6 +21,7 @@ Route::get('', function () {
     return view('home');
 });
 
+
 Route::middleware('role:superusuario')->group(function () {
     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
     Route::post('/aprobaciones/{id}/aprobar', [SuperUsuarioController::class, 'aprobar'])->name('aprobaciones.aprobar');
@@ -38,12 +39,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rutas para dashboards según roles
 Route::get('/dashboard/alumno', function () {
-    return view('dashboard-alumno');
+    return view('dashalumno');
 })->name('dashboard.alumno')->middleware('auth');
 
-Route::get('/dashboard/academico', function () {
-    return view('dashboard-academico');
-})->name('dashboard.academico')->middleware('auth');
+Route::get('/dashboard/profesor', function () {
+    return view('dashmaestro');
+})->name('dashboard.profesor')->middleware('auth');
 
 Route::get('/dashboard/superusuario', function () {
     return view('dashsuper');

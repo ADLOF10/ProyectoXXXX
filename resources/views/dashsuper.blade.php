@@ -13,7 +13,7 @@
         </div>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="{{ route('dashboard') }}">Inicio</a></li>
+                <li><a href="/login">Iniciar sesión</a></li>
                 <li><a href="{{ route('aprobaciones') }}">Gestionar Aprobaciones</a></li>
                 <li><a href="{{ route('registro.usuario') }}">Registrar Usuario</a></li>
                 <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
@@ -24,7 +24,7 @@
     <main class="main-container">
         <h1>Bienvenido, Superusuario</h1>
         <p class="description">Desde este panel puedes gestionar usuarios, aprobar registros y administrar las configuraciones del sistema.</p>
-        
+
         <div class="action-buttons">
             <a href="{{ route('aprobaciones') }}" class="btn btn-primary">Gestionar Aprobaciones</a>
             <a href="{{ route('registro.usuario') }}" class="btn btn-secondary">Registrar Usuario</a>

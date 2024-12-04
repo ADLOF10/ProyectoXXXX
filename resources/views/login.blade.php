@@ -12,7 +12,8 @@
                 <img src="{{ asset('image.png') }}" alt="Logo Universidad">
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Inicio</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/registro-usuario">Registrarse</a></li>
                 <li><a href="/nosotros">Nosotros</a></li>
             </ul>
         </nav>
@@ -21,18 +22,17 @@
     <div class="login-container">
         <h1>Inicia Sesión</h1>
 
-        <form action="{{ url('/login2') }}" method="POST">
+        <form action="{{route('login.handle') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="correo_institucional">Correo Institucional</label>
-                <input type="email" id="correo_institucional" name="correo_institucional" required placeholder="usuario@alumno.universidad.mx">
+                <label for="correo_personal">Correo Personal</label>
+                <input type="email" id="correo_personal" name="correo_personal" required placeholder="usuario@alumno.universidad.mx">
             </div>
 
             <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña">
             </div>
-
             <div class="form-group">
                 <button type="submit">Iniciar Sesión</button>
             </div>

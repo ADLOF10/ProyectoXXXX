@@ -23,7 +23,7 @@
                 <img src="{{ asset('image.png') }}" alt="Logo Universidad">
             </div>
             <ul class="nav-links">
-                <li><a href="http://127.0.0.1:8000/login">Iniciar sesion</a></li>
+                <li><a href="/login">Iniciar sesion</a></li>
                 <li><a href="/nosotros">Nosotros</a></li>
             </ul>
         </nav>
@@ -104,6 +104,7 @@
                 @if ($errors->has('correo_personal'))
                     <span class="text-danger">{{ $errors->first('correo_personal') }}</span>
                 @endif
+
             </div>
 
             <div class="form-group">
@@ -124,6 +125,17 @@
                     <option value="CU">Ciudad Universitaria</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value="{{ old('password') }}"
+                    required
+                    class="@error('password') is-invalid @enderror"
+                >
+            </div>
 
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="es_academico" name="es_academico" onchange="toggleAcademicoFields()">
@@ -140,6 +152,7 @@
                     @endif
                 </div>
             </div>
+
 
             <button type="submit">Registrar</button>
         </form>
