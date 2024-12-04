@@ -73,7 +73,7 @@
                         id="fecha_nacimiento"
                         name="fecha_nacimiento"
                         class="form-control @error('fecha_nacimiento') is-invalid @enderror"
-                        value="{{ old('fecha_nacimiento') }}"
+                        value="{{ old('fecha_nacimiento') }}x"
                         required
                         >
                         @if ($errors->has('fecha_nacimiento'))

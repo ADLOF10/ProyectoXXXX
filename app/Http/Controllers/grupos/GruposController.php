@@ -16,43 +16,43 @@ class GruposController extends Controller
     }
 
     public function guardarGrupo(Request $request)
-    {
-        // Validación de los datos de entrada
-        $request->validate([
-            'nombreGrupo' => 'required|string|max:255|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-            'materia' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-            'fechaClase' => 'required|date|after_or_equal:today',    
-            'profesor' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-            'horarioClase' => 'required|date_format:H:i|after_or_equal:07:00|before_or_equal:19:00',
-            'horarioClaseFinal' => 'required|date_format:H:i|after:horarioClase|before_or_equal:19:00',
-            'horarioRegistro' => 'required|date_format:H:i', // se validará con lógica adicional
-        ]);
+{
+    // Validación de los datos de entrada
+    $request->validate([
+        'nombreGrupo' => 'required|string|max:255|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
+        'materia' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
+        'fechaClase' => 'required|date|after_or_equal:today',
+        'profesor' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
+        'horarioClase' => 'required|date_format:H:i|after_or_equal:07:00|before_or_equal:19:00',
+        'horarioClaseFinal' => 'required|date_format:H:i|after:horarioClase|before_or_equal:19:00',
+        'horarioRegistro' => 'required|date_format:H:i',
+    ]);
 
-        // Validación de rango de horario para `horarioRegistro`
-        $horarioClase = $request->input('horarioClase');
-        $horarioClaseFinal = $request->input('horarioClaseFinal');
-        $horarioRegistro = $request->input('horarioRegistro');
+    // Conversión de horarios a objetos Carbon para comparación
+    $horarioClase = Carbon::createFromFormat('H:i', $request->input('horarioClase'));
+    $horarioClaseFinal = Carbon::createFromFormat('H:i', $request->input('horarioClaseFinal'));
+    $horarioRegistro = Carbon::createFromFormat('H:i', $request->input('horarioRegistro'));
 
-        if ($horarioRegistro < $horarioClase || $horarioRegistro > $horarioClaseFinal) {
-            return redirect()->back()->withErrors(['horarioRegistro' => 'El horario de registro debe estar entre el horario de inicio y finalización de la clase.']);
-        }
-
-        // Crear el registro en la base de datos si la validación se pasa
-        Grupo::create([
-            'nombre_grupo' => $request->input('nombreGrupo'),
-            'materia' => $request->input('materia'),
-            'fecha_clase' => $request->input('fechaClase'),
-            'profesor' => $request->input('profesor'),
-            'horario_clase' => $horarioClase,
-            'horario_clase_final' => $horarioClaseFinal,
-            'horario_registro' => $horarioRegistro,
-            'qr_code' => 'PRUEBA', // Aquí podrías generar el QR
-        ]);
-
-        //echo $horarioClase .  $request->input('nombreGrupo');
-
-        return ;
+    // Validación de rango de horario para `horarioRegistro`
+    if ($horarioRegistro < $horarioClase || $horarioRegistro > $horarioClaseFinal) {
+        return redirect()->back()->withErrors(['horarioRegistro' => 'El horario de registro debe estar entre el horario de inicio y finalización de la clase.']);
     }
+
+    // Crear el registro en la base de datos
+    Grupo::create([
+        'nombre_grupo' => $request->input('nombreGrupo'),
+        'materia' => $request->input('materia'),
+        'fecha_clase' => $request->input('fechaClase'),
+        'profesor' => $request->input('profesor'),
+        'horario_clase' => $horarioClase->format('H:i'),
+        'horario_clase_final' => $horarioClaseFinal->format('H:i'),
+        'horario_registro' => $horarioRegistro->format('H:i'),
+        'qr_code' => 'PRUEBA', // Aquí podrías generar el QR
+    ]);
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('grupos.index')->with('success', 'Grupo creado exitosamente.');
+}
 
     // Método para la consulta de asistencias
     public function consultaAsistencias()
@@ -148,6 +148,7 @@ class GruposController extends Controller
             return redirect()->back()->with('status', 'Alumno eliminado con exito.')->with('error',true);
         }
     }
+        
     //editar alumno
     public function datosAlumno(Request $request, $cuenta)
     {
