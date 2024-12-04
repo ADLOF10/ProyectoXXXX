@@ -50,12 +50,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="nombreGrupo">Nombre del Grupo:</label>
-                        <input type="text" id="nombreGrupo" name="nombreGrupo" required value="{{ old('nombreGrupo') }}"
+                        <input type="text" id="nombreGrupo" name="nombreGrupo" required maxlength="10" value="{{ old('nombreGrupo') }}"
                             pattern="^[A-Za-zÀ-ÿ\s]+$" title="Solo se permiten letras y espacios">
                     </div>
                     <div class="form-group">
                         <label for="materia">Materia:</label>
-                        <input type="text" id="materia" name="materia" required value="{{ old('materia') }}"
+                        <input type="text" id="materia" name="materia" required maxlength="60" value="{{ old('materia') }}"
                             pattern="^[A-Za-zÀ-ÿ\s]+$" title="Solo se permiten letras y espacios">
                     </div>
                     
@@ -66,7 +66,7 @@
 
                     <div class="form-group">
                         <label for="profesor">Profesor:</label>
-                        <input type="text" id="profesor" name="profesor" required value="{{ old('profesor') }}"
+                        <input type="text" id="profesor" name="profesor" required maxlength="255" value="{{ old('profesor') }}"
                             pattern="^[A-Za-zÀ-ÿ\s]+$" title="Solo se permiten letras y espacios">
                     </div>
                     <div class="form-group">
@@ -81,6 +81,7 @@
                         <label for="horarioRegistro">Fin de Horario de Registro Activo: </label>
                         <input type="time" id="horarioRegistro" name="horarioRegistro" required value="{{ old('horarioRegistro') }}">
                     </div>
+
                     <!-- Botón para generar código QR -->
                     <button type="submit" id="generateQRButton">Generar Código QR</button>
                 </form>
@@ -218,6 +219,36 @@
         });
     });
     </script>
+
+<!--Validacion del tiempo de registro -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const horarioClaseInput = document.getElementById("horarioClase");
+        const horarioRegistroInput = document.getElementById("horarioRegistro");
+
+        // Escucha cambios en el horario de inicio
+        horarioClaseInput.addEventListener("input", function() {
+            const horarioClase = horarioClaseInput.value;
+
+            if (horarioClase) {
+                // Calcular el horario de fin de registro sumando 5 minutos
+                const [horas, minutos] = horarioClase.split(":").map(Number);
+                let nuevaHora = horas;
+                let nuevosMinutos = minutos + 5;
+
+                // Ajustar la hora si los minutos superan 59
+                if (nuevosMinutos >= 60) {
+                    nuevosMinutos -= 60;
+                    nuevaHora += 1;
+                }
+
+                // Formatear el tiempo con ceros iniciales
+                const horarioFormateado = `${String(nuevaHora).padStart(2, '0')}:${String(nuevosMinutos).padStart(2, '0')}`;
+                horarioRegistroInput.value = horarioFormateado; // Establecer el valor calculado
+            }
+        });
+    });
+</script>
     
 
 
