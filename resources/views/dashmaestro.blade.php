@@ -12,6 +12,7 @@
             <img src="{{ asset('image.png') }}" alt="Logo Universidad">
         </div>
         <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
             <li><a href="/grupos">Grupos</a></li>
             <li><a href="/generador-qr">Generar QR</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
@@ -21,4 +22,7 @@
 <body>
 
 </body>
+<footer>
+    <p>© 2024 Universidad - Todos los derechos reservados</p>
+</footer>
 </html>

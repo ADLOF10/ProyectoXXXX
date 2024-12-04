@@ -23,6 +23,6 @@
     <h1>Bienvenido</h1>
 </body>
 <footer>
-    <p>2024 Universidad Autonoma del Estado de Mexico</p>
+    <p>© 2024 Universidad - Todos los derechos reservados</p>
 </footer>
 </html>

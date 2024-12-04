@@ -22,4 +22,7 @@
 <body>
 
 </body>
+<footer>
+    <p>© 2024 Universidad - Todos los derechos reservados</p>
+</footer>
 </html>

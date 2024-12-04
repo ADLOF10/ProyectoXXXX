@@ -29,6 +29,10 @@
         <p>Diego</p>
     </section>
     <section id="about-us"> <h2>Contacto</h2>
-        <p> El Andre se la Come 7895465</p>
+        <p>45567895465</p>
 </body>
+<footer>
+    <p>© 2024 Universidad - Todos los derechos reservados</p>
+</footer>
+
 </html>
