@@ -58,5 +58,3 @@ class AsistenciaController extends Controller
         return view('asistencias.consulta', compact('resultados', 'fechaSeleccionada'));
     }
 }
-
-

@@ -4,7 +4,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Asistencias</title>
     <link rel="stylesheet" href="{{ asset('css/stylesconsultas.css') }}">
     <style>
@@ -21,14 +21,12 @@
                 <img src="{{ asset('image.png') }}" alt="Logo Universidad">
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="http://127.0.0.1:8000/">Inicio</a></li>
+                <li><a href="/nosotros">Nosotros</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <h1>Asistencias</h1>
         <div class="calendar">

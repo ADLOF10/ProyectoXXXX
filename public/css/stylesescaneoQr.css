@@ -6,6 +6,17 @@ body {
     margin: 0;
     padding: 0;
 }
+footer {
+    background-color: #004d40; /* Fondo blanco */
+    padding: 10px 0; /* Reducir el padding inferior del header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0; /* Asegurar que no haya margen adicional */
+    color: #fff;
+    position: fixed; bottom: 0; width: 100%;
+
+}
 
 /* Contenedor principal */
 .container {

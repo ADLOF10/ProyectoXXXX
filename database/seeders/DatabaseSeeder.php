@@ -10,18 +10,20 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        // Crear un superusuario
         User::create([
             'nombre' => 'Super Usuario',
             'apellidos' => 'Administrador',
             'fecha_nacimiento' => '1980-01-01',
             'genero' => 'Otro',
             'correo_personal' => 'dios@gmail.com',
-            'password' => Hash::make('12345'),
+            'correo_institucional' => 'dios@gmail.com',
             'licenciatura' => 'Derecho',
             'centro_universitario' => 'Ciudad Universitaria',
+            'grupo' => null, // Dejar grupo como null para el superusuario
+            'cedula_profesional' => null,
             'es_academico' => false,
+            'password' => bcrypt('12345'), // Contraseña por defecto
         ]);
-        
-        
     }
 }

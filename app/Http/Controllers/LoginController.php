@@ -19,24 +19,25 @@ class LoginController extends Controller
         //die;
 
         $request->validate([
-            'correo_institucional' => 'required|email',
+            'correo_personal' => 'required|email',
             'password' => 'required',
         ]);
 
         $credentials = [
-            'correo_personal' => $request->input('correo_institucional'),
+            'correo_personal' => $request->input('correo_personal'),
             'password' => $request->input('password'),
         ];
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            if (str_contains($user->correo_institucional, '@alumno.universidad.mx')) {
-                return redirect()->route('dashboard.alumno');
-            } elseif (str_contains($user->correo_institucional, '@academico.universidad.mx')) {
-                return redirect()->route('dashboard.academico');
-            } elseif ($user->correo_personal === 'dios@gmail.com') {
-                return redirect('/dashboard/superusuario');
+              // Redirige según el tipo de usuario
+            if ($user->correo_personal === 'dios@gmail.com') {
+                return redirect()->route('dashboard.superusuario');
+            } elseif ($user->es_academico) {
+                return redirect()->route('dashboard.profesor');
+            } elseif (!$user->es_academico) {
+                return redirect()->route('dashboard.alumno'); // Ruta del superusuario
             }
         }
 

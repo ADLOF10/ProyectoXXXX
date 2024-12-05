@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Alumno extends Model
+class Academico extends Model
 {
     use HasFactory;
 
-    protected $table = 'alumnos';
+    protected $table = 'academicos';
 
     protected $fillable = [
         'nombre',
@@ -19,12 +19,10 @@ class Alumno extends Model
         'centro_universitario',
         'licenciatura',
         'grupo',
-        'semestre',
+        'cedula_profesional',
         'password',
     ];
 
-    public function asistencias()
-    {
-        return $this->hasMany(Asistencia::class);
-    }
+    // Convertir licenciaturas y grupos a JSON automáticamente
+    
 }
