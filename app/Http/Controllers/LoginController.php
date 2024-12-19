@@ -35,7 +35,7 @@ class LoginController extends Controller
             if ($user->correo_personal === 'dios@gmail.com') {
                 return redirect()->route('dashboard.superusuario');
             } elseif ($user->es_academico) {
-                return redirect()->route('dashboard.profesor');
+                return redirect('/dashboard/profesor');
             } elseif (!$user->es_academico) {
                 return redirect()->route('dashboard.alumno'); // Ruta del superusuario
             }
