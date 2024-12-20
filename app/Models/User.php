@@ -42,19 +42,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    
-    
-  
-    
-
-
-
-
-
-
-
-
-    
     /**
      * Casts para tipos de datos.
      *

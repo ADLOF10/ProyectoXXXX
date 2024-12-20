@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperUsuarioController;
 use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/nosotros', function () {
     return view('nosotros');
@@ -37,18 +38,18 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login2', [LoginController::class, 'handleLogin'])->name('login.handle');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Rutas para dashboards según roles
+// Rutas para dashboards según roles 
 Route::get('/dashboard/alumno', function () {
     return view('dashalumno');
-})->name('dashboard.alumno')->middleware('auth');
+})->name('dashboard.alumno');
 
 Route::get('/dashboard/profesor', function () {
     return view('dashmaestro');
-})->name('dashboard.profesor')->middleware('auth');
+})->name('dashboard.profesor');
 
-Route::get('/dashboard/superusuario', function () {
+Route::get('/dashboard/superuser', function () {
     return view('dashsuper');
-})->name('dashboard.superusuario')->middleware('auth');
+})->name('dashboard.superuser');
 
 
 Route::get('/forgot-password', function () {
@@ -57,71 +58,6 @@ Route::get('/forgot-password', function () {
 
 
 Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('aprobaciones');
-
-Route::middleware(['auth', 'role:superusuario'])->group(function () {
-    Route::get('/dashsuper', [SuperUsuarioController::class, 'mostrarDashboard'])->name('dashboard');
-    Route::get('/aprobaciones', [SuperUsuarioController::class, 'mostrarAprobaciones'])->name('aprobaciones');
-});
-
-
-
-
-// use App\Http\Controllers\AuthController;
-
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [AuthController::class, 'login']);
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route::middleware(['role:superusuario'])->group(function () {
-//     Route::get('/dashboard/superusuario', function () {
-//         return view('dashboard.superusuario');
-//     })->name('dashboard.superusuario');
-// });
-
-// Route::middleware(['role:academico'])->group(function () {
-//     Route::get('/dashboard/academico', function () {
-//         return view('dashboard.academico');
-//     })->name('dashboard.academico');
-// });
-
-// Route::middleware(['role:alumno'])->group(function () {
-//     Route::get('/dashboard/alumno', function () {
-//         return view('dashboard.alumno');
-//     })->name('dashboard.alumno');
-// });
-
-
-
-// Route::middleware(['auth', 'role:superusuario'])->group(function () {
-//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('listarSolicitudes');
-//     Route::post('/aprobar/{id}', [SuperUsuarioController::class, 'aprobarRegistro'])->name('aprobarRegistro');
-//     Route::delete('/rechazar/{id}', [SuperUsuarioController::class, 'rechazarRegistro'])->name('rechazarRegistro');
-// });
-
-
-// Route::middleware(['auth', 'role:superusuario'])->group(function () {
-//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index']);
-// });
-
-
-
-// // Superusuario
-// Route::middleware(['auth', 'role:superusuario'])->group(function () {
-//     Route::get('/aprobaciones', [SuperUsuarioController::class, 'index']);
-//     Route::post('/aprobar', [SuperUsuarioController::class, 'aprobarUsuario']);
-// });
-
-// // Académicos
-// Route::middleware(['auth', 'role:academico'])->group(function () {
-//     Route::get('/crear-qr', [AcademicoController::class, 'crearQR']);
-//     Route::get('/consulta-alumnos', [AcademicoController::class, 'consultaAlumnos']);
-// });
-
-// // Alumnos
-// Route::middleware(['auth', 'role:alumno'])->group(function () {
-//     Route::get('/asistencias', [AlumnoController::class, 'verAsistencias']);
-//     Route::get('/historial', [AlumnoController::class, 'historial']);
-// });
 
 
 // Ruta para mostrar el formulario de registro de grupo

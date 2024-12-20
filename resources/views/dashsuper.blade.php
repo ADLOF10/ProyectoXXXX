@@ -17,9 +17,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashsuper') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Cerrar Sesión</a>
                     </li>
                 </ul>

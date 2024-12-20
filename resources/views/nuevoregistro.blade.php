@@ -108,6 +108,22 @@
             </div>
 
             <div class="form-group">
+                <label for="correo_institucional">Correo Institucional:</label>
+                <input
+                    type="email"
+                    id="correo_institucional"
+                    name="correo_institucional"
+                    value="{{ old('correo_institucional') }}"
+                    required
+                    class="@error('correo_institucional') is-invalid @enderror"
+                >
+                @if ($errors->has('correo_institucional'))
+                    <span class="text-danger">{{ $errors->first('correo_institucional') }}</span>
+                @endif
+
+            </div>
+
+            <div class="form-group">
                 <label for="licenciatura">Licenciatura:</label>
                 <select id="licenciatura" name="licenciatura" required>
                     <option value="Software">Ingenieria en Software</option>

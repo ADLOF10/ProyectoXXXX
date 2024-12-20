@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
             'fecha_nacimiento' => '1980-01-01',
             'genero' => 'Otro',
             'correo_personal' => 'dios@gmail.com',
-            'correo_institucional' => 'dios@gmail.com',
+            'correo_institucional' => 'alan@gmail.com',
             'licenciatura' => 'Derecho',
             'centro_universitario' => 'Ciudad Universitaria',
             'grupo' => null, // Dejar grupo como null para el superusuario
             'cedula_profesional' => null,
             'es_academico' => false,
-            'password' => bcrypt('12345'), // Contraseña por defecto
+            'password' => bcrypt('Dio12345'), // Contraseña por defecto
         ]);
     }
 }

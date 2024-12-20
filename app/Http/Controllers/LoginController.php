@@ -32,12 +32,12 @@ class LoginController extends Controller
             $user = Auth::user();
 
               // Redirige según el tipo de usuario
-            if ($user->correo_personal === 'dios@gmail.com') {
-                return redirect()->route('dashboard.superusuario');
+              if ($user->correo_personal === 'dios@gmail.com') {
+                return redirect()->route('dashboard.superuser'); // Redirección para el superusuario
             } elseif ($user->es_academico) {
-                return redirect('/dashboard/profesor');
+                return redirect()->route('dashboard.profesor'); // Redirección para profesor
             } elseif (!$user->es_academico) {
-                return redirect()->route('dashboard.alumno'); // Ruta del superusuario
+                return redirect()->route('dashboard.alumno'); // Redirección para alumno
             }
         }
 
