@@ -28,7 +28,7 @@ class User extends Authenticatable
         'cedula_profesional',
         'grupo',
         'es_academico', // Campo para diferenciar entre académico y alumno
-        // 'password',
+        'password',
         
     ];
 
