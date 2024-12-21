@@ -18,6 +18,10 @@ Route::get('/generador-qr', function () {
     return view('welcome');
 });
 
+Route::get('/asistencias', function () {
+    return view('asistencias.consulta');
+});
+
 Route::get('', function () {
     return view('home');
 });
@@ -64,7 +68,7 @@ Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes']
 Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
 // Ruta para la vista de asistencias
-Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
+// Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
 
 
 // Ruta para mostrar el formulario de registro de grupo
@@ -74,7 +78,7 @@ Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegist
 Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando
 
 // Ruta para la consulta de asistencias
-Route::get('/consulta-asistencias', [GruposController::class, 'consultaAsistencias'])->name('consultaAsistencias');
+// Route::get('/consulta-asistencias', [GruposController::class, 'consultaAsistencias'])->name('consultaAsistencias');
 
 // Ruta para la vista de alumnos (lista de alumnos)
 Route::get('/alumnos', [GruposController::class, 'tablaAlumos'])->name('tablaAlumos');

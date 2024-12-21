@@ -19,13 +19,13 @@ class GruposController extends Controller
 {
     // Validación de los datos de entrada
     $request->validate([
-        'nombreGrupo' => 'required|string|max:255|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
+        'nombre_grupo' => 'required|string|max:255|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
         'materia' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-        'fechaClase' => 'required|date|after_or_equal:today',
+        'fecha_clase' => 'required|date|after_or_equal:today',
         'profesor' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-        'horarioClase' => 'required|date_format:H:i|after_or_equal:07:00|before_or_equal:19:00',
-        'horarioClaseFinal' => 'required|date_format:H:i|after:horarioClase|before_or_equal:19:00',
-        'horarioRegistro' => 'required|date_format:H:i',
+        'horario_clase' => 'required|date_format:H:i|after_or_equal:07:00|before_or_equal:19:00',
+        'horario_clase_final' => 'required|date_format:H:i|after:horarioClase|before_or_equal:19:00',
+        'horario_registro' => 'required|date_format:H:i',
     ]);
 
     // Conversión de horarios a objetos Carbon para comparación
@@ -47,7 +47,7 @@ class GruposController extends Controller
         'horario_clase' => $horarioClase->format('H:i'),
         'horario_clase_final' => $horarioClaseFinal->format('H:i'),
         'horario_registro' => $horarioRegistro->format('H:i'),
-        'qr_code' => 'PRUEBA', // Aquí podrías generar el QR
+        'qr_code' => 'GENERADO', // Aquí podrías generar el QR
     ]);
 
     // Redirigir con un mensaje de éxito
@@ -56,20 +56,22 @@ class GruposController extends Controller
 
     // Método para la consulta de asistencias
     public function consultaAsistencias()
-    {
-        // Recupera los grupos y sus asistencias
-        $grupos = Grupo::with('asistencias.alumno')->get();
+{
+    // Recuperar grupos con sus asistencias y alumnos relacionados
+    $grupos = Grupo::with(['asistencias.alumno'])->get();
 
-        foreach ($grupos as $grupo) {
-            foreach ($grupo->asistencias as $asistencia) {
-                $totalDias = $grupo->asistencias->count();
-                $diasAsistidos = $grupo->asistencias->where('estado', 'asistio')->count();
-                $asistencia->porcentaje_asistencia = $totalDias > 0 ? ($diasAsistidos / $totalDias) * 100 : 0;
-            }
+    // Calcular porcentaje de asistencia para cada grupo y asignarlo a las asistencias
+    foreach ($grupos as $grupo) {
+        foreach ($grupo->asistencias as $asistencia) {
+            $totalDias = $grupo->asistencias->count();
+            $diasAsistidos = $grupo->asistencias->where('estado', 'asistio')->count();
+            $asistencia->porcentaje_asistencia = $totalDias > 0 ? ($diasAsistidos / $totalDias) * 100 : 0;
         }
-
-        return view('asistencias.consulta', compact('grupos'));
     }
+
+    // Pasar los datos a la vista
+    return view('asistencias.consulta', compact('grupos'));
+}
 
 
 

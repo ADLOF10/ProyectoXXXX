@@ -10,13 +10,18 @@ class CreateAsistenciasTable extends Migration
     {
         Schema::create('asistencias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grupo_id')->constrained('grupo')->onDelete('cascade');
-            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
+            $table->unsignedBigInteger('grupo_id');
+            $table->unsignedBigInteger('alumno_id');
+            $table->string('numero_cuenta');
             $table->date('fecha');
-            $table->time('hora');
-            $table->enum('estado', ['asistio', 'ausente'])->default('ausente');
+            $table->time('hora_registro');
+            $table->string('estado'); // Puede ser "asistio", "falta", etc.
             $table->timestamps();
+        
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
+            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete('cascade');
         });
+        
     }
 
     public function down()

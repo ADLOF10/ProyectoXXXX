@@ -20,6 +20,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="http://127.0.0.1:8000/">Inicio</a></li>
+                <li><a href="/asistencias">Asistencia por Grupos</a></li>
                 <li><a href="http://127.0.0.1:8000/nosotros">Nosotros</a></li>
             </ul>
         </nav>
