@@ -55,6 +55,9 @@ Route::get('/dashboard/superuser', function () {
     return view('dashsuper');
 })->name('dashboard.superuser');
 
+Route::get('/dashboard/pofe',function(){
+    return view('ventanapofe');
+})->name('das.prof');;
 
 Route::get('/forgot-password', function () {
     return view('forgot-password');
