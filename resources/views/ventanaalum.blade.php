@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Dashboard &mdash; Profesor</title>
+  <title>Dashboard &mdash; Alumno</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -184,7 +184,7 @@
               </a>
               <div class="dropdown-divider"></div>
               <a href="{{ route('login') }}" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Secion
+                <i class="fas fa-sign-out-alt"></i> Cerrar secion
               </a>
             </div>
           </li>
@@ -195,7 +195,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Profesor</a>
+            <a href="index.html">Alumno</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
@@ -205,7 +205,7 @@
             <li class="dropdown active">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
               <ul class="dropdown-menu">
-                <li class=active><a class="nav-link" href="{{ route('dash.crudgrupo') }}">Grupos</a></li>
+                <li class=active><a class="nav-link" href="{{ route('dash.crudalumno') }}">Asistencias</a></li>
                 <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
               </ul>
             </li>
@@ -228,9 +228,7 @@
 
       <!-- Main Content -->
       <div class="main-content">
-
         @yield('content')
-
       </div>
       <footer class="main-footer">
         <div class="footer-left">

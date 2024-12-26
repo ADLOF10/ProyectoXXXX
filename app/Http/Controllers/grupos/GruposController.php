@@ -9,7 +9,23 @@ use Carbon\Carbon;
 
 class GruposController extends Controller
 {
+    public function registarGru(Request $request)
+    {
+        $request->validate([
+            'nombre_grupo' => 'required',
+            'materia' => 'required',
+            'profesor' => 'required',
+        ]);
+
+        Grupo::create($request->all());
+
+        return redirect()->route('dash.crudgrupo')->with('success', 'Grupo creado con éxito.');
+    }
+    
+    
+    
     // Método para mostrar el formulario de registro de grupo
+    
     public function mostrarFormularioRegistro()
     {
         return view('registro.grupo'); // Asegúrate de que exista la vista en resources/views/registro/grupo.blade.php

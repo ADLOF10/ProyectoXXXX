@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Dashboard &mdash; Profesor</title>
+  <title>Dashboard &mdash; Super usuario</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/fontawesome/css/all.min.css') }}">
-
+  <link rel="stylesheet" href="{{ asset('css/styleslogin.css') }}">
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/jqvmap/dist/jqvmap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/weather-icon/css/weather-icons.min.css') }}">
@@ -18,7 +18,6 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('baken/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('baken/assets/css/components.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/styleslogin.css') }}">
 <!-- Start GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 <script>
@@ -195,27 +194,27 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Profesor</a>
+            <a href="#">Super usuario</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="#">St</a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="dropdown active">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
               <ul class="dropdown-menu">
-                <li class=active><a class="nav-link" href="{{ route('dash.crudgrupo') }}">Grupos</a></li>
-                <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+                <li class=active><a class="nav-link" href="#">General Dashboard</a></li>
+                <li><a class="nav-link" href="#">Ecommerce Dashboard</a></li>
               </ul>
             </li>
             <li class="menu-header">Starter</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                <li><a class="nav-link" href="#">Default Layout</a></li>
+                <li><a class="nav-link" href="#">Transparent Sidebar</a></li>
+                <li><a class="nav-link" href="#">Top Navigation</a></li>
               </ul>
             </li>
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
@@ -228,9 +227,73 @@
 
       <!-- Main Content -->
       <div class="main-content">
-
-        @yield('content')
-
+        <section class="section">
+          <div class="section-header">
+            <h1>Dashboard</h1>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-primary">
+                  <i class="far fa-user"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total Admin</h4>
+                  </div>
+                  <div class="card-body">
+                    10
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-danger">
+                  <i class="far fa-newspaper"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>News</h4>
+                  </div>
+                  <div class="card-body">
+                    42
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-warning">
+                  <i class="far fa-file"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Reports</h4>
+                  </div>
+                  <div class="card-body">
+                    1,201
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-success">
+                  <i class="fas fa-circle"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Online Users</h4>
+                  </div>
+                  <div class="card-body">
+                    47
+                  </div>
+                </div>
+              </div>
+            </div>                  
+          </div>
+        </section>
       </div>
       <footer class="main-footer">
         <div class="footer-left">

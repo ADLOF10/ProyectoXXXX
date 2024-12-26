@@ -22,9 +22,10 @@ Route::get('/asistencias', function () {
     return view('asistencias.consulta');
 });
 
+
 Route::get('', function () {
     return view('home');
-});
+})->name('inicio');
 
 
 Route::middleware('role:superusuario')->group(function () {
@@ -55,20 +56,60 @@ Route::get('/dashboard/superuser', function () {
     return view('dashsuper');
 })->name('dashboard.superuser');
 
-Route::get('/dashboard/pofe',function(){
-    return view('ventanapofe');
-})->name('das.prof');;
-
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 })->name('forgot-password');
+
+Route::get('/aprovaciones', function () {
+    return view('asistencias.aprobaciones');
+})->name('apro');
+
+Route::get('/assis', function () {
+    return view('asistencias.assitencias');
+})->name('asiste');
+
+Route::get('/con', function () {
+    return view('asistencias.consulta');
+})->name('con');
+
+//nuevos dashboard para los usuarios
+Route::get('/dashboard/pofe',function(){
+    return view('ventanapofe');
+})->name('dash.pofe');
+
+Route::get('/dashboard/alum',function(){
+    return view('ventanaalum');
+})->name('dash.alum');
+
+Route::get('/dashboard/super',function(){
+    return view('ventanasuper');
+})->name('dash.super');
+
+//////
+
+////crud de grupo
+Route::get('/dashboard/crudgrupo',function(){
+    return view('crudgrupo');
+})->name('dash.crudgrupo');
+
+Route::post('/guardar_gru', [GruposController::class, 'registarGru'])->name('guardarGru');
+
+
+
+//////
+///////crud para alumno
+Route::get('/dashboard/crudalumno',function(){
+    return view('crudalumno');
+})->name('dash.crudalumno');
+
+
 
 
 Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('aprobaciones');
 
 
 // Ruta para mostrar el formulario de registro de grupo
-Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
+//Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
 // Ruta para la vista de asistencias
 // Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
@@ -77,7 +118,7 @@ Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegist
 // Ruta para mostrar el formulario de registro de grupo
 Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
 
-// Ruta para guardar el grupo (envío de formulario)
+// Ruta para guardar el grupo (envío de formulario)///////////////////////////////////////
 Route::post('guardar-grupo', [GruposController::class, 'guardarGrupo'])->name('guardarGrupo');  //trabajando
 
 // Ruta para la consulta de asistencias
