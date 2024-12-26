@@ -96,6 +96,7 @@ class NuevoRegistroController extends Controller
             'fecha_nacimiento' => $request->input('fecha_nacimiento'),
             'genero' => $request->input('genero'),
             'correo_personal' => (string) $request->input('correo_personal'),
+            'correo_institucional' => (string) $request->input('correo_institucional'),
             'licenciatura' => $request->input('licenciatura'),
             'centro_universitario' => $request->input('centro_universitario'),
             'cedula_profesional' => $request->input('cedula_profesional'), // Será null si no aplica

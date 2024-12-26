@@ -13,6 +13,7 @@
             <img src="{{ asset('image.png') }}" alt="Logo Universidad">
         </div>
         <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
             <li><a href="http://127.0.0.1:8000/login">Iniciar sesion</a></li>
         </ul>
     </nav>

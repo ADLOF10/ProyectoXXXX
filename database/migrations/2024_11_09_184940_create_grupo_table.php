@@ -8,23 +8,23 @@ class CreateGrupoTable extends Migration
 {
     public function up()
     {
-        Schema::create('grupo', function (Blueprint $table) {
+        Schema::create('grupos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_grupo', 100);
-            $table->string('materia', 100);
-            $table->date('fecha_clase');
-            $table->string('profesor', 100);
-            $table->time('horario_clase');
-            $table->time('horario_clase_final');
-            $table->time('horario_registro');
-            $table->string('qr_code', 255);
+            $table->string('nombre_grupo');
+            $table->string('materia');
+            $table->date('fecha_clase')->nullable();
+            $table->string('profesor');
+            $table->time('horario_clase')->nullable();
+            $table->time('horario_clase_final')->nullable();
+            $table->time('horario_registro')->nullable();
+            $table->string('qr_code')->nullable();
             $table->timestamps();
-        });
+        });        
     }
 
     public function down()
     {
-        Schema::dropIfExists('grupo');
+        Schema::dropIfExists('grupos');
     }
 }
 

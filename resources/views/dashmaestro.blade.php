@@ -13,7 +13,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="/">Inicio</a></li>
-            <li><a href="/grupos">Grupos</a></li>
+            <li><a href="/asistencias">Asistencia por Grupos</a></li>
             <li><a href="/generador-qr">Generar QR</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
         </ul>

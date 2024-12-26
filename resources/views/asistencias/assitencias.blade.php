@@ -13,7 +13,8 @@
 
     <main>
         <div class="container">
-            @foreach($asistencias as $grupo)
+         @foreach($asistencias as $grupo)
+
                 <div class="grupo">
                     <h2>Grupo: {{ $grupo->nombre_grupo }}</h2>
                     <p>Materia: {{ $grupo->materia }}</p>
