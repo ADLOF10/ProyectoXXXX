@@ -73,6 +73,9 @@ class GruposController extends Controller
 
 
 
+
+    
+
     // Método para mostrar la lista de alumnos
     // public function tablaAlumos(Request $request)
     // {
