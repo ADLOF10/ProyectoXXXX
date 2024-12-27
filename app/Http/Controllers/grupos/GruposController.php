@@ -19,7 +19,15 @@ class GruposController extends Controller
 
         Grupo::create($request->all());
 
-        return redirect()->route('dash.crudgrupo')->with('success', 'Grupo creado con éxito.');
+        return redirect()->route('crear-grupo')->with('success', 'Grupo creado con éxito.');
+    }
+
+
+    public function consulGru()
+    {
+
+        $grupos = Grupo::paginate(10);
+        return view('crudgrupo', compact('grupos'));
     }
     
     

@@ -87,16 +87,45 @@ Route::get('/dashboard/super',function(){
 
 //////
 
-////crud de grupo
+////crud de grupo del la vista profesor
 Route::get('/dashboard/crudgrupo',function(){
     return view('crudgrupo');
 })->name('dash.crudgrupo');
 
+Route::get('/crear-grupo',function(){
+    return view('crear_grupo');
+})->name('crear-grupo');
+
+Route::get('/modificar-grupo',function(){
+    return view('modificar_grupo');
+})->name('modificar-grupo');
+
 Route::post('/guardar_gru', [GruposController::class, 'registarGru'])->name('guardarGru');
+Route::get('/consultar_gru', [GruposController::class, 'consulGru'])->name('consultarGru');
 
+////
 
+/////apartado alumnos de la vista profesor
+Route::get('/crudalumno-profe',function(){
+    return view('crudalumno_profe');
+})->name('crudalumno-profe');
+
+////
+
+/////apartado asistencias de la vista profesor
+Route::get('/asistencia-profe',function(){
+    return view('asistencia_profe');
+})->name('asistencia-profe');
 
 //////
+
+/////apartado generar qr de la vista profesor
+Route::get('/qr-profe',function(){
+    return view('qr_profe');
+})->name('qr-profe');
+
+//////
+
 ///////crud para alumno
 Route::get('/dashboard/crudalumno',function(){
     return view('crudalumno');

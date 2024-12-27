@@ -13,7 +13,7 @@
 
   <div class="container">
     <h1>Lista de Grupos</h1>
-    <a href="#" class="btn btn-primary mb-3">Crear Nuevo Grupo</a>
+    <a href="{{ route('crear-grupo') }}" class="btn btn-primary mb-3">Crear Nuevo Grupo</a>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -32,80 +32,25 @@
             </tr>
         </thead>
         <tbody>
-            
-                <tr>
-                    <td>id</td>
-                    <td>nombre grupo</td>
-                    <td>materia</td>
-                    <td>profesor</td>
-                    <td>
-                        <a href="#" class="btn btn-info btn-sm">Ver</a>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="#" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este grupo?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            
+            @foreach($grupos as $grupo)
+            <tr>
+                <td>{{ $grupo->id }}</td>
+                <td>{{ $grupo->nombre_grupo }}</td>
+                <td>{{ $grupo->materia }}</td>
+                <td>{{ $grupo->profesor }}</td>
+                <td>
+                    <a href="#" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{{ route('modificar-grupo') }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="#" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este grupo?')">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
-    </div>
-            <!-- formulario para crear un grupo-->
-    <div class="container">
-        <h1>Crear Nuevo Grupo</h1>
-        <form action="{{ route('guardarGru') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="nombre_grupo" class="form-label">Nombre del Grupo</label>
-                <input type="text" name="nombre_grupo" class="form-control" id="nombre_grupo" required>
-            </div>
-            <div class="mb-3">
-                <label for="materia" class="form-label">Materia</label>
-                <input type="text" name="materia" class="form-control" id="materia"  required>
-            </div>
-            <div class="mb-3">
-                <label for="profesor" class="form-label">Profesor</label>
-                <input type="text" name="profesor" class="form-control" id="profesor" value="{{old('profesor')}}" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a href="#" class="btn btn-secondary">Cancelar</a>
-        </form>
-    </div>
-
-    <div class="container">
-        <h1>Editar Grupo</h1>
-        <form action="#" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-                <label for="nombre_grupo" class="form-label">Nombre del Grupo</label>
-                <input type="text" name="nombre_grupo" class="form-control" id="nombre_grupo" value="variable" required>
-            </div>
-            <div class="mb-3">
-                <label for="materia" class="form-label">Materia</label>
-                <input type="text" name="materia" class="form-control" id="materia" value="variable" required>
-            </div>
-            <div class="mb-3">
-                <label for="profesor" class="form-label">Profesor</label>
-                <input type="text" name="profesor" class="form-control" id="profesor" value="variable" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-            <a href="#" class="btn btn-secondary">Cancelar</a>
-        </form>
-    </div>
-
-    <div class="container">
-        <h1>Detalles del Grupo</h1>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Nombre del Grupo: </h5>
-                <p class="card-text">Materia: </p>
-                <p class="card-text">Profesor: </p>
-                <a href="#" class="btn btn-secondary">Volver</a>
-            </div>
-        </div>
     </div>
 </section>
 @endsection
