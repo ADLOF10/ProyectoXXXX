@@ -7,8 +7,10 @@ use App\Http\Controllers\grupos\RegistroController as GruposRegistroController;
 use App\Http\Controllers\SuperUsuarioController;
 use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\GenerarqrController;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\QRScannerController;
 
 Route::get('/nosotros', function () {
     return view('nosotros');
@@ -102,6 +104,9 @@ Route::get('/modificar-grupo',function(){
 
 Route::post('/guardar_gru', [GruposController::class, 'registarGru'])->name('guardarGru');
 Route::get('/consultar_gru', [GruposController::class, 'consulGru'])->name('consultarGru');
+Route::get('/ver_grupo', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
+Route::get('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
+
 
 ////
 
@@ -126,11 +131,19 @@ Route::get('/qr-profe',function(){
 
 //////
 
-///////crud para alumno
+///////crud para alumno de la vista alumno
 Route::get('/dashboard/crudalumno',function(){
     return view('crudalumno');
 })->name('dash.crudalumno');
 
+Route::get('/consultar_gruAlum', [GruposController::class, 'consulGrualum'])->name('consultarGrual');
+
+//escaner qr
+Route::get('/app',function(){
+    return view('app');
+})->name('app_');
+Route::get('/qr-scan', [QRScannerController::class, 'scanView'])->name('qr.scan');
+Route::post('/store', [QRScannerController::class, 'store'])->name('store');
 
 
 

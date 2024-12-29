@@ -210,7 +210,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('crudalumno-profe') }}">Alumnos</a></li>
                 <li class=active><a class="nav-link" href="{{ route('consultarGru') }}">Grupos</a></li>
-                <li><a class="nav-link" href="{{ route('qr-profe') }}">Generar qr</a></li>
+                <li><a class="nav-link" href="{{ route('verGrupo') }}">Generar qr</a></li>
                 <li><a class="nav-link" href="{{ route('asistencia-profe') }}">Asistencias</a></li>
               </ul>
             </li>

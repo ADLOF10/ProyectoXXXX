@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard &mdash; Alumno</title>
 
   <!-- General CSS Files -->
@@ -28,6 +29,10 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
+
+<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+
 <!-- /END GA --></head>
 
 <body>
@@ -208,8 +213,8 @@
             <li class="dropdown active">
               <a href="#" class="nav-link has-dropdown">Menu</a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="#">Grupos</a></li>
-                <li><a class="nav-link" href="#">Registra asistencia</a></li>
+                <li><a class="nav-link" href="{{ route('consultarGrual') }}">Grupos</a></li>
+                <li><a class="nav-link" href="{{ route('qr.scan') }}">Registra asistencia</a></li>
                 <li><a class="nav-link" href="{{ route('dash.crudalumno') }}">Grafica de asistensia</a></li>
               </ul>
             </li>
@@ -232,6 +237,11 @@
       <div class="main-content">
         @yield('content')
       </div>
+
+      <div class="main-content">
+        @yield('scripts')
+      </div>
+
       <footer class="main-footer">
         <div class="footer-left">
           <a>© 2024 Universidad - Todos los derechos reservados</a>

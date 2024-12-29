@@ -5,6 +5,11 @@ namespace App\Http\Controllers\grupos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Grupo; // Modelo 'Grupo' para interactuar con la base de datos
+use BaconQrCode\Encoder\QrCode;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Writer;
 use Carbon\Carbon;
 
 class GruposController extends Controller
@@ -22,7 +27,7 @@ class GruposController extends Controller
         return redirect()->route('crear-grupo')->with('success', 'Grupo creado con éxito.');
     }
 
-
+////consulta de profesir
     public function consulGru()
     {
 
@@ -30,7 +35,16 @@ class GruposController extends Controller
         return view('crudgrupo', compact('grupos'));
     }
     
-    
+    /////consulta de alumno
+    public function consulGrualum()
+    {
+
+        $grupos = Grupo::paginate(10);
+        return view('asistencia_alum', compact('grupos'));
+    }
+
+
+   
     
     // Método para mostrar el formulario de registro de grupo
     
