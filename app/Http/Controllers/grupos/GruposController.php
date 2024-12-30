@@ -14,6 +14,8 @@ use Carbon\Carbon;
 
 class GruposController extends Controller
 {
+
+    ///registrar en grupo en la ventana profesor
     public function registarGru(Request $request)
     {
         $request->validate([
@@ -27,7 +29,15 @@ class GruposController extends Controller
         return redirect()->route('crear-grupo')->with('success', 'Grupo creado con éxito.');
     }
 
-////consulta de profesir
+    ////eliminar grupo en ventana profesor
+    public function destroy_profe(Grupo $grupo)
+    {
+        $grupo->delete();
+
+        return redirect()->route('consultarGru')->with('success', 'Grupo eliminado con éxito.');
+    }
+
+////consulta de profesor
     public function consulGru()
     {
 
@@ -40,7 +50,29 @@ class GruposController extends Controller
     {
 
         $grupos = Grupo::paginate(10);
-        return view('asistencia_alum', compact('grupos'));
+        return view('crudalumno', compact('grupos'));
+    }
+
+
+    ////editar y actualizar la informacion de grupo en la ventana profesor
+
+    public function edit(Grupo $grupo)
+    {
+        return view('modificar_grupo', compact('grupo'));
+    }
+
+
+    public function update(Request $request, Grupo $grupo)
+    {
+        $request->validate([
+            'nombre_grupo' => 'required',
+            'materia' => 'required',
+            'profesor' => 'required',
+        ]);
+
+        $grupo->update($request->all());
+
+        return redirect()->route('consultarGru')->with('success', 'Grupo actualizado con éxito.');
     }
 
 

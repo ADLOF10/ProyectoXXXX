@@ -172,15 +172,15 @@
             <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">usuario</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5 min ago</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
+              <div class="dropdown-title">inicio seción  5 min </div>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Perfil
               </a>
-              <a href="features-activities.html" class="dropdown-item has-icon">
-                <i class="fas fa-bolt"></i> Activities
+              <a href="#" class="dropdown-item has-icon">
+                <i class="fas fa-bolt"></i> Actividades
               </a>
-              <a href="features-settings.html" class="dropdown-item has-icon">
-                <i class="fas fa-cog"></i> Settings
+              <a href="#" class="dropdown-item has-icon">
+                <i class="fas fa-cog"></i> configuaracion
               </a>
               <div class="dropdown-divider"></div>
               <a href="{{ route('login') }}" class="dropdown-item has-icon text-danger">

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard &mdash; Alumno</title>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('baken/assets/modules/fontawesome/css/all.min.css') }}">
@@ -177,15 +179,15 @@
             <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">usuario</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5 min ago</div>
+              <div class="dropdown-title">inicio seción 5 min</div>
               <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
+                <i class="far fa-user"></i> Perfil
               </a>
               <a href="features-activities.html" class="dropdown-item has-icon">
-                <i class="fas fa-bolt"></i> Activities
+                <i class="fas fa-bolt"></i> Actividades
               </a>
               <a href="features-settings.html" class="dropdown-item has-icon">
-                <i class="fas fa-cog"></i> Settings
+                <i class="fas fa-cog"></i> configuracion
               </a>
               <div class="dropdown-divider"></div>
               <a href="{{ route('login') }}" class="dropdown-item has-icon text-danger">
@@ -215,7 +217,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('consultarGrual') }}">Grupos</a></li>
                 <li><a class="nav-link" href="{{ route('qr.scan') }}">Registra asistencia</a></li>
-                <li><a class="nav-link" href="{{ route('dash.crudalumno') }}">Grafica de asistensia</a></li>
+                <li><a class="nav-link" href="{{ route('asisten_grafi_alum') }}">Grafica de asistensia</a></li>
               </ul>
             </li>
             <li class="menu-header">Cambiar plan</li>
@@ -238,9 +240,6 @@
         @yield('content')
       </div>
 
-      <div class="main-content">
-        @yield('scripts')
-      </div>
 
       <footer class="main-footer">
         <div class="footer-left">

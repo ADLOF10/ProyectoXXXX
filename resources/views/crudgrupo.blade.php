@@ -40,8 +40,8 @@
                 <td>{{ $grupo->profesor }}</td>
                 <td>
                     <a href="#" class="btn btn-info btn-sm">Ver</a>
-                    <a href="{{ route('modificar-grupo') }}" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="#" method="POST" style="display: inline-block;">
+                    <a href="{{ route('grupos.edit', $grupo) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('borrarGru', $grupo) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este grupo?')">Eliminar</button>

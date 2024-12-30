@@ -20,7 +20,7 @@
     <div class="qr-code">
         {!! $qrCode !!}
     </div>
-    <a href="#" class="btn btn-secondary">Volver a la lista</a>
+    <a href="{{ route('verGrupo') }}" class="btn btn-secondary">Volver a la lista</a>
 </div>
 </section>
 @endsection

@@ -35,7 +35,7 @@
             <input type="text" name="profesor" class="form-control" id="profesor" value="{{old('profesor')}}" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="#" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('consultarGru') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 </section>

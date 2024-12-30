@@ -98,13 +98,17 @@ Route::get('/crear-grupo',function(){
     return view('crear_grupo');
 })->name('crear-grupo');
 
-Route::get('/modificar-grupo',function(){
-    return view('modificar_grupo');
-})->name('modificar-grupo');
+
 
 Route::post('/guardar_gru', [GruposController::class, 'registarGru'])->name('guardarGru');
 Route::get('/consultar_gru', [GruposController::class, 'consulGru'])->name('consultarGru');
+Route::delete('/borrar_gru/{grupo}', [GruposController::class, 'destroy_profe'])->name('borrarGru');
+///editar y actualizar
+Route::get('grupos/{grupo}/edit', [GruposController::class, 'edit'])->name('grupos.edit');
+Route::put('grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.update');
+//
 Route::get('/ver_grupo', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
+///crear qr de la ventana profrsor
 Route::get('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
 
 
@@ -148,6 +152,12 @@ Route::post('/store', [QRScannerController::class, 'store'])->name('store');
 
 
 Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes'])->name('aprobaciones');
+
+
+///vista para la grafica de asistencias
+Route::get('/asisten_grafi_alum',function(){
+    return view('asistencia_alum');
+})->name('asisten_grafi_alum');
 
 
 // Ruta para mostrar el formulario de registro de grupo
