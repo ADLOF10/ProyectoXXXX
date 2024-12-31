@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'grupo' => null, // Dejar grupo como null para el superusuario
             'cedula_profesional' => null,
             'es_academico' => false,
-            'password' => bcrypt('Dio12345'), // Contraseña por defecto
+            'password' => bcrypt('Dios1234'), // Contraseña por defecto
         ]);
 
         User::create([
