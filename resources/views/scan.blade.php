@@ -12,9 +12,12 @@
              {{-- form--}}
              <form action="{{ route('store') }}" method="POST" id="form">
                 @csrf
-                <input type="hidden" name="nombre_grupo" id="nombre_grupo">
-                <input type="hidden" name="materia" id="materia">
-                <input type="hidden" name="profesor" id="profesor">
+                <input type="hidden" name="numero_cuenta" id="numero_cuenta">
+                <input type="hidden" name="fecha" id="fecha">
+                <input type="hidden" name="hora_registro" id="hora_registro">
+                <input type="hidden" name="estado" id="estado">
+                <input type="hidden" name="grupo_id" id="grupo_id">
+                <input type="hidden" name="alumno_id" id="alumno_id">
              </form>
              
         </div>
@@ -34,10 +37,13 @@
           let data = content.split('\n');
 
           // Verifica si hay al menos tres líneas para asignar a los campos
-          if (data.length >= 3) {
-            document.getElementById('nombre_grupo').value = data[0];  // Asigna la primera línea a 'nombre_grupo'
-            document.getElementById('materia').value = data[1];       // Asigna la segunda línea a 'materia'
-            document.getElementById('profesor').value = data[2];      // Asigna la tercera línea a 'profesor'
+          if (data.length >= 6) {
+            document.getElementById('numero_cuenta').value = data[0];  // Asigna la primera línea a 'nombre_grupo'
+            document.getElementById('fecha').value = data[1];       // Asigna la segunda línea a 'materia'
+            document.getElementById('hora_registro').value = data[2];      // Asigna la tercera línea a 'profesor'
+            document.getElementById('estado').value = data[3];
+            document.getElementById('grupo_id').value = data[4];
+            document.getElementById('alumno_id').value = data[5];
           }
 
           // Luego, se envía el formulario

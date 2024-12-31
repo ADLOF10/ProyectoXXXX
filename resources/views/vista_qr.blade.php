@@ -16,6 +16,7 @@
     <div class="mb-3">
         <p>Materia: {{ $grupo->materia }}</p>
         <p>Profesor: {{ $grupo->profesor }}</p>
+        <p>campo manual: {{ $campoManual }}</p>
     </div>
     <div class="qr-code">
         {!! $qrCode !!}

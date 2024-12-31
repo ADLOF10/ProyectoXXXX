@@ -46,6 +46,13 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este grupo?')">Eliminar</button>
                     </form>
+
+                    <form action="{{ route('crearQr', $grupo->id) }}" method="POST">
+                        @csrf
+                        <label for="campo_manual">Ingresa un dato manual:</label>
+                        <input type="text" id="campo_manual" name="campo_manual" required>
+                        <button type="submit">Generar QR</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

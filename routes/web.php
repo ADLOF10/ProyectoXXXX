@@ -109,7 +109,7 @@ Route::put('grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.
 //
 Route::get('/ver_grupo', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
 ///crear qr de la ventana profrsor
-Route::get('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
+Route::post('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
 
 
 ////

@@ -25,13 +25,15 @@ class GenerarqrController extends Controller
 
 
    /////generar el codigo qr
-     public function generate_qr($id)
+     public function generate_qr($id, Request $request)
      {
          // Obtén los datos del grupo desde la base de datos
          $grupo = Grupo::findOrFail($id);
+
+         $campoManual = $request->input('campo_manual');
  
          // Prepara los datos para el QR
-         $data = "Grupo: {$grupo->nombre_grupo}\nMateria: {$grupo->materia}\nProfesor: {$grupo->profesor}";
+         $data = "Grupo: {$grupo->nombre_grupo}\nMateria: {$grupo->materia}\nProfesor: {$grupo->profesor}\nCampoManual: {$campoManual}";
  
          // Configura el renderizador de QR
          $renderer = new ImageRenderer(
@@ -45,7 +47,7 @@ class GenerarqrController extends Controller
          $qrCode = $writer->writeString($data);
  
          // Devuelve la vista con el QR
-         return view('vista_qr', compact('qrCode', 'grupo'));
+         return view('vista_qr', compact('qrCode', 'grupo','campoManual'));
      }
      
 
