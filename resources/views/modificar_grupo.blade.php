@@ -18,6 +18,8 @@
   </div>
   @endif
 <!-- formulario para modificar un grupo-->
+
+
 <div class="container">
         <h1>Editar Grupo</h1>
         <form action="{{ route('grupos.update', $grupo) }}" method="POST">
