@@ -12,6 +12,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\QRScannerController;
 
+
+
+
 Route::get('/nosotros', function () {
     return view('nosotros');
 });
@@ -109,7 +112,23 @@ Route::put('grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.
 //
 Route::get('/ver_grupo', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
 ///crear qr de la ventana profrsor
+Route::get('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
 Route::post('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
+
+
+
+// Ruta para listar los grupos
+Route::get('/qr_profe', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
+
+// Ruta para mostrar el formulario de configuración del QR
+Route::get('/vista_qr/{id}', [GenerarqrController::class, 'verFormulario'])->name('vistaQr');
+
+// Ruta para procesar el formulario y generar el QR
+Route::post('/guardar_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('guardarQr');
+
+Route::put('/editar_qr/{id}', [GenerarqrController::class, 'editarQr'])->name('editarQr');
+Route::delete('/eliminar_qr/{id}', [GenerarqrController::class, 'eliminarQr'])->name('eliminarQr');
+
 
 
 ////
@@ -134,6 +153,9 @@ Route::get('/qr-profe',function(){
 })->name('qr-profe');
 
 //////
+
+Route::post('/generar-qr', [GenerarqrController::class, 'store'])->name('generar.qr');
+
 
 ///////crud para alumno de la vista alumno
 Route::get('/dashboard/crudalumno',function(){

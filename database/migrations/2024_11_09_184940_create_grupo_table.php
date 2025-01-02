@@ -20,7 +20,7 @@ class CreateGrupoTable extends Migration
             $table->string('qr_code')->nullable();
             $table->timestamps();
         });        
-    }
+    }   
 
     public function down()
     {
