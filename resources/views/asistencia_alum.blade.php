@@ -9,93 +9,78 @@
           <div class="breadcrumb-item">Profile</div>
         </div>
       </div>
-    
-      <div class="container">
-        <h1>grafica de asistencias</h1>
 
+      <div class="container mt-5">
+        <h1 class="text-center">Gráfica de Asistencias</h1>
     
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+        <!-- Formulario para buscar -->
+        <form action="{{ route('grafica_alum') }}" method="POST" class="mb-5">
+            @csrf
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="grupo" class="form-label">Nombre del Grupo:</label>
+                    <input type="text" id="grupo" name="grupo" class="form-control" placeholder="Ej: Grupo A" required>
+                </div>
             </div>
+            <button type="submit" class="btn btn-primary">Generar Gráfica</button>
+        </form>
+
+        <div class="card bg-white shadow rounded-3 p-3 border-0">
+        <!-- Gráfica -->
+        @if(!empty($percentages))
+        <h2 class="text-center">Asistencias de {{ $alumno }} en {{ $grupo }}</h2>
+        <canvas id="attendanceChart" width="10" height="5"></canvas>
+        <script>
+            const percentages = @json($percentages);
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar', // Cambio a gráfico de barras
+                data: {
+                    labels: ['Asistencias', 'Retardos', 'Faltas'],
+                    datasets: [{
+                        label: 'Porcentaje',
+                        data: [percentages.asistencias, percentages.retardos, percentages.faltas],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)', // Asistencias
+                            'rgba(255, 206, 86, 0.6)', // Retardos
+                            'rgba(255, 99, 132, 0.6)', // Faltas
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)', // Asistencias
+                            'rgba(255, 206, 86, 1)', // Retardos
+                            'rgba(255, 99, 132, 1)', // Faltas
+                        ],
+                        borderWidth: 1,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Porcentaje (%)',
+                            },
+                        },
+                    },
+                },
+            });
+        </script>
+        @else
+        <p class="text-center text-muted">No hay datos disponibles para el grupo y alumno seleccionados.</p>
         @endif
-
-        
-    <div class="container mt-5">
-      <h1 class="text-center">Gráfica de Asistencias</h1>
-      <div class="row justify-content-center">
-          <div class="col-md-8">
-              <div class="card">
-                  <div class="card-body">
-                      <canvas id="attendanceChart" width="400" height="200"></canvas>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-
-  <script>
-      // Pasar datos desde Laravel a JavaScript
-      const chartData = @json($data);
-      const labels = Object.keys(chartData); // Usuarios (IDs o nombres)
-      const attendanceData = labels.map(user => chartData[user].asistencias);
-      const tardinessData = labels.map(user => chartData[user].retardos);
-      const absenceData = labels.map(user => chartData[user].faltas);
-
-      // Crear la gráfica con Chart.js
-      const ctx = document.getElementById('attendanceChart').getContext('2d');
-      new Chart(ctx, {
-          type: 'bar',
-          data: {
-              labels: labels, // Nombres o IDs de usuarios
-              datasets: [
-                  {
-                      label: 'Asistencias (%)',
-                      data: attendanceData,
-                      backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                  },
-                  {
-                      label: 'Retardos (%)',
-                      data: tardinessData,
-                      backgroundColor: 'rgba(255, 206, 86, 0.6)',
-                  },
-                  {
-                      label: 'Faltas (%)',
-                      data: absenceData,
-                      backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                  },
-              ],
-          },
-          options: {
-              responsive: true,
-              plugins: {
-                  legend: {
-                      position: 'top',
-                  },
-              },
-              scales: {
-                  y: {
-                      beginAtZero: true,
-                      title: {
-                          display: true,
-                          text: 'Porcentaje (%)',
-                      },
-                  },
-              },
-          },
-      });
-  </script>
-
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-              
-
-
-
-      </div>
-
+    </div>
+</div>
     
-        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+          
      
   </section>
   @endsection

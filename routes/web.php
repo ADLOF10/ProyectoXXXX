@@ -182,8 +182,9 @@ Route::get('/asisten_grafi_alum',function(){
     return view('asistencia_alum');
 })->name('asisten_grafi_alum');
 
-Route::get('/attendance-chart', [GraficaControlador::class, 'showAttendanceChart'])->name('grafica_alum');
+Route::post('/attendance-chart', [GraficaControlador::class, 'showAttendanceChart'])->name('grafica_alum');
 
+Route::post('/grafica-pro', [GraficaControlador::class, 'grafiprofe'])->name('attendance.filtered');
 
 // Ruta para mostrar el formulario de registro de grupo
 //Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');

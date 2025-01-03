@@ -47,7 +47,7 @@ class GenerarqrController extends Controller
 
 
         // Construir los datos para el QR
-        $data = "{$grupo->nombre_grupo}\n{$grupo->materia}\n{$grupo->profesor}\n{$fecha_clase}\n{$horario_inicio}\n{$horario_fin}\n{$asistencia}\n{$retardo}\n{$inasistencia}\n{$created_at}";
+        $data = "{$grupo->nombre_grupo}\n{$grupo->materia}\n{$grupo->profesor}\n{$fecha_clase}\n{$horario_inicio}\n{$horario_fin}\n{$asistencia}\n{$retardo}\n{$inasistencia}\n{$created_at}\n{$grupo->id}";
 
         // Generar el QR
         $qrCode = (new Writer(new ImageRenderer(new RendererStyle(300), new SvgImageBackEnd())))->writeString($data);

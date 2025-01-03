@@ -11,12 +11,14 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <h1>GRUPO: {{ $grupo->nombre_grupo }} {{ $grupo->materia }}. PROFESOR {{ $grupo->profesor }}</h1>
 
     @if(session('qrCode'))
     <div class="mt-4">
       <h2>Información Generada:</h2>
       <ul>
+        <li><strong>Nombre de Grupo:</strong> {{ $grupo->nombre_grupo }}</li>
+        <li><strong>Nombre de Materia:</strong> {{ $grupo->materia }}</li>
+        <li><strong>Docente:</strong> {{ $grupo->profesor }}</li>
         <li><strong>Fecha de Clase:</strong> {{ session('fecha_clase') }}</li>
         <li><strong>Horario de Clase:</strong> {{ session('horario_clase') }} - {{ session('horario_clase_final') }}</li>
         <li><strong>Parámetros de Registro Activo:</strong> {{ session('horario_registro') }}</li>

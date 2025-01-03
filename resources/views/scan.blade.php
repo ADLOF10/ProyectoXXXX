@@ -28,6 +28,8 @@
                 <input type="hidden" name="asistencia" id="asistencia">
                 <input type="hidden" name="retardo" id="retardo">
                 <input type="hidden" name="falta" id="falta">
+                <input type="hidden" name="fecha_hora_actual" id="fecha_hora_actual">
+                <input type="hidden" name="id_grupo" id="id_grupo">
 
              </form>
              
@@ -59,6 +61,8 @@
             document.getElementById('asistencia').value = data[6];
             document.getElementById('retardo').value = data[7];      // Asigna la tercera línea a 'profesor'
             document.getElementById('falta').value = data[8];
+            document.getElementById('fecha_hora_actual').value = data[9];
+            document.getElementById('id_grupo').value = data[10];
             
           }
 

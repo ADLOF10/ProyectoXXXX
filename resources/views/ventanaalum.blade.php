@@ -220,7 +220,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('consultarGrual') }}">Grupos</a></li>
                 <li><a class="nav-link" href="{{ route('qr.scan') }}">Registra asistencia</a></li>
-                <li><a class="nav-link" href="{{ route('grafica_alum') }}">Grafica de asistensia</a></li>
+                <li><a class="nav-link" href="{{ route('asisten_grafi_alum') }}">Grafica de asistensia</a></li>
               </ul>
             </li>
             <li class="menu-header">Cambiar plan</li>

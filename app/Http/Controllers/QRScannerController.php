@@ -7,6 +7,7 @@ use App\Models\Grupo;
 use App\Models\Asistencia;
 use PHPUnit\Framework\Attributes\Group;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class QRScannerController extends Controller
 
@@ -35,14 +36,13 @@ class QRScannerController extends Controller
             return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
         }
 
-       
-
         
         Asistencia::create([
             'alumno_id'=>$userId,
+            'grupo_id'=>$request->id_grupo,
             'fecha'=>$request->fecha,
             'hora_registro'=>$request->hora_registro,
-            'estado'=>$request->asistencia
+            'estado'=>$request->retardo
         ]);
         
         return redirect('/qr-scan')->with('success','Asistencia registrada');
