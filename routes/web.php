@@ -130,6 +130,14 @@ Route::post('/guardar_qr/{id}', [GenerarqrController::class, 'generate_qr'])->na
 Route::put('/editar_qr/{id}', [GenerarqrController::class, 'editarQr'])->name('editarQr');
 Route::delete('/eliminar_qr/{id}', [GenerarqrController::class, 'eliminarQr'])->name('eliminarQr');
 
+Route::post('/upload_alumnos', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
+
+Route::post('/alumnos/update/{index}', [AlumnoController::class, 'updateAlumno']);
+Route::delete('/alumnos/delete/{index}', [AlumnoController::class, 'deleteAlumno']);
+
+Route::post('/alumnos/store-all', [AlumnoController::class, 'storeAll'])->name('alumnos.storeAll');
+Route::post('/alumnos/delete-duplicados', [AlumnoController::class, 'deleteDuplicados'])->name('alumnos.deleteDuplicados');
+Route::post('/alumnos/upload', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
 
 
 ////
