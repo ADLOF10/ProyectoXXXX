@@ -128,9 +128,9 @@ class User extends Authenticatable
     }
 
 
-    public function alumnoo()
+    public function userAlumnoo()
     {
-        return $this->belongsTo(Alumno::class,'correo_instituciona');
+        return $this->belongsTo(UserAlumno::class,'correo_institucional_user');
     }
 
     public function asitenciass()

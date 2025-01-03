@@ -19,11 +19,12 @@ class Grupo extends Model
         'horario_clase_final', 
         'horario_registro', 
         'qr_code',
+        'alumno_id',
     ];
 
-    public function alumnoo()
+    public function grupoAlumnoo()
     {
-        return $this->hasMany(Alumno::class,'id');
+        return $this->hasMany(GrupoAlumno::class,'clave_id');
     }
 
     ////asistencia

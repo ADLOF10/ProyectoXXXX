@@ -17,8 +17,6 @@ class CreateAlumnosTable extends Migration
             $table->string('semestre', 20);
             $table->string('licenciatura', 100);
             $table->timestamps();
-
-           $table->foreign('correo_institucional')->references('correo_institucional')->on('users')->onDelete('cascade');
         });
     }
 

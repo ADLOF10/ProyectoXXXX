@@ -12,13 +12,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellidos');
-            $table->date('fecha_nacimiento');
-            $table->string('genero');
             $table->string('correo_personal')->unique();
             $table->string('correo_institucional')->unique();
-            $table->string('licenciatura');
-            $table->string('centro_universitario');
-            $table->string('grupo')->nullable();
             $table->string('cedula_profesional')->nullable();
             $table->boolean('es_academico')->default(false);
             $table->string('password')->default('Jo123456'); // Asignar una contraseña predeterminada4

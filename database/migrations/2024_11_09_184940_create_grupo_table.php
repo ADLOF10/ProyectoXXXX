@@ -12,17 +12,9 @@ class CreateGrupoTable extends Migration
             $table->id();
             $table->string('nombre_grupo');
             $table->string('materia');
-            $table->date('fecha_clase')->nullable();
             $table->string('profesor');
-            $table->time('horario_clase')->nullable();
-            $table->time('horario_clase_final')->nullable();
-            $table->time('horario_registro')->nullable();
-            $table->string('qr_code')->nullable();
-            $table->unsignedBigInteger('alumno_id');
+            $table->string('clave', 20)->unique();
             $table->timestamps();
-
-            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete('cascade');
-
         });        
     }   
 

@@ -20,18 +20,9 @@ class Alumno extends Model
         'licenciatura',
     ];
 
-    public function asistencias()
+    public function userAlumnoo()
     {
-        return $this->hasMany(Asistencia::class);
+        return $this->belongsTo(UserAlumno::class,'correo_institucional_alumno');
     }
 
-    public function userss()
-    {
-        return $this->belongsTo(User::class,'correo_instituciona');
-    }
-
-    public function grupoo()
-    {
-        return $this->belongsTo(Grupo::class,'alumno_id');
-    }
 }

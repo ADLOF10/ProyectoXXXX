@@ -20,8 +20,13 @@ class GruposController extends Controller
     {
         $request->validate([
             'nombre_grupo' => 'required',
+            'fecha_clase' => 'required',
             'materia' => 'required',
             'profesor' => 'required',
+            'horario_inicio' => 'required',
+            'horario_registro' => 'required',
+            'horario_registro' => 'required',
+            'alumno_id' => 'required',
         ]);
 
         Grupo::create($request->all());
