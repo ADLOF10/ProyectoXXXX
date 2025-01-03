@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperUsuarioController;
 use App\Http\Controllers\AcademicoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\GenerarqrController;
+use App\Http\Controllers\GraficaControlador;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\QRScannerController;
@@ -180,6 +181,8 @@ Route::get('/aprobaciones', [SuperUsuarioController::class, 'listarSolicitudes']
 Route::get('/asisten_grafi_alum',function(){
     return view('asistencia_alum');
 })->name('asisten_grafi_alum');
+
+Route::get('/attendance-chart', [GraficaControlador::class, 'showAttendanceChart'])->name('grafica_alum');
 
 
 // Ruta para mostrar el formulario de registro de grupo

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Alumno;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\Type\TrueType;
 
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'nombre' => 'Super Usuario',
+            'nombre' => 'alumno',
             'apellidos' => 'Administrador',
             'fecha_nacimiento' => '1980-01-01',
             'genero' => 'Otro',
@@ -56,5 +57,17 @@ class DatabaseSeeder extends Seeder
             'es_academico' => false,
             'password' => bcrypt('Juan1234'), // Contraseña por defecto
         ]);
+
+        Alumno::create([
+            'nombre' => 'alumno',
+            'apellidos' => 'fer',
+            'correo_institucional' => 'an@gmail.com',
+            'numero_cuenta' => '1970511',
+            'semestre' => '5',
+            'licenciatura' => 'Derecho',
+        ]);
+
+
+
     }
 }

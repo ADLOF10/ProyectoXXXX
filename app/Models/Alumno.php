@@ -16,15 +16,22 @@ class Alumno extends Model
         'apellidos',
         'correo_institucional',
         'numero_cuenta',
-        'centro_universitario',
-        'licenciatura',
-        'grupo',
         'semestre',
-        'password',
+        'licenciatura',
     ];
 
     public function asistencias()
     {
         return $this->hasMany(Asistencia::class);
+    }
+
+    public function userss()
+    {
+        return $this->belongsTo(User::class,'correo_instituciona');
+    }
+
+    public function grupoo()
+    {
+        return $this->belongsTo(Grupo::class,'alumno_id');
     }
 }

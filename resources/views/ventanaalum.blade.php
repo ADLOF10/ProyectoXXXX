@@ -34,6 +34,9 @@
 
 <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
 
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <!-- /END GA --></head>
 
@@ -177,7 +180,7 @@
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">usuario</div></a>
+            <div class="d-sm-none d-lg-inline-block">{{Auth::user()->nombre;}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">inicio seción 5 min</div>
               <a href="features-profile.html" class="dropdown-item has-icon">
@@ -217,7 +220,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('consultarGrual') }}">Grupos</a></li>
                 <li><a class="nav-link" href="{{ route('qr.scan') }}">Registra asistencia</a></li>
-                <li><a class="nav-link" href="{{ route('asisten_grafi_alum') }}">Grafica de asistensia</a></li>
+                <li><a class="nav-link" href="{{ route('grafica_alum') }}">Grafica de asistensia</a></li>
               </ul>
             </li>
             <li class="menu-header">Cambiar plan</li>

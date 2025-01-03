@@ -18,7 +18,11 @@ class CreateGrupoTable extends Migration
             $table->time('horario_clase_final')->nullable();
             $table->time('horario_registro')->nullable();
             $table->string('qr_code')->nullable();
+            $table->unsignedBigInteger('alumno_id');
             $table->timestamps();
+
+            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete('cascade');
+
         });        
     }   
 

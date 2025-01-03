@@ -6,18 +6,29 @@
     <div class="section-header">
     
     <div class="container col-lg-6 py-4">
+
+      @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
         {{-- Scanner--}}
         <div class="card bg-white shadow rounded-3 p-3 border-0">
             <video id="preview"></video>  
              {{-- form--}}
              <form action="{{ route('store') }}" method="POST" id="form">
                 @csrf
-                <input type="hidden" name="numero_cuenta" id="numero_cuenta">
+                <input type="hidden" name="grupo" id="grupo">
+                <input type="hidden" name="materia" id="materia">
+                <input type="hidden" name="profesor" id="profesor">
                 <input type="hidden" name="fecha" id="fecha">
                 <input type="hidden" name="hora_registro" id="hora_registro">
-                <input type="hidden" name="estado" id="estado">
-                <input type="hidden" name="grupo_id" id="grupo_id">
-                <input type="hidden" name="alumno_id" id="alumno_id">
+                <input type="hidden" name="hora_registro_fin" id="hora_registro_fin">
+                <input type="hidden" name="asistencia" id="asistencia">
+                <input type="hidden" name="retardo" id="retardo">
+                <input type="hidden" name="falta" id="falta">
+
              </form>
              
         </div>
@@ -37,13 +48,18 @@
           let data = content.split('\n');
 
           // Verifica si hay al menos tres líneas para asignar a los campos
-          if (data.length >= 6) {
-            document.getElementById('numero_cuenta').value = data[0];  // Asigna la primera línea a 'nombre_grupo'
-            document.getElementById('fecha').value = data[1];       // Asigna la segunda línea a 'materia'
-            document.getElementById('hora_registro').value = data[2];      // Asigna la tercera línea a 'profesor'
-            document.getElementById('estado').value = data[3];
-            document.getElementById('grupo_id').value = data[4];
-            document.getElementById('alumno_id').value = data[5];
+          if (data.length >= 9) {
+              // Asigna la primera línea a 'nombre_grupo'
+            document.getElementById('grupo').value = data[0];       // Asigna la segunda línea a 'materia'
+            document.getElementById('materia').value = data[1];      // Asigna la tercera línea a 'profesor'
+            document.getElementById('profesor').value = data[2];
+            document.getElementById('fecha').value = data[3];       // Asigna la segunda línea a 'materia'
+            document.getElementById('hora_registro').value = data[4];
+            document.getElementById('hora_registro_fin').value = data[7];      // Asigna la tercera línea a 'profesor'
+            document.getElementById('asistencia').value = data[6];
+            document.getElementById('retardo').value = data[7];      // Asigna la tercera línea a 'profesor'
+            document.getElementById('falta').value = data[8];
+            
           }
 
           // Luego, se envía el formulario

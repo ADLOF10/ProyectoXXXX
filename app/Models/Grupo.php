@@ -21,13 +21,15 @@ class Grupo extends Model
         'qr_code',
     ];
 
-    public function asistencias()
+    public function alumnoo()
     {
-        return $this->hasMany(Asistencia::class);
+        return $this->hasMany(Alumno::class,'id');
     }
 
-        public function profesor()
+    ////asistencia
+    public function asisten()
     {
-        return $this->belongsTo(Profesor::class);
+        return $this->hasMany(Asistencia::class,'grupo_id');
     }
+
 }

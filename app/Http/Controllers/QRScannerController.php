@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Grupo;
 use App\Models\Asistencia;
 use PHPUnit\Framework\Attributes\Group;
+use Illuminate\Support\Facades\Auth;
 
 class QRScannerController extends Controller
 
@@ -18,28 +19,32 @@ class QRScannerController extends Controller
 
     public function store(Request $request)
     {
+
+
+        $userId = Auth::user()->id;
         ///cek data
         $cek=Asistencia::Where([
-            'numero_cuenta'=>$request->numero_cuenta,
-            'fecha'=>$request->fecha,
-            'hora_registro'=>$request->hora_registro,
-            'estado'=>$request->estado,
-            'grupo_id'=>$request->grupo_id,
-            'alumno_id'=>$request->alumno_id
+            
+            'alumno_id'=>$userId,
+            'fecha'=>$request->fecha,       
         ])->first();
+        
 
         if ($cek) {
-            return redirect('/qr-scan')->with('gagal','anda sudah absen');
+            
+            return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
         }
+
+       
+
+        
         Asistencia::create([
-            'numero_cuenta'=>$request->numero_cuenta,
+            'alumno_id'=>$userId,
             'fecha'=>$request->fecha,
             'hora_registro'=>$request->hora_registro,
-            'estado'=>$request->estado,
-            'grupo_id'=>$request->grupo_id,
-            'alumno_id'=>$request->alumno_id
+            'estado'=>$request->asistencia
         ]);
         
-        return redirect('/qr-scan')->with('success','silahkan masuk');
+        return redirect('/qr-scan')->with('success','Asistencia registrada');
     }
 }

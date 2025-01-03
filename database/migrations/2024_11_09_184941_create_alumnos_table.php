@@ -14,11 +14,11 @@ class CreateAlumnosTable extends Migration
             $table->string('apellidos', 100);
             $table->string('correo_institucional')->unique();
             $table->string('numero_cuenta', 20)->unique();
-            $table->string('grupo', 50);
             $table->string('semestre', 20);
             $table->string('licenciatura', 100);
-            $table->string('password');
             $table->timestamps();
+
+           $table->foreign('correo_institucional')->references('correo_institucional')->on('users')->onDelete('cascade');
         });
     }
 

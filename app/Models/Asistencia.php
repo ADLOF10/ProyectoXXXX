@@ -10,23 +10,23 @@ class Asistencia extends Model
     use HasFactory;
 
     protected $fillable = [
-        'numero_cuenta',
+        'alumno_id',
+        'grupo_id',
         'fecha',
         'hora_registro',
         'estado',
-        'grupo_id',
-        'alumno_id',
+        
     ];
 
     // Relación con alumno
-    public function alumno()
+    public function alumnou()
     {
-        return $this->belongsTo(Alumno::class);
+        return $this->belongsTo(User::class,'id');
     }
 
     // Relación con grupo
-    public function grupo()
+    public function grupooo()
     {
-        return $this->belongsTo(Grupo::class);
+        return $this->belongsTo(Grupo::class,'id');
     }
 }

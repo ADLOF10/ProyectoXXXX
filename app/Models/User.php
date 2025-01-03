@@ -27,7 +27,6 @@ class User extends Authenticatable
         'licenciatura',
         'centro_universitario',
         'cedula_profesional',
-        'grupo',
         'es_academico', // Campo para diferenciar entre académico y alumno
         'password',
         
@@ -127,4 +126,18 @@ class User extends Authenticatable
         // Guardar los cambios
         $this->save();
     }
+
+
+    public function alumnoo()
+    {
+        return $this->belongsTo(Alumno::class,'correo_instituciona');
+    }
+
+    public function asitenciass()
+    {
+        return $this->hasMany(Asistencia::class,'alumno_id');
+    }
+
+
+
 }
