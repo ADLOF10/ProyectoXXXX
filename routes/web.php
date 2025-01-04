@@ -12,6 +12,7 @@ use App\Http\Controllers\GraficaControlador;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\QRScannerController;
+use App\Http\Controllers\GrupoController;
 
 
 
@@ -138,6 +139,23 @@ Route::delete('/alumnos/delete/{index}', [AlumnoController::class, 'deleteAlumno
 Route::post('/alumnos/store-all', [AlumnoController::class, 'storeAll'])->name('alumnos.storeAll');
 Route::post('/alumnos/delete-duplicados', [AlumnoController::class, 'deleteDuplicados'])->name('alumnos.deleteDuplicados');
 Route::post('/alumnos/upload', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
+
+
+
+
+Route::post('/alumnos/store-all', [AlumnoController::class, 'storeAll'])->name('alumnos.storeAll');
+Route::get('/grupos/{grupoId}/alumnos', [GrupoController::class, 'mostrarAlumnosGrupo'])->name('grupos.alumnos');
+
+
+
+// Ruta para listar todos los grupos
+Route::get('/grupos', [GrupoController::class, 'index'])->name('grupos.index');
+
+// Ruta para mostrar los alumnos de un grupo específico
+Route::get('/grupos/{id}/alumnos', [GrupoController::class, 'showAlumnos'])->name('grupos.alumnos');
+
+Route::get('/grupos/alumnosalan', [GrupoController::class, 'consulAlum'])->name('grupos.alumnosalan');
+
 
 
 ////

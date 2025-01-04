@@ -10,14 +10,16 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
-            $table->string('apellidos', 100);
+            $table->string('nombre');
+            $table->string('apellidos');
             $table->string('correo_institucional')->unique();
-            $table->string('numero_cuenta', 20)->unique();
-            $table->string('semestre', 20);
-            $table->string('licenciatura', 100);
+            $table->string('numero_cuenta')->unique();
+            $table->unsignedBigInteger('grupo_id')->nullable(); // Relación con grupos
+            $table->string('semestre');
+            $table->string('licenciatura');
             $table->timestamps();
         });
+        
     }
 
     public function down()

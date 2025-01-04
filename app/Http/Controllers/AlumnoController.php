@@ -148,53 +148,49 @@ class AlumnoController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function storeAll(Request $request)
+        public function storeAll(Request $request)
     {
         $selectedIndexes = $request->input('selected_alumnos');
         $alumnos = session('alumnos');
-    
+
         if (!$selectedIndexes) {
             return back()->with('error', 'No se seleccionaron alumnos para registrar.');
         }
-    
+
         $alumnosToInsert = [];
         foreach ($selectedIndexes as $index) {
             $alumno = $alumnos[$index];
-    
-            // Verificar si el alumno ya existe en la base de datos
-            $existe = DB::table('alumnos')
-                ->where('correo_institucional', $alumno['correo_institucional'])
-                ->orWhere('numero_cuenta', $alumno['numero_cuenta'])
-                ->exists();
-    
-            if (!$existe) {
-                $alumnosToInsert[] = [
-                    'nombre' => $alumno['nombre'],
-                    'apellidos' => $alumno['apellidos'],
-                    'correo_institucional' => $alumno['correo_institucional'],
-                    'numero_cuenta' => $alumno['numero_cuenta'],
-                    'semestre' => $alumno['semestre'],
-                    'licenciatura' => $alumno['licenciatura'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-                
+
+            // Verificar el grupo
+            $grupo = DB::table('grupos')->where('nombre_grupo', $alumno['grupo'])->first();
+
+            if (!$grupo) {
+                return back()->with('error', "El grupo '{$alumno['grupo']}' no existe. Verifica el archivo CSV.");
             }
+
+            $alumnosToInsert[] = [
+                'nombre' => $alumno['nombre'],
+                'apellidos' => $alumno['apellidos'],
+                'correo_institucional' => $alumno['correo_institucional'],
+                'numero_cuenta' => $alumno['numero_cuenta'],
+                'grupo_id' => $grupo->id, // Asignar grupo al alumno
+                'semestre' => $alumno['semestre'],
+                'licenciatura' => $alumno['licenciatura'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
-    
+
         if (!empty($alumnosToInsert)) {
-            // Insertar los alumnos válidos en la base de datos
             DB::table('alumnos')->insert($alumnosToInsert);
-    
-            // Limpiar los datos de la sesión después de registrar
             session()->forget('alumnos');
             session()->forget('duplicados');
-    
-            return back()->with('success', 'Alumnos registrados correctamente.');
+            return back()->with('success', 'Alumnos registrados y asignados a sus grupos correctamente.');
         }
-    
+
         return back()->with('error', 'Todos los alumnos seleccionados ya están registrados.');
     }
+
     
     
 
