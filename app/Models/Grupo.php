@@ -13,13 +13,8 @@ class Grupo extends Model
     protected $fillable = [
         'nombre_grupo', 
         'materia', 
-        'fecha_clase', 
         'profesor', 
-        'horario_clase', 
-        'horario_clase_final', 
-        'horario_registro', 
-        'qr_code',
-        'alumno_id',
+        'clave',
     ];
 
     public function grupoAlumnoo()

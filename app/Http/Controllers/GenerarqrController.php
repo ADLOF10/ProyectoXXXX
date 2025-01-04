@@ -122,13 +122,16 @@ class GenerarqrController extends Controller
     $fecha_hora_actualizacion = $grupo->updated_at->format('Y-m-d H:i:s');
 
     // Datos del QR
-    $data = "Grupo: {$grupo->nombre_grupo}\n"
-          . "Materia: {$grupo->materia}\n"
-          . "Profesor: {$grupo->profesor}\n"
-          . "Fecha Clase: {$fecha_clase}\n"
-          . "Horario: {$horario_inicio} - {$horario_fin}\n"
-          . "Parámetros: {$horario_registro}\n"
-          . "Última Actualización: {$fecha_hora_actualizacion}";
+    $data = "{$grupo->nombre_grupo}\n"
+          . "{$grupo->materia}\n"
+          . "{$grupo->profesor}\n"
+          . "{$fecha_clase}\n"
+          . "{$horario_inicio}\n"
+          . "{$horario_fin}\n"
+          . "{$horario_registro}\n"
+          . "{$fecha_hora_actualizacion}\n"
+          . "{$grupo->id}"
+          ;
 
     $qrCode = (new Writer(new ImageRenderer(new RendererStyle(300), new SvgImageBackEnd())))->writeString($data);
 

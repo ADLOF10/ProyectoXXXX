@@ -24,7 +24,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Clave</th>
                 <th>Nombre del Grupo</th>
                 <th>Materia</th>
                 <th>Profesor</th>
@@ -34,7 +34,7 @@
         <tbody>
             @foreach($grupos as $grupo)
             <tr>
-                <td>{{ $grupo->id }}</td>
+                <td>{{ $grupo->clave }}</td>
                 <td>{{ $grupo->nombre_grupo }}</td>
                 <td>{{ $grupo->materia }}</td>
                 <td>{{ $grupo->profesor }}</td>

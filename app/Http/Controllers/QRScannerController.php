@@ -18,33 +18,34 @@ class QRScannerController extends Controller
         return view('scan');
     }
 
-    public function store(Request $request)
-    {
+            public function store(Request $request)
+            {
 
 
-        $userId = Auth::user()->id;
-        ///cek data
-        $cek=Asistencia::Where([
-            
-            'alumno_id'=>$userId,
-            'fecha'=>$request->fecha,       
-        ])->first();
-        
+                $userId = Auth::user()->id;
+                ///cek data
+                $cek=Asistencia::Where([      
+                    'alumno_id'=>$userId,
+                    'fecha'=>$request->fecha,       
+                ])->first();
+                
 
-        if ($cek) {
-            
-            return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
-        }
+                if ($cek) {
+                    
+                    return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
+                }
 
-        
+
+        // Crear la entrada en la base de datos
         Asistencia::create([
-            'alumno_id'=>$userId,
-            'grupo_id'=>$request->id_grupo,
-            'fecha'=>$request->fecha,
-            'hora_registro'=>$request->hora_registro,
-            'estado'=>$request->retardo
+            'alumno_id' => $userId,
+            'grupo_id' => $request->id_grupo,
+            'fecha' => $request->fecha,
+            'hora_registro' => $request->hora_inicio_clase,
+            'estado' => $request->falta
         ]);
-        
-        return redirect('/qr-scan')->with('success','Asistencia registrada');
-    }
+
+                
+                return redirect('/qr-scan')->with('success','Asistencia registrada');
+            }
 }

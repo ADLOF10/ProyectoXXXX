@@ -173,12 +173,12 @@ class AlumnoController extends Controller
                     'apellidos' => $alumno['apellidos'],
                     'correo_institucional' => $alumno['correo_institucional'],
                     'numero_cuenta' => $alumno['numero_cuenta'],
-                    'grupo' => $alumno['grupo'],
                     'semestre' => $alumno['semestre'],
                     'licenciatura' => $alumno['licenciatura'],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
+                
             }
         }
     

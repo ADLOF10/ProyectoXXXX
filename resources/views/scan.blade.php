@@ -23,7 +23,7 @@
                 <input type="hidden" name="materia" id="materia">
                 <input type="hidden" name="profesor" id="profesor">
                 <input type="hidden" name="fecha" id="fecha">
-                <input type="hidden" name="hora_registro" id="hora_registro">
+                <input type="hidden" name="hora_inicio_clase" id="hora_inicio_clase">
                 <input type="hidden" name="hora_registro_fin" id="hora_registro_fin">
                 <input type="hidden" name="asistencia" id="asistencia">
                 <input type="hidden" name="retardo" id="retardo">
@@ -56,7 +56,7 @@
             document.getElementById('materia').value = data[1];      // Asigna la tercera línea a 'profesor'
             document.getElementById('profesor').value = data[2];
             document.getElementById('fecha').value = data[3];       // Asigna la segunda línea a 'materia'
-            document.getElementById('hora_registro').value = data[4];
+            document.getElementById('hora_inicio_clase').value = data[4];
             document.getElementById('hora_registro_fin').value = data[7];      // Asigna la tercera línea a 'profesor'
             document.getElementById('asistencia').value = data[6];
             document.getElementById('retardo').value = data[7];      // Asigna la tercera línea a 'profesor'
