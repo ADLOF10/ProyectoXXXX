@@ -14,7 +14,6 @@ class CreateAlumnosTable extends Migration
             $table->string('apellidos');
             $table->string('correo_institucional')->unique();
             $table->string('numero_cuenta')->unique();
-            $table->unsignedBigInteger('grupo_id')->nullable(); // Relación con grupos
             $table->string('semestre');
             $table->string('licenciatura');
             $table->timestamps();

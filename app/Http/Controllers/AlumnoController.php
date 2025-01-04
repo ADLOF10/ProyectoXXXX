@@ -173,7 +173,6 @@ class AlumnoController extends Controller
                 'apellidos' => $alumno['apellidos'],
                 'correo_institucional' => $alumno['correo_institucional'],
                 'numero_cuenta' => $alumno['numero_cuenta'],
-                'grupo_id' => $grupo->id, // Asignar grupo al alumno
                 'semestre' => $alumno['semestre'],
                 'licenciatura' => $alumno['licenciatura'],
                 'created_at' => now(),

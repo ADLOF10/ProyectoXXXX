@@ -18,7 +18,6 @@ class Alumno extends Model
         'numero_cuenta',
         'semestre',
         'licenciatura',
-        'grupo_id', // Clave foránea
     ];
 
     public function userAlumnoo()
