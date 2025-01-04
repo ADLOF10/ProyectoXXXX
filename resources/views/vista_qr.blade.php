@@ -44,12 +44,12 @@
 
         <div class="mb-3">
             <label for="horario_inicio" class="form-label">Horario de Inicio</label>
-            <input type="time" id="horario_inicio" name="horario_inicio" class="form-control" min="07:00"  required>
+            <input type="time" id="horario_inicio" name="horario_inicio" class="form-control"  required>
         </div>
 
         <div class="mb-3">
             <label for="horario_fin" class="form-label">Horario de Finalización</label>
-            <input type="time" id="horario_fin" name="horario_fin" class="form-control" min="07:00" required>
+            <input type="time" id="horario_fin" name="horario_fin" class="form-control"  required>
         </div>
 
         <div class="mb-3">

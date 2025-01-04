@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class GrupoAlumno extends Model
 {
 
+    
+
     public function grupoo()
     {
         return $this->belongsTo(Grupo::class,'clave');

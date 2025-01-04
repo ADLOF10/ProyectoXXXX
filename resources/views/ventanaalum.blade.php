@@ -127,15 +127,21 @@
                 </div>
               </div>
               <div class="dropdown-list-content dropdown-list-icons">
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-icon bg-primary text-white">
-                    <i class="fas fa-code"></i>
+
+                <a class="dropdown">
+                  <div >
+                    <form action="{{ route('guardarGru') }}" method="POST">
+                      @csrf
+                      <div class="mb-3">
+                          <label for="correo institucional" class="form-label">correo institucional</label>
+                          <input type="text" name="correo institucional" class="form-control" id="correo institucional" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary">vincular</button>                   
+                  </form>
                   </div>
-                  <div class="dropdown-item-desc">
-                    Template update is available now!
-                    <div class="time text-primary">2 Min Ago</div>
-                  </div>
+                  
                 </a>
+
                 <a href="#" class="dropdown-item">
                   <div class="dropdown-item-icon bg-info text-white">
                     <i class="far fa-user"></i>
@@ -242,6 +248,10 @@
       <div class="main-content">
         @yield('content')
       </div>
+      
+
+
+      
 
 
       <footer class="main-footer">
