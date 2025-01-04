@@ -33,6 +33,10 @@ class User extends Authenticatable
         
     ];
 
+
+
+    
+
     /**
      * Atributos ocultos para arrays.
      *
