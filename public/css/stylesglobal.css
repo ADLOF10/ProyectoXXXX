@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #004d40; /* Verde */
+    --secondary-color: #FF9800; /* Naranja */
+    --background-color: #F5F5F5; /* Gris claro */
+    --text-color: #333333; /* Gris oscuro */
+    --accent-color: #004d40; /* Azul */
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+}
+
+.sidebar {
+    background-color: var(--primary-color);
+    padding: 15px;
+    color: white;
+    min-height: 100vh;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.table-responsive {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav.navbar.main-navbar {
+    background-color: #004d40;
+    }
+
+    .btn-primary {
+    background-color: #004d40
+    }
