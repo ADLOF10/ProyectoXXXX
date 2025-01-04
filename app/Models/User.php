@@ -27,6 +27,7 @@ class User extends Authenticatable
         'licenciatura',
         'centro_universitario',
         'cedula_profesional',
+        'fecha_nacimiento',
         'es_academico', // Campo para diferenciar entre académico y alumno
         'password',
         
