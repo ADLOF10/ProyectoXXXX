@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\grupos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Alumno;
 use Illuminate\Http\Request;
 use App\Models\Grupo; // Modelo 'Grupo' para interactuar con la base de datos
 use BaconQrCode\Encoder\QrCode;
@@ -39,6 +40,9 @@ class GruposController extends Controller
     }
 
 ////consulta de profesor
+
+
+
     public function consulGru()
     {
 
