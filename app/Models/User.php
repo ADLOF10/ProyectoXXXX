@@ -22,9 +22,14 @@ class User extends Authenticatable
         'correo_personal',
         'correo_institucional', // Nuevo campo para el correo institucional
         'cedula_profesional',
+        'fecha_nacimiento',
         'es_academico', // Campo para diferenciar entre académico y alumno
         'password',   
     ];
+
+
+
+    
 
     /**
      * Atributos ocultos para arrays.
