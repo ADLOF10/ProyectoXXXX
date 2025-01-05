@@ -13,6 +13,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\QRScannerController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 
@@ -138,6 +139,21 @@ Route::delete('/alumnos/delete/{index}', [AlumnoController::class, 'deleteAlumno
 Route::post('/alumnos/store-all', [AlumnoController::class, 'storeAll'])->name('alumnos.storeAll');
 Route::post('/alumnos/delete-duplicados', [AlumnoController::class, 'deleteDuplicados'])->name('alumnos.deleteDuplicados');
 Route::post('/alumnos/upload', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
+
+
+
+
+// Mostrar el formulario de recuperación de contraseña
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+// Procesar la solicitud de envío del enlace de recuperación
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Mostrar el formulario para restablecer la contraseña
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// Procesar el formulario para restablecer la contraseña
+Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 
 
 

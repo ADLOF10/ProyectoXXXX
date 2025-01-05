@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olvidé mi Contraseña</title>
-    <link rel="stylesheet" href="{{ asset('css/styleslogin.css') }}">
+    <title>Recuperar Contraseña</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container">
-        <h1>Recuperar Contraseña</h1>
-        <form action="#" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="correo_institucional">Correo Institucional</label>
-                <input type="email" id="correo_institucional" name="correo_institucional" required>
-            </div>
+<div class="container mt-5">
+    <h2>Recuperar Contraseña</h2>
+    <form action="{{ route('password.email') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="correo_personal">Correo Electrónico</label>
+            <input type="email" id="correo_personal" name="correo_personal" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Enviar Enlace de Recuperación</button>
+    </form>
 
-            <div class="form-group">
-                <button type="submit">Enviar Enlace</button>
-            </div>
-        </form>
-    </div>
+    @if(session('status'))
+        <div class="alert alert-success mt-3">{{ session('status') }}</div>
+    @endif
+</div>
 </body>
-<footer>
-    <p>© 2024 Universidad - Todos los derechos reservados</p>
-</footer>
 </html>

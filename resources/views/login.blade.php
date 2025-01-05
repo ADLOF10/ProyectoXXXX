@@ -39,7 +39,8 @@
         </form>
 
         <div class="extra-links">
-            <a href="{{ route('forgot-password') }}">¿Olvidaste tu contraseña?</a>
+            <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+
         </div>
     </div>
 </body>
