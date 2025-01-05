@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Asistencia;
+use App\Models\Grupo;
 use Illuminate\Support\Facades\Auth;
 
 class GraficaControlador extends Controller
@@ -14,6 +16,7 @@ class GraficaControlador extends Controller
 
     public function showAttendanceChart(Request $request)
     {
+        
        
         $userName = Auth::user()->nombre;
        
@@ -23,7 +26,13 @@ class GraficaControlador extends Controller
                 ]);
     
                 $grupo = $request->input('grupo');
+                $cek = Grupo::where('nombre_grupo', $grupo)->first();
+
+                if ($cek) {
+
                 $alumno = $userName;
+                $existing= Alumno::where('nombre', $alumno)->first();
+            if ($existing) {
     
                 // Consultar datos agrupados
                 $data = DB::table('asistencias')
@@ -52,6 +61,19 @@ class GraficaControlador extends Controller
                     'grupo' => $grupo,
                     'alumno' => $alumno,
                 ]);
+            }else {
+                return view('asistencia_alum');
+                    
+            }
+
+            } else {// Crear el registro en la tabla UserAlumno
+                return view('asistencia_alum');
+                
+    
+                
+        }
+
+           
     }
     
 
@@ -59,15 +81,23 @@ class GraficaControlador extends Controller
 
     public function grafiprofe(Request $request)
     {
-       
-                // Validar datos del formulario
+
+        
             $request->validate([
                 'grupo' => 'required|string',
                 'alumno' => 'required|string',
             ]);
 
             $grupo = $request->input('grupo');
+
+            $cek = Grupo::where('nombre_grupo', $grupo)->first();
+
+            if ($cek) {
+                // Verificar si ya existe un registro en la tabla UserAlumno
+               
             $alumno = $request->input('alumno');
+            $existing= Alumno::where('nombre', $alumno)->first();
+            if ($existing) {
 
             // Consultar datos agrupados
             $data = DB::table('asistencias')
@@ -96,7 +126,23 @@ class GraficaControlador extends Controller
                 'grupo' => $grupo,
                 'alumno' => $alumno,
             ]);
+                }else {
+                    return view('asistencia_profe');
+                        
+                }
+
+
+            } else {// Crear el registro en la tabla UserAlumno
+                return view('asistencia_profe');
+                
+    
+                
+        }
+
+        
    }
+
+   
 
 
 }
