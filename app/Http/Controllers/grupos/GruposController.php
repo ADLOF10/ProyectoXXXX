@@ -7,6 +7,7 @@ use App\Models\Alumno;
 use Illuminate\Http\Request;
 use App\Models\Grupo; // Modelo 'Grupo' para interactuar con la base de datos
 use App\Models\GrupoAlumno;
+use App\Models\User;
 use BaconQrCode\Encoder\QrCode;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
@@ -65,18 +66,31 @@ class GruposController extends Controller
     public function consulGrualum(Request $request)
     {
 
-       // $userCorreo = Auth::user()->correo_institucional;
-                ///cek data
-            //    $cek=Alumno::Where([      
-              //      'correo_institucional'=>$userCorreo,
-              //      'fecha'=>$request->fecha,       
-              //  ])->first();
-                
+        $userCorreo = Auth::user()->correo_institucional;
 
-               // if ($cek) {
-                    
-                 //   return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
-                //}
+        // Verificar si el correo existe en la tabla Alumno
+        $cek = Alumno::where('correo_institucional', $userCorreo)->first();
+        
+        if ($cek) {
+            // Verificar si ya existe un registro en la tabla UserAlumno
+            $existing = UserAlumno::where('correo_institucional_alumno', $userCorreo)->first();
+        
+            if ($existing) {
+
+            }else {
+                UserAlumno::create([
+                'correo_institucional_alumno' => $userCorreo,
+                'correo_institucional_user' => $userCorreo,
+            ]);
+
+           
+            }
+            
+        } else {// Crear el registro en la tabla UserAlumno
+            
+
+            
+        }
         
 
         $userName = Auth::user()->correo_institucional;

@@ -81,7 +81,7 @@ class NuevoRegistroController extends Controller
             'correo_institucional' => (string) $request->input('correo_institucional'),
             'cedula_profesional' => $request->input('cedula_profesional'), // Será null si no aplica
             'es_academico' => $request->has('es_academico'), // Retorna true si el checkbox fue marcado
-            'password' => $request->input('password'),
+            'password' => bcrypt($request->input('password')),
         ]);
 
 
