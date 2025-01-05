@@ -53,7 +53,7 @@ class QRScannerController extends Controller
                     } elseif ($horaActual <= $inicioClase->addMinutes(20)) {
                         // Falta (después de las 8:11)
                         $estatus = 'falta';
-        }
+                        }
 
                     // Crear la entrada en la base de datos
                     Asistencia::create([

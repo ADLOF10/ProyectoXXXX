@@ -8,8 +8,8 @@ class UserAlumno extends Model
 {
 
     protected $fillable = [
-        'alumno_id', 
-        'clave_id', 
+        'correo_institucional_alumno', 
+        'correo_institucional_user', 
     ];
 
     public function userr()

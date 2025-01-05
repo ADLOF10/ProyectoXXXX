@@ -15,6 +15,7 @@ use BaconQrCode\Writer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\UserAlumno;
 
 class GruposController extends Controller
 {
@@ -61,8 +62,23 @@ class GruposController extends Controller
     }
     
     /////consulta de alumno
-    public function consulGrualum()
+    public function consulGrualum(Request $request)
     {
+
+       // $userCorreo = Auth::user()->correo_institucional;
+                ///cek data
+            //    $cek=Alumno::Where([      
+              //      'correo_institucional'=>$userCorreo,
+              //      'fecha'=>$request->fecha,       
+              //  ])->first();
+                
+
+               // if ($cek) {
+                    
+                 //   return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
+                //}
+        
+
         $userName = Auth::user()->correo_institucional;
 
         $alugrupos =DB::table('grupoAlumno')
