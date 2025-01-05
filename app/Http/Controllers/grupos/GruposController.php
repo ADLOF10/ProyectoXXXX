@@ -81,9 +81,7 @@ class GruposController extends Controller
                 UserAlumno::create([
                 'correo_institucional_alumno' => $userCorreo,
                 'correo_institucional_user' => $userCorreo,
-            ]);
-
-           
+            ]);     
             }
             
         } else {// Crear el registro en la tabla UserAlumno
