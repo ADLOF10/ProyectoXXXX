@@ -36,18 +36,8 @@ class NuevoRegistroController extends Controller
                 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', // Solo caracteres alfabéticos y espacios
             ],
 
-            'fecha_nacimiento' => [
-                'required',
-                'date',
-                function ($attribute, $value, $fail) {
-                    $age = \Carbon\Carbon::parse($value)->age;
-                    if ($age < 17) {
-                        $fail('La edad debe ser de al menos 17 años.');
-                    }
-                },
-            ],
-
-            'genero' => 'required|string',
+           
+            
             'correo_personal' => [
                 'required',
                 'email',
@@ -58,8 +48,7 @@ class NuevoRegistroController extends Controller
                     }
                 },
             ],
-            'licenciatura' => 'required|string|max:30',
-            'centro_universitario' => 'required|string|max:30',
+
 
             'password' => [
             'required',
@@ -70,22 +59,17 @@ class NuevoRegistroController extends Controller
             'regex:/[0-9]/', // Al menos un número
 
         ],
-        'cedula_profesional' => [
-            'nullable', // Puede ser nula si no es académico
-            'required_if:es_academico,on', // Obligatoria si es académico
-            'regex:/^\d{7,8}$/', // Solo números de 7 u 8 dígitos
-        ],
-        ],
+       
+    
         [
-            'cedula_profesional.required_if' => 'La cédula profesional es obligatoria para académicos.',
-            'cedula_profesional.regex' => 'La cédula profesional debe ser un número de 7 u 8 dígitos.',
+            
             'nombre.required_if' => 'Campo Obligatorio.',
             'nombre.regex' => 'El nombre solo puede contener caracteres',
             'apellidos.required_if' => 'Campo Obligatorio.',
             'apellidos.regex' => 'El apellido solo puede contener caracteres',
             'password.required_if' =>'Campo Obligatorio',
             'password.regex'=> 'La contraseña debe de tener al menos 8 caracteres una mayuscula una minuscula y un numero',
-
+        ],
         ]);
 
 
@@ -93,15 +77,11 @@ class NuevoRegistroController extends Controller
         User::create([
             'nombre' => $request->input('nombre'),
             'apellidos' => $request->input('apellidos'),
-            'fecha_nacimiento' => $request->input('fecha_nacimiento'),
-            'genero' => $request->input('genero'),
             'correo_personal' => (string) $request->input('correo_personal'),
             'correo_institucional' => (string) $request->input('correo_institucional'),
-            'licenciatura' => $request->input('licenciatura'),
-            'centro_universitario' => $request->input('centro_universitario'),
             'cedula_profesional' => $request->input('cedula_profesional'), // Será null si no aplica
             'es_academico' => $request->has('es_academico'), // Retorna true si el checkbox fue marcado
-            'password' => bcrypt($request->input('password')),
+            'password' => $request->input('password'),
         ]);
 
 

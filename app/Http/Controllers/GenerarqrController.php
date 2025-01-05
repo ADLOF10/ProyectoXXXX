@@ -11,6 +11,8 @@ use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GenerarqrController extends Controller
 {
@@ -18,7 +20,9 @@ class GenerarqrController extends Controller
     ///ver tabla grupo
     public function verGrupo()
     {
-        $grupos = Grupo::paginate(10);
+        $userName = Auth::user()->nombre;
+
+        $grupos =Grupo::where('profesor', $userName)->paginate(4);
         return view('qr_profe', compact('grupos'));
     }
 

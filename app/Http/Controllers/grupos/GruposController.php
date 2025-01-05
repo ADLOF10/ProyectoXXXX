@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 use App\Models\Grupo; // Modelo 'Grupo' para interactuar con la base de datos
+use App\Models\GrupoAlumno;
 use BaconQrCode\Encoder\QrCode;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GruposController extends Controller
 {
@@ -19,14 +22,19 @@ class GruposController extends Controller
     ///registrar en grupo en la ventana profesor
     public function registarGru(Request $request)
     {
+        $userName = Auth::user()->nombre;
         $request->validate([
-            'nombre_grupo' => 'required',
-            'materia' => 'required',
-            'profesor' => 'required',
-            'clave' => 'required',
+            'nombre_grupo' => 'required|string|max:255',
+            'materia' => 'required|string|max:255',
+            'clave' => 'required|string|max:255',
         ]);
 
-        Grupo::create($request->all());
+        Grupo::create([
+            'nombre_grupo' => $request->nombre_grupo,
+            'materia' => $request->materia,
+            'profesor' => $userName, // Agregamos manualmente el profesor
+            'clave' => $request->clave,
+        ]);
 
         return redirect()->route('crear-grupo')->with('success', 'Grupo creado con éxito.');
     }
@@ -45,17 +53,26 @@ class GruposController extends Controller
 
     public function consulGru()
     {
+        $userName = Auth::user()->nombre;
 
-        $grupos = Grupo::paginate(10);
+        $grupos =Grupo::where('profesor', $userName)->paginate(4);
+
         return view('crudgrupo', compact('grupos'));
     }
     
     /////consulta de alumno
     public function consulGrualum()
     {
+        $userName = Auth::user()->correo_institucional;
 
-        $grupos = Grupo::paginate(10);
-        return view('crudalumno', compact('grupos'));
+        $alugrupos =DB::table('grupoAlumno')
+        ->join('alumnos', 'grupoAlumno.alumno_id', '=', 'alumnos.id') // Relaciona con alumnos
+        ->join('grupos', 'grupoAlumno.clave_id', '=', 'grupos.clave') // Relaciona con grupos
+        ->where('alumnos.correo_institucional', '=', $userName) // Filtro por correo
+        ->select('grupoAlumno.*', 'alumnos.nombre as alumno_nombre', 'grupos.nombre_grupo', 'grupos.materia', 'grupos.profesor') // Selecciona columnas necesarias
+        ->get();
+        
+        return view('crudalumno', compact('alugrupos','userName'));
     }
 
 

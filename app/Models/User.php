@@ -19,17 +19,11 @@ class User extends Authenticatable
     protected $fillable = [
         'nombre',
         'apellidos',
-        'fecha_nacimiento',
-        'genero',
         'correo_personal',
         'correo_institucional', // Nuevo campo para el correo institucional
-        'numero_cuenta', // Nuevo campo para el número de cuenta
-        'licenciatura',
-        'centro_universitario',
         'cedula_profesional',
         'es_academico', // Campo para diferenciar entre académico y alumno
-        'password',
-        
+        'password',   
     ];
 
     /**

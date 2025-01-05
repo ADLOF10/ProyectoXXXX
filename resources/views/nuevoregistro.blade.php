@@ -68,30 +68,6 @@
             </div>
 
             <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input
-                        type="date"
-                        id="fecha_nacimiento"
-                        name="fecha_nacimiento"
-                        class="form-control @error('fecha_nacimiento') is-invalid @enderror"
-                        value="{{ old('fecha_nacimiento') }}x"
-                        required
-                        >
-                        @if ($errors->has('fecha_nacimiento'))
-                        <span class="text-danger">{{ $errors->first('fecha_nacimiento') }}</span>
-                    @endif
-            </div>
-
-            <div class="form-group">
-                <label for="genero">Género:</label>
-                <select id="genero" name="genero" required>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label for="correo_personal">Correo Personal:</label>
                 <input
                     type="email"
@@ -121,25 +97,6 @@
                     <span class="text-danger">{{ $errors->first('correo_institucional') }}</span>
                 @endif
 
-            </div>
-
-            <div class="form-group">
-                <label for="licenciatura">Licenciatura:</label>
-                <select id="licenciatura" name="licenciatura" required>
-                    <option value="Software">Ingenieria en Software</option>
-                    <option value="Plasticos">Ingenieria en Plasticos</option>
-                    <option value="Computacion">Ingenieria en Computacion</option>
-                    <option value="Arquitectura">Arquitectura</option>
-                    <option value="Derecho">Derecho</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="centro_universitario">Centro Universitario:</label>
-                <select id="centro_universitario" name="centro_universitario" required>
-                    <option value="UAPT">Unidad Academica Profesional Tianguistenco</option>
-                    <option value="CU">Ciudad Universitaria</option>
-                </select>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>

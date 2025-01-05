@@ -10,23 +10,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Correo Institucional</th>
-                    <th>Número de Cuenta</th>
-                    <th>Semestre</th>
-                    <th>Licenciatura</th>
+                    <th>Nombre alumno</th>
+                    <th> grupo</th>
+                    <th>materia</th>
+                    <th>profesor</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($alumnos as $alumno)
                 <tr>
-                    <td>{{ $alumno->nombre }}</td>
-                    <td>{{ $alumno->apellidos }}</td>
-                    <td>{{ $alumno->correo_institucional }}</td>
-                    <td>{{ $alumno->numero_cuenta }}</td>
-                    <td>{{ $alumno->semestre }}</td>
-                    <td>{{ $alumno->licenciatura }}</td>
+                    <td>{{ $alumno->alumno_nombre }}</td>
+                    <td>{{ $alumno->nombre_grupo }}</td>
+                    <td>{{ $alumno->materia }}</td>
+                    <td>{{ $alumno->profesor }}</td>
+                    
                 </tr>
                 @endforeach
             </tbody>

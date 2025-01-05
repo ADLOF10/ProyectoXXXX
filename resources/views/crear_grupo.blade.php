@@ -31,10 +31,6 @@
             <input type="text" name="materia" class="form-control" id="materia"  required>
         </div>
         <div class="mb-3">
-            <label for="profesor" class="form-label">Profesor</label>
-            <input type="text" name="profesor" class="form-control" id="profesor"  required>
-        </div>
-        <div class="mb-3">
             <label for="clave" class="form-label">clave</label>
             <input type="text" name="clave" class="form-control" id="clave" required>
         </div>

@@ -19,29 +19,34 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if($alugrupos->isEmpty())
+        <div class="alert alert-warning text-center">
+            No hay registros asociados a tu correo institucional.
+        </div>
+         @else
     
         <table class="table table-bordered">
             <thead>
                 <tr>
                     
-                    <th>Nombre del Grupo</th>
+                    <th>id</th>
+                    <th>Grupo</th>
                     <th>Materia</th>
                     <th>Profesor</th>
-                    
                 </tr>
             </thead>
             <tbody>
-                @foreach($grupos as $grupo)
+                @foreach($alugrupos as $alugrupo)
                 <tr>
-                    
-                    <td><a href="#" class="btn btn-info btn-sm">{{ $grupo->nombre_grupo }}</a></td>
-                    <td>{{ $grupo->materia }}</td>
-                    <td>{{ $grupo->profesor }}</td>
-                    
+                    <td><a href="#" class="btn btn-info btn-sm"></a>{{ $alugrupo->id }}</td>
+                    <td>{{ $alugrupo->nombre_grupo }}</td>
+                    <td>{{ $alugrupo->materia }}</td>
+                    <td>{{ $alugrupo->profesor}}</td>              
                 </tr>
             @endforeach
             </tbody>
         </table>
+        @endif
         </div>
      
   </section>

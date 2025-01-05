@@ -118,7 +118,6 @@ Route::get('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name(
 Route::post('/crear_qr/{id}', [GenerarqrController::class, 'generate_qr'])->name('crearQr');
 
 
-
 // Ruta para listar los grupos
 Route::get('/qr_profe', [GenerarqrController::class, 'verGrupo'])->name('verGrupo');
 
@@ -154,7 +153,7 @@ Route::get('/grupos', [GrupoController::class, 'index'])->name('grupos.index');
 // Ruta para mostrar los alumnos de un grupo específico
 Route::get('/grupos/{id}/alumnos', [GrupoController::class, 'showAlumnos'])->name('grupos.alumnos');
 
-Route::get('/grupos/alumnosalan', [GrupoController::class, 'consulAlum'])->name('grupos.alumnosalan');
+Route::get('/grupos/{id}/alumnosalan', [GrupoController::class, 'consulAlum'])->name('grupos.alumnosalan');
 
 
 

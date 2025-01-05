@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Grupo;
 use App\Models\Alumno;
+use Illuminate\Support\Facades\Auth;
 
 class GrupoController extends Controller
 {
@@ -70,11 +71,21 @@ class GrupoController extends Controller
 
     }
 
-        public function consulAlum()
+        public function consulAlum($id)
         {
+            
+            $userName = Auth::user()->nombre;
 
-            $alumnos = Alumno::paginate(10);
-            return view('grupo_alumnos', compact('alumnos'));
+            $alumnos =DB::table('grupoAlumno')
+                    ->join('alumnos', 'grupoAlumno.alumno_id', '=', 'alumnos.id') // Relaciona con alumnos
+                    ->join('grupos', 'grupoAlumno.clave_id', '=', 'grupos.clave') // Relaciona con grupos
+                    ->where('grupos.profesor', '=', $userName) // Filtro por correo
+                    ->where('grupos.clave', '=', $id)
+                    ->select('grupoAlumno.*', 'alumnos.nombre as alumno_nombre', 'grupos.nombre_grupo', 'grupos.materia', 'grupos.profesor') // Selecciona columnas necesarias
+                    ->get();
+
+           // $alumnos = Alumno::paginate(10);
+            return view('grupo_alumnos', compact('alumnos','userName'));
         }
 
 }
