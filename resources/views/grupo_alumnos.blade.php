@@ -11,9 +11,9 @@
             <thead>
                 <tr>
                     <th>Nombre alumno</th>
-                    <th> grupo</th>
-                    <th>materia</th>
-                    <th>profesor</th>
+                    <th>Grupo</th>
+                    <th>Materia</th>
+                    <th>Profesor</th>
                 </tr>
             </thead>
             <tbody>
