@@ -129,6 +129,12 @@ Route::post('/alumnos/delete-duplicados', [AlumnoController::class, 'deleteDupli
 Route::post('/alumnos/upload', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
 
 
+Route::post('/alumnos/preview', [AlumnoController::class, 'previewAlumnos'])->name('previewAlumnos');
+Route::post('/alumnos/upload', [AlumnoController::class, 'uploadAlumnos'])->name('uploadAlumnos');
+
+Route::post('/grupos/{id}/alumnos', [GrupoController::class, 'addAlumno'])->name('grupo.addAlumno');
+Route::post('/alumnos/manual', [AlumnoController::class, 'addManualAlumno'])->name('alumno.addManual');
+
 
 
 // Mostrar el formulario de recuperación de contraseña

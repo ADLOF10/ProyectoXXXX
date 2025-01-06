@@ -8,6 +8,29 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+    public function login(Request $request)
+    {
+        // Validar los campos del formulario
+        $request->validate([
+            'correo_personal' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('correo_personal', 'password');
+
+        // Intentar autenticar al usuario
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard'); // Redirigir al dashboard si las credenciales son correctas
+        }
+
+        // Si las credenciales son incorrectas, regresar con un mensaje de error
+        return back()->withErrors([
+            'correo_personal' => 'El correo o la contraseña son incorrectos.',
+        ])->onlyInput('correo_personal');
+    }
+
+    
     public function showLoginForm()
     {
         return view('login');
@@ -15,33 +38,25 @@ class LoginController extends Controller
 
     public function handleLogin(Request $request)
     {
-        //print_r('hola');
-        //die;
-
+        // Validar los campos del formulario
         $request->validate([
             'correo_personal' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = [
-            'correo_personal' => $request->input('correo_personal'),
-            'password' => $request->input('password'),
-        ];
+        // Obtener las credenciales
+        $credentials = $request->only('correo_personal', 'password');
 
+        // Intentar autenticar al usuario
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-              // Redirige según el tipo de usuario
-            if ($user->correo_personal === 'dios@gmail.com') {
-                return redirect()->route('dash.super'); // Redirección para el superusuario
-            } elseif ($user->es_academico) {
-                return redirect()->route('dash.pofe'); // Redirección para profesor
-            } elseif (!$user->es_academico) {
-                return redirect()->route('dash.alum'); // Redirección para alumno
-            }
+            // Redirigir al dashboard si la autenticación es exitosa
+            return redirect()->intended('dashboard');
         }
 
-        return back()->withErrors(['login_error' => 'Correo o contraseña incorrectos.']);
+        // Regresar al formulario con un mensaje de error
+        return back()->withErrors([
+            'correo_personal' => 'El correo o la contraseña son incorrectos.',
+        ])->onlyInput('correo_personal');
     }
 
     public function logout()

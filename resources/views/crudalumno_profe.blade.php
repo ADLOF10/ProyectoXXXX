@@ -8,6 +8,7 @@
 
   <div class="container">
     <h2>Sube un archivo CSV con la lista de alumnos</h2>
+    <h3>El esquema del CSV: (nombre, apellidos, correo_institucional, numero_cuenta, grupo, semestre, licenciatura).</h3>
     <form action="{{ route('uploadAlumnos') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -85,6 +86,7 @@
     </form>
     @endif
   </div>
+  
 </section>
 
 <script>

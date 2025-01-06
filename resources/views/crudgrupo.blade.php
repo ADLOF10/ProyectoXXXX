@@ -23,8 +23,8 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Grupo</th>
                 <th>Clave</th>
-                <th>Nombre del Grupo</th>
                 <th>Materia</th>
                 <th>Profesor</th>
                 <th>Acciones</th>

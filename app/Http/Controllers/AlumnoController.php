@@ -53,7 +53,7 @@ class AlumnoController extends Controller
                     ]);
 
                     // Insertar o actualizar la relación en la tabla `grupoalumno`
-                    DB::table('grupoalumno')->updateOrInsert([
+                    DB::table('grupoAlumno')->updateOrInsert([
                         'alumno_id' => $alumno->id,
                         'clave_id' => $grupo->clave, // Usar la clave para relacionar
                     ], [

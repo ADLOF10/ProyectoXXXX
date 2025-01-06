@@ -23,7 +23,7 @@
     <form action="{{ route('guardarGru') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="nombre_grupo" class="form-label">Nombre del Grupo</label>
+            <label for="nombre_grupo" class="form-label">Clave</label>
             <input type="text" name="nombre_grupo" class="form-control" id="nombre_grupo" required>
         </div>
         <div class="mb-3">
@@ -31,7 +31,7 @@
             <input type="text" name="materia" class="form-control" id="materia"  required>
         </div>
         <div class="mb-3">
-            <label for="clave" class="form-label">clave</label>
+            <label for="clave" class="form-label">Nombre Grupo</label>
             <input type="text" name="clave" class="form-control" id="clave" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
