@@ -158,6 +158,13 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name
 
 
 
+// Ruta para mostrar alumnos con contraseñas
+Route::get('/alumnos-con-password', [AlumnoController::class, 'getAlumnosConPassword'])->name('alumnos.con.password');
+
+
+
+
+
 Route::post('/alumnos/store-all', [AlumnoController::class, 'storeAll'])->name('alumnos.storeAll');
 Route::get('/grupos/{grupoId}/alumnos', [GrupoController::class, 'mostrarAlumnosGrupo'])->name('grupos.alumnos');
 

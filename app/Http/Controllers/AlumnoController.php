@@ -199,5 +199,24 @@ class AlumnoController extends Controller
         return back()->with('success', 'Duplicados eliminados correctamente. Puedes continuar.');
         return response()->json(['success' => true]);
     }
+
+
+    // Método para obtener los alumnos junto con su contraseña
+    public function getAlumnosConPassword()
+    {
+        // Realizar el JOIN usando `correo_institucional` en ambas tablas
+        $alumnosConPassword = DB::table('alumnos')
+            ->join('users', 'alumnos.correo_institucional', '=', 'users.correo_institucional')
+            ->select(
+                'alumnos.nombre',
+                'alumnos.apellidos',
+                'alumnos.numero_cuenta',
+                'users.password' // Campo password de la tabla users
+            )
+            ->get();
+
+        // Pasar los datos a la vista
+        return view('alumnos_con_password', compact('alumnosConPassword'));
+    }
     
 }

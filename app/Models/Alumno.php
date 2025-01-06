@@ -30,5 +30,11 @@ class Alumno extends Model
         return $this->belongsTo(Grupo::class);
     }
 
+    // Relación con el modelo User
+    public function user()
+    {
+        return $this->hasOne(User::class, 'correo_personal', 'correo_institucional');
+    }
+
 
 }
