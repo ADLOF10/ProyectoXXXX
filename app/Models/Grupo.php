@@ -32,7 +32,7 @@ class Grupo extends Model
 
         public function alumnos()
     {
-        return $this->belongsToMany(Alumno::class, 'grupoalumno', 'clave_id', 'alumno_id', 'clave', 'id');
+        return $this->belongsToMany(Alumno::class, 'grupoAlumno', 'clave_id', 'alumno_id', 'clave', 'id');
     }
 
 

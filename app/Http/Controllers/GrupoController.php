@@ -38,9 +38,9 @@ class GrupoController extends Controller
         $grupo = Grupo::findOrFail($grupoId);
     
         // Obtener los alumnos relacionados con el grupo usando la tabla `grupoalumno`
-        $alumnos = DB::table('grupoalumno')
-            ->join('alumnos', 'grupoalumno.alumno_id', '=', 'alumnos.id')
-            ->join('grupos', 'grupoalumno.clave_id', '=', 'grupos.clave')
+        $alumnos = DB::table('grupoAlumno')
+            ->join('alumnos', 'grupoAlumno.alumno_id', '=', 'alumnos.id')
+            ->join('grupos', 'grupoAlumno.clave_id', '=', 'grupos.clave')
             ->where('grupos.id', $grupoId)
             ->select('alumnos.nombre', 'alumnos.apellidos', 'alumnos.numero_cuenta')
             ->get();
