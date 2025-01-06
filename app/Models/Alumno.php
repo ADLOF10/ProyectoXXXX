@@ -36,5 +36,10 @@ class Alumno extends Model
         return $this->hasOne(User::class, 'correo_personal', 'correo_institucional');
     }
 
+    public function grupos()
+    {
+        return $this->belongsToMany(Grupo::class, 'grupoalumno', 'alumno_id', 'clave_id', 'id', 'clave');
+    }
+    
 
 }

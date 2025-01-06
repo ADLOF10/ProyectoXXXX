@@ -3,27 +3,24 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Lista de Alumnos del Grupo</h1>
+        <h1>Alumnos del Grupo: {{ $grupo->nombre_grupo }}</h1>
     </div>
 
     <div class="container">
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Nombre alumno</th>
-                    <th>Grupo</th>
-                    <th>Materia</th>
-                    <th>Profesor</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Número de Cuenta</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($alumnos as $alumno)
                 <tr>
-                    <td>{{ $alumno->alumno_nombre }}</td>
-                    <td>{{ $alumno->nombre_grupo }}</td>
-                    <td>{{ $alumno->materia }}</td>
-                    <td>{{ $alumno->profesor }}</td>
-                    
+                    <td>{{ $alumno->nombre }}</td>
+                    <td>{{ $alumno->apellidos }}</td>
+                    <td>{{ $alumno->numero_cuenta }}</td>
                 </tr>
                 @endforeach
             </tbody>

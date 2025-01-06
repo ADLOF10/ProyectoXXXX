@@ -174,7 +174,10 @@ Route::get('/grupos/{grupoId}/alumnos', [GrupoController::class, 'mostrarAlumnos
 Route::get('/grupos', [GrupoController::class, 'index'])->name('grupos.index');
 
 // Ruta para mostrar los alumnos de un grupo específico
-Route::get('/grupos/{id}/alumnos', [GrupoController::class, 'showAlumnos'])->name('grupos.alumnos');
+// Route::get('/grupos/{id}/alumnos', [GrupoController::class, 'showAlumnos'])->name('grupos.alumnos');
+Route::get('/grupos/{id}/alumnos', [GrupoController::class, 'showAlumnos'])->name('grupo.alumnos');
+
+
 
 Route::get('/grupos/{id}/alumnosalan', [GrupoController::class, 'consulAlum'])->name('grupos.alumnosalan');
 

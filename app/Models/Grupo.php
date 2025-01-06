@@ -29,4 +29,11 @@ class Grupo extends Model
         return $this->hasMany(Asistencia::class,'grupo_id');
     }
 
+
+        public function alumnos()
+    {
+        return $this->belongsToMany(Alumno::class, 'grupoalumno', 'clave_id', 'alumno_id', 'clave', 'id');
+    }
+
+
 }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Alumno; // Modelo que interactúa con la tabla alumnos
+use App\Models\Alumno;
+use App\Models\Grupo; // Modelo que interactúa con la tabla alumnos
 use Illuminate\Support\Facades\DB;
 
 
@@ -15,58 +16,60 @@ class AlumnoController extends Controller
         $request->validate([
             'file' => 'required|file|mimes:csv,txt',
         ]);
-    
+
         $file = $request->file('file');
         $filePath = $file->getRealPath();
-    
-        $alumnos = [];
-        $duplicados = [];
-    
+
         try {
             $fileHandle = fopen($filePath, 'r');
             $header = fgetcsv($fileHandle);
-    
-            // Validar columnas
+
+            // Validar que el CSV tenga las columnas necesarias
             $expectedColumns = ['nombre', 'apellidos', 'correo_institucional', 'numero_cuenta', 'grupo', 'semestre', 'licenciatura'];
             if ($header !== $expectedColumns) {
                 return back()->with('error', 'El archivo no tiene las columnas requeridas.');
             }
-    
+
             while (($row = fgetcsv($fileHandle, 1000, ',')) !== false) {
-                $alumno = [
-                    'nombre' => $row[0],
-                    'apellidos' => $row[1],
-                    'correo_institucional' => $row[2],
-                    'numero_cuenta' => $row[3],
-                    'grupo' => $row[4],
-                    'semestre' => $row[5],
-                    'licenciatura' => $row[6],
-                ];
-    
-                // Verificar duplicados en la base de datos
-                $existe = DB::table('alumnos')
-                    ->where('correo_institucional', $alumno['correo_institucional'])
-                    ->orWhere('numero_cuenta', $alumno['numero_cuenta'])
-                    ->exists();
-    
-                if ($existe) {
-                    $duplicados[] = $alumno;
-                } else {
-                    $alumnos[] = $alumno;
-                }
+                DB::transaction(function () use ($row) {
+                    // Buscar el grupo por la clave
+                    $grupo = Grupo::where('clave', $row[4])->first();
+
+                    if (!$grupo) {
+                        throw new \Exception("El grupo con la clave '{$row[4]}' no existe.");
+                    }
+
+                    // Crear o actualizar el alumno
+                    $alumno = Alumno::updateOrCreate([
+                        'correo_institucional' => $row[2], // Campo único
+                    ], [
+                        'nombre' => $row[0],
+                        'apellidos' => $row[1],
+                        'numero_cuenta' => $row[3],
+                        'semestre' => $row[5],
+                        'licenciatura' => $row[6],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+
+                    // Insertar o actualizar la relación en la tabla `grupoalumno`
+                    DB::table('grupoalumno')->updateOrInsert([
+                        'alumno_id' => $alumno->id,
+                        'clave_id' => $grupo->clave, // Usar la clave para relacionar
+                    ], [
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                });
             }
-    
+
             fclose($fileHandle);
-    
-            // Guardar en sesión
-            session(['alumnos' => $alumnos, 'duplicados' => $duplicados]);
-    
-            return back()->with('success', 'Archivo procesado correctamente. Revisa la tabla de alumnos.');
+
+            return back()->with('success', 'Lista de alumnos subida y asignada correctamente.');
         } catch (\Exception $e) {
             return back()->with('error', 'Hubo un error al procesar el archivo: ' . $e->getMessage());
         }
     }
-    
 
         public function previewAlumnos(Request $request)
     {

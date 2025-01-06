@@ -38,7 +38,7 @@
                 <td>{{ $grupo->materia }}</td>
                 <td>{{ $grupo->profesor }}</td>
                 <td>
-                    <a href="{{ route('grupos.alumnosalan', $grupo->clave) }}" class="btn btn-info btn-sm">Ver Alumnos</a>
+                    <a href="{{ route('grupo.alumnos', $grupo->id) }}" class="btn btn-info btn-sm">Ver Alumnos</a>
                     <a href="{{ route('grupos.edit', $grupo) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('borrarGru', $grupo) }}" method="POST" style="display: inline-block;">
                         @csrf
@@ -47,7 +47,7 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
   </div>
