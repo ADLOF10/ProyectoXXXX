@@ -29,6 +29,7 @@ class QRScannerController extends Controller
                 ///cek data
                 $cek=Asistencia::Where([      
                     'alumno_id'=>$userId,
+                    'grupo_id'=>$request->id_grupo,
                     'fecha'=>$request->fecha,       
                 ])->first();
                 
@@ -37,9 +38,7 @@ class QRScannerController extends Controller
                     
                     return redirect('/qr-scan')->with('success','No te puedes registrar por segunda vez');
                 }
-
-            
-                
+         
                 $horaActual = Carbon::now('America/Mexico_City'); // Hora actual como objeto Carbon
                 $inicioClase = Carbon::parse($request->hora_inicio_clase, 'America/Mexico_City'); // Hora de inicio de clase
 

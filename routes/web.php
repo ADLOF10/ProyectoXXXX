@@ -36,11 +36,6 @@ Route::get('', function () {
 })->name('inicio');
 
 
-Route::middleware('role:superusuario')->group(function () {
-    Route::get('/aprobaciones', [SuperUsuarioController::class, 'index'])->name('aprobaciones');
-    Route::post('/aprobaciones/{id}/aprobar', [SuperUsuarioController::class, 'aprobar'])->name('aprobaciones.aprobar');
-    Route::post('/aprobaciones/{id}/rechazar', [SuperUsuarioController::class, 'rechazar'])->name('aprobaciones.rechazar');
-});
 
 
 Route::get('/registro-usuario', [NuevoRegistroController::class, 'showForm'])->name('registro.usuario');
@@ -51,14 +46,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login2', [LoginController::class, 'handleLogin'])->name('login.handle');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Rutas para dashboards según roles 
-Route::get('/dashboard/alumno', function () {
-    return view('dashalumno');
-})->name('dashboard.alumno');
 
-Route::get('/dashboard/profesor', function () {
-    return view('dashmaestro');
-})->name('dashboard.profesor');
 
 Route::get('/dashboard/superuser', function () {
     return view('dashsuper');
@@ -236,12 +224,6 @@ Route::get('/asisten_grafi_alum',function(){
 Route::post('/attendance-chart', [GraficaControlador::class, 'showAttendanceChart'])->name('grafica_alum');
 
 Route::post('/grafica-pro', [GraficaControlador::class, 'grafiprofe'])->name('attendance.filtered');
-
-// Ruta para mostrar el formulario de registro de grupo
-//Route::get('/registro-grupo', [GruposController::class, 'mostrarFormularioRegistro'])->name('registroGrupo');
-
-// Ruta para la vista de asistencias
-// Route::get('/asistencias', [GruposController::class, 'consultaAsistencias']);
 
 
 // Ruta para mostrar el formulario de registro de grupo
